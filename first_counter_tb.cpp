@@ -13,12 +13,12 @@ int sc_main (int argc, char* argv[]) {
   int i = 0;
   // Connect the DUT
   first_counter counter("COUNTER");
-    counter.clock(clock);
-    counter.reset(reset);
-    counter.enable(enable);
-    counter.counter_out(counter_out);
+  counter.clock(clock);
+  counter.reset(reset);
+  counter.enable(enable);
+  counter.counter_out(counter_out);
 
-    sc_start(1, SC_NS);
+  sc_start(1, SC_NS);
 
   // Open VCD file
   sc_trace_file *wf = sc_create_vcd_trace_file("counter");
@@ -32,34 +32,34 @@ int sc_main (int argc, char* argv[]) {
   reset = 0;       // initial value of reset
   enable = 0;      // initial value of enable
   for (i=0;i<5;i++) {
-    clock = 0; 
+    clock = 0;
     sc_start(1, SC_NS);
-    clock = 1; 
+    clock = 1;
     sc_start(1, SC_NS);
   }
   reset = 1;    // Assert the reset
   cout << "@" << sc_time_stamp() <<" Asserting reset\n" << endl;
   for (i=0;i<10;i++) {
-    clock = 0; 
+    clock = 0;
     sc_start(1, SC_NS);
-    clock = 1; 
+    clock = 1;
     sc_start(1, SC_NS);
   }
   reset = 0;    // De-assert the reset
   cout << "@" << sc_time_stamp() <<" De-Asserting reset\n" << endl;
   for (i=0;i<5;i++) {
-    clock = 0; 
+    clock = 0;
     sc_start(1, SC_NS);
-    clock = 1; 
+    clock = 1;
     sc_start(1, SC_NS);
   }
   cout << "count=" << counter_out << endl;
   cout << "@" << sc_time_stamp() <<" Asserting Enable\n" << endl;
   enable = 1;  // Assert enable
   for (i=0;i<20;i++) {
-    clock = 0; 
+    clock = 0;
     sc_start(1, SC_NS);
-    clock = 1; 
+    clock = 1;
     sc_start(1, SC_NS);
   }
   cout << "count=" << counter_out << endl;
