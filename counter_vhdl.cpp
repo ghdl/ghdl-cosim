@@ -29,7 +29,8 @@ extern "C" {
   extern void *__ghdl_rti_top_instance;
   struct ghdl_process;
   void grt_init (void);
-  int grt_main_init (const char *progname, int argc, const char * const argv[]);
+  int grt_main_options (const char *progname, int argc, const char * const argv[]);
+  int grt_main_init (void);
   int grt_main_elab (void);
   void __ghdl_process_add_driver (struct ghdl_signal *);
   void __ghdl_process_add_sensitivity (struct ghdl_signal *);
@@ -101,7 +102,7 @@ SC_MODULE (first_counter) {
   SC_CTOR(first_counter) {
     //  Elaborate instance.
     grt_init (); // Elab Ada code
-    grt_main_init (sc_argv()[0], sc_argc (), sc_argv()); //  Init grt
+    grt_main_options (sc_argv()[0], sc_argc (), sc_argv()); // Set opts.
     grt_main_elab (); //  Elaborate vhdl unit
     instance = (struct counter_INSTTYPE *) __ghdl_rti_top_instance;
 
