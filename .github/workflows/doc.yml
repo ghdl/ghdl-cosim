@@ -1,0 +1,27 @@
+name: 'doc'
+on: [push, pull_request]
+jobs:
+  linux:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: build doc
+      run: ./doc/make.sh
+    - name: 'publish site to gh-pages'
+      if: github.event_name != 'pull_request' && github.repository == 'ghdl/ghdl-cosim'
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        cd doc/_build/html
+        touch .nojekyll
+        git init
+        git add .
+        git config --local user.email "push@gha"
+        git config --local user.name "GHA"
+        git commit -a -m "update ${{ github.sha }}"
+        git remote add origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}"
+        git push -u origin +HEAD:gh-pages
+    - uses: actions/upload-artifact@master
+      with:
+        name: doc
+        path: doc/_build/html
