@@ -13,4 +13,5 @@ Examples
    quickstart
    wrapping
    linking
+   shared
    other
