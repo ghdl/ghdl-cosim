@@ -134,10 +134,11 @@ intersphinx_mapping = {
 
 # -- Sphinx.Ext.ExtLinks --------------------------------------------------
 extlinks = {
-   'wikipedia': ('https://en.wikipedia.org/wiki/%s', None),
-   'ghdlsharp': ('https://github.com/ghdl/ghdl/issues/%s', '#'),
-   'ghdlissue': ('https://github.com/ghdl/ghdl/issues/%s', 'issue #'),
-   'ghdlpull':  ('https://github.com/ghdl/ghdl/pull/%s', 'pull request #'),
-   'ghdlsrc':   ('https://github.com/ghdl/ghdl/blob/master/src/%s', None),
-   'cosimtree': ('https://github.com/ghdl/ghdl-cosim/blob/master/%s', None),
+   'wikipedia':  ('https://en.wikipedia.org/wiki/%s', None),
+   'ghdlsharp':  ('https://github.com/ghdl/ghdl/issues/%s', 'ghdl#'),
+   'ghdlissue':  ('https://github.com/ghdl/ghdl/issues/%s', 'issue #'),
+   'ghdlpull':   ('https://github.com/ghdl/ghdl/pull/%s', 'pull request #'),
+   'ghdlsrc':    ('https://github.com/ghdl/ghdl/blob/master/src/%s', None),
+   'cosimsharp': ('https://github.com/ghdl/ghdl-cosim/issues/%s', 'ghdl-cosim#'),
+   'cosimtree':  ('https://github.com/ghdl/ghdl-cosim/blob/master/%s', None),
 }

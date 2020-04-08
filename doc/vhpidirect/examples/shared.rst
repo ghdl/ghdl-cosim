@@ -36,29 +36,12 @@ This example tests whether symbol ``ghdl_main`` is visible in the shared librari
 
 This example is complementary to :ref:`COSIM:VHPIDIRECT:Examples:shared:shlib`, since the VHDL simulation is built as a shared library, which is then loaded from a main C application (as in :ref:`COSIM:VHPIDIRECT:Examples:shared:dlopen`).
 
-When ``main`` is executed, the shared libray is loaded, symbol ``ghdl_main`` is searched for, and it is executed. Unfortunately, GHL does not make ``ghdl_main`` visible by default. Hence, if a simulation model is to be loaded dynamically, visibility needs to be tweaked. This is also true for any additional function that is described in the C sources that are linked to the simulation model.
+When ``main`` is executed:
 
-* It is possible to force a symbol to be added with ``-Wl,-Wl,-u,ghdl_main``.
+* The shared libray is loaded, symbol ``print_something`` is searched for, and it is executed.
+* Symbol ``ghdl_main`` is searched for, and it is executed three times. Unfortunately, GHDL does not currently support reseting/restarting the simulation runtime. Hence, in this example the shared library is unloaded and loaded again before calling ``ghdl_main`` after the first time.
 
-* If the shared library is built with :option:`-e`, option ``-Wl,-Wl,--version-script=file.ver`` can be used, where ``file.ver`` is an additional custom version file such as:
+See :ref:`Generating_shared_libraries` for further details with regard to the visibility of symbols in the shared libraries.
 
-.. code-block:: C
-
-  VHPIDIRECT {
-    global:
-      ghdl_main;
-    local:
-      *;
-  };
-
-* [**EXPERIMENTAL** :ghdlsharp:`1184`] Alternatively, :option:`-shared` removes the version script.
-.. * [**EXPERIMENTAL** :ghdlsharp:`1184`] As of commit `095190f <https://github.com/ghdl/ghdl/commit/095190fbeeb05c746275947167dcbef5a22f7df5>`_, elaboration flag :option:`-shared` replaces the :option:`--version-script` option. It causes elaboration to produce a shared object file named after the primary entity. Exposure of the GHDL symbols is still needed.
-
-* If the shared library is built with :option:`--bind` and :option:`--list-link`, the output from the later can be filtered with tools such as ``sed`` in order to remove the default version script (accomplished in :ghdlsharp:`640`), and make all symbols visible by default. It is also possible to pass an additional script. See description of :option:`--list-link` for further details.
-
-.. HINT::
-  When GHDL is configured with ``--default-pic`` explicitly, it uses it implicitly when executing any :option:`-a`, :option:`-e` or :option:`-r` command. Hence, it is not required to provide these arguments (fPIC/PIE) to GHDL. However, these might need to be provided when building C sources with GCC. Otherwise linker errors such as the following are produced:
-
-  .. code-block::
-
-    relocation R_X86_64_PC32 against symbol * can not be used when making a shared object; recompile with -fPIC
+.. NOTE::
+  On GNU/linux, both executable binaries and shared libraries use the ELF format. As a result, although hackish, it is possible to load an executable binary dynamically, i.e. without using any of the ``shared`` options explained in :ref:`Generating_shared_libraries`. In this example, this case is also tested. However, this is not suggested at all, since it won't work on all platforms.
