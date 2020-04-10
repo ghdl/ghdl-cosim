@@ -10,4 +10,5 @@ Examples
 
 .. toctree::
 
+   quickstart
    other
