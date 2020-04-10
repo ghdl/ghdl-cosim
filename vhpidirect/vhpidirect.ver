@@ -1,0 +1,6 @@
+VHPIDIRECT {
+  global:
+ghdl_main;
+  local:
+        *;
+};
