@@ -12,4 +12,5 @@ Examples
 
    quickstart
    wrapping
+   linking
    other
