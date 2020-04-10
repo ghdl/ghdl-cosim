@@ -11,4 +11,5 @@ Examples
 .. toctree::
 
    quickstart
+   wrapping
    other
