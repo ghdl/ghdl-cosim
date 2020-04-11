@@ -24,7 +24,7 @@ Note the :file:`c` library is always linked with an executable.
 .. HINT::
   The process for personal code is the same, provided the code is compiled to an object file.
   Analysis must be made of the HDL files, then elaboration with ``-e -Wl,personal.o [options...] primary_unit [secondary_unit]`` as arguments.
-  Additional object files are flagged separate ``-Wl,*`` arguments. The elaboration step will compile the executable with the custom resources.
+  Additional object files are flagged as separate ``-Wl,*`` arguments. The elaboration step will compile the executable with the custom resources.
   Further reading (particularly about the backend particularities) is at :ref:`Elaboration:command` and :ref:`Run:command`.
 
 .. _Linking_with_Ada:

@@ -41,7 +41,7 @@ upper-case keyword followed by one or more blanks). The linkage name of the
 subprogram follows.
 
 The object file with the source code for the foreign subprogram must then be
-linked to GHDL, expanded upon in :ref:`Starting_a_simulation_from_a_foreign_program`.
+linked to GHDL, expanded upon in :ref:`COSIM:VHPIDIRECT:Linking`.
 
 .. _Restrictions_on_foreign_declarations:
 

@@ -27,7 +27,6 @@ Loading a simulation
 In order to generate a position independent executable (PIE), be it an executable binary
 or a shared library, GHDL must be built with config option ``--default-pic``. This will ensure
 that all the libraries and sources analyzed by GHDL generate position independent code (PIC).
-Furthermore, when the binary is built, argument ``-Wl,-pie`` needs to be provided.
 
 PIE binaries can be loaded and executed from any language that supports C-alike signatures and types
 (C, C++, golang, Python, Rust, etc.). For example, in Python:

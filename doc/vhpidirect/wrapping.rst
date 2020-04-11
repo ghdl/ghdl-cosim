@@ -30,7 +30,7 @@ in Ada:
   Don't forget to list the object file(s) of this entry point and other foreign sources, as per :ref:`Linking_with_foreign_object_files`.
 
 .. ATTENTION::
-  This function must be called once, since reseting/restarting the simulation runtime is not supported yet (see :ghdlsharp:`1184`).
+  The ``ghdl_main`` function must be called once, since reseting/restarting the simulation runtime is not supported yet. A workaround is to build the simulation as a shared object and load the ``ghdl_main`` symbol from it (see :ref:`COSIM:VHPIDIRECT:Examples:shared:shghdl`).
 
 .. HINT::
   Immitating the run time flags, such as ``-gDEPTH=12`` from :option:`-gGENERIC`, requires the ``argv`` to have the executable's path at index 0, effectively shifting all other indicies along by 1. This can be taken from the 0 index of the ``argv`` passed to ``main()``, or (not suggested, despite a lack of consequences) left empty/null.

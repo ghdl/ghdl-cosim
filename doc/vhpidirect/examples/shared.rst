@@ -21,13 +21,15 @@ This example features the same functionality as :ref:`COSIM:VHPIDIRECT:Examples:
 
 Although this example does not include a simulation built with GHDL, it is a test and the introduction to the next example. In this test, two separate shared libraries are built from C sources, both including a function named ``ghdl_main``. Then, in a main C application, both shared libraries are dynamically loaded at the same time, and both are executed (one after the other)
 
-This example tests whether symbol ``ghdl_main`` is visible in the shared libraries, and whether the same symbol name can be loaded from multiple shared libraries (and use them) at the same time.
+This example tests whether symbol ``ghdl_main`` is visible in the shared libraries, and whether the same symbol name can be loaded from multiple shared libraries (and used) at the same time.
 
 .. TIP::
   If the symbol is not found, try adding `-g`, `-rdynamic` and/or `-O0` when building the shared libraries. Tools such as ``objdump``, ``readelf`` or ``nm`` can be used to check if a symbol is visible. For instance, ``objdump -d corea.so | grep ghdl_main``.
 
 .. HINT::
   Building multiple designs as separate artifacts and dynamically loading them at the same time is a naive approach to multi-core simulation with GHDL. It is also a possible solution for coarse grained co-simulation with Verilator.
+
+.. _COSIM:VHPIDIRECT:Examples:shared:shghdl:
 
 :cosimtree:`shghdl <vhpidirect/shared/shghdl>`
 **********************************************
@@ -44,14 +46,15 @@ When ``main`` is executed, the shared libray is loaded, symbol ``ghdl_main`` is 
 
   VHPIDIRECT {
     global:
-  ghdl_main;
+      ghdl_main;
     local:
-  *;
+      *;
   };
 
 * [**EXPERIMENTAL** :ghdlsharp:`1184`] Alternatively, :option:`-shared` removes the version script.
+.. * [**EXPERIMENTAL** :ghdlsharp:`1184`] As of commit `095190f <https://github.com/ghdl/ghdl/commit/095190fbeeb05c746275947167dcbef5a22f7df5>`_, elaboration flag :option:`-shared` replaces the :option:`--version-script` option. It causes elaboration to produce a shared object file named after the primary entity. Exposure of the GHDL symbols is still needed.
 
-* If the shared library is built with :option:`--bind` and :option:`--list-link`, the output from the later can be filtered with tools such as ``sed`` in order to remove the default version script, and make all symbols visible by default. It is also possible to pass an additional script. See description of :option:`--list-link` for further details.
+* If the shared library is built with :option:`--bind` and :option:`--list-link`, the output from the later can be filtered with tools such as ``sed`` in order to remove the default version script (accomplished in :ghdlsharp:`640`), and make all symbols visible by default. It is also possible to pass an additional script. See description of :option:`--list-link` for further details.
 
 .. HINT::
   When GHDL is configured with ``--default-pic`` explicitly, it uses it implicitly when executing any :option:`-a`, :option:`-e` or :option:`-r` command. Hence, it is not required to provide these arguments (fPIC/PIE) to GHDL. However, these might need to be provided when building C sources with GCC. Otherwise linker errors such as the following are produced:
