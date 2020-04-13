@@ -5,25 +5,25 @@ architecture arch of tb is
 
   procedure cproc is
   begin
-    assert false severity failure;
+    assert false report "VHPIDIRECT custom_procedure" severity failure;
   end;
   attribute foreign of cproc : procedure is "VHPIDIRECT custom_procedure";
 
   procedure cproc_wargs ( x: integer ) is
   begin
-    assert false severity failure;
+    assert false report "VHPIDIRECT custom_procedure_withargs" severity failure;
   end;
   attribute foreign of cproc_wargs : procedure is "VHPIDIRECT custom_procedure_withargs";
 
   function cfunc return integer is
   begin
-    assert false severity failure;
+    assert false report "VHPIDIRECT custom_function" severity failure;
   end;
   attribute foreign of cfunc : function is "VHPIDIRECT custom_function";
 
   function cfunc_wargs ( x: integer ) return integer is
   begin
-    assert false severity failure;
+    assert false report "VHPIDIRECT custom_function_withargs" severity failure;
   end;
   attribute foreign of cfunc_wargs : function is "VHPIDIRECT custom_function_withargs";
 
