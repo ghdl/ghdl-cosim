@@ -5,7 +5,7 @@ architecture arch of tb is
 
   function get_rand return integer is
   begin
-    assert false severity failure;
+    assert false report "VHPIDIRECT ./lib.so get_rand" severity failure;
   end;
   attribute foreign of get_rand: function is "VHPIDIRECT ./lib.so get_rand";
 
