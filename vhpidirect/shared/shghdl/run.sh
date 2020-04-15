@@ -17,7 +17,7 @@ ghdl -e -Wl,test.c -Wl,-Wl,--version-script=./test.ver -o tb.so tb
 ./main
 
 echo "> Build and execute [GHDL -shared]"
-ghdl -e -Wl,test.c -shared -Wl,-Wl,-u,ghdl_main -o tb.so tb
+ghdl -e -Wl,test.c -shared -o tb.so tb
 ./main
 
 echo "> Build and execute [GHDL -Wl,-shared]"
