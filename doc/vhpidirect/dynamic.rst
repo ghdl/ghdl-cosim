@@ -29,7 +29,7 @@ Generating shared libraries
 
 There are three possibilities to elaborate simulation models as shared libraries, instead of executable binaries:
 
-* ``ghdl -e -shared -Wl,-Wl,-u,ghdl_main [options...] primary_unit [secondary_unit]``
+* ``ghdl -e -shared [options...] primary_unit [secondary_unit]``
 
 * ``ghdl -e -Wl,-shared -Wl,-Wl,--version-script=./file.ver -Wl,-Wl,-u,ghdl_main [options...] primary_unit [secondary_unit]``
 
