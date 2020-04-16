@@ -25,6 +25,8 @@ This example shows how to import and use ``rand`` to generate and print 10 integ
       return 0;
     }
 
+.. _COSIM:VHPIDIRECT:Examples:quickstart:math:
+
 :cosimtree:`math <vhpidirect/quickstart/math>`
 **********************************************
 
