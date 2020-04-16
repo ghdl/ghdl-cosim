@@ -3,32 +3,65 @@ name: 'test'
 on:
     push:
     pull_request:
+    schedule:
+      - cron: '0 15 * * *'
 
 env:
   CI: true
-  DOCKER_BUILDKIT: 1
-  DOCKER_IMAGE: ghdl/ghdl:buster-llvm-7
 
 jobs:
 
-  vhpidirect:
-    runs-on: ubuntu-latest
+  lin:
     strategy:
         fail-fast: false
         max-parallel: 4
         matrix:
           task: [
-            quickstart/random,
-            quickstart/math,
-            quickstart/customc,
-            wrapping/basic,
-            wrapping/time,
-            linking/bind,
-            shared/shlib,
-            shared/dlopen,
-            shared/shghdl,
+            vhpidirect/quickstart/random,
+            vhpidirect/quickstart/math,
+            vhpidirect/quickstart/customc,
+            vhpidirect/wrapping/basic,
+            vhpidirect/wrapping/time,
+            vhpidirect/linking/bind,
+            vhpidirect/shared/shlib,
+            vhpidirect/shared/dlopen,
+            vhpidirect/shared/shghdl,
           ]
+    runs-on: ubuntu-latest
+    env:
+      DOCKER_BUILDKIT: 1
+      DOCKER_IMAGE: ghdl/ghdl:buster-llvm-7
     steps:
     - uses: actions/checkout@v2
     - run: docker pull $DOCKER_IMAGE
-    - run: docker run --rm -tv $(pwd):/src $DOCKER_IMAGE /src/vhpidirect/${{ matrix.task}}/run.sh
+    - run: docker run --rm -tv $(pwd):/src -e CI $DOCKER_IMAGE /src/${{ matrix.task}}/run.sh
+
+  win:
+    strategy:
+        fail-fast: false
+        max-parallel: 4
+        matrix:
+          task: [
+            vhpidirect/quickstart/random,
+            vhpidirect/quickstart/math,
+            vhpidirect/quickstart/customc,
+            vhpidirect/wrapping/basic,
+            vhpidirect/wrapping/time,
+            #vhpidirect/linking/bind,  ! needs investigation, output of list-link seems to have wrong path format
+            vhpidirect/shared/shlib,
+            #vhpidirect/shared/dlopen, ! dlfcn.h is not available on win
+            #vhpidirect/shared/shghdl, ! dlfcn.h is not available on win
+          ]
+    runs-on: windows-latest
+    env:
+      WINDOWS_RELEASE: 0.37-mingw64-llvm
+    steps:
+    - uses: actions/checkout@v2
+    - shell: bash
+      run: |
+        curl -fsSL -o ghdl.zip https://github.com/ghdl/ghdl/releases/download/v0.37/ghdl-${WINDOWS_RELEASE}.zip
+        7z x ghdl.zip "-o../ghdl-tmp" -y
+        mv ../ghdl-tmp/GHDL/${WINDOWS_RELEASE}/ ../ghdl
+        rm -rf ../ghdl-tmp ghdl.zip
+        export PATH=$PATH:$(pwd)/../ghdl/bin
+        ./${{ matrix.task}}/run.sh
