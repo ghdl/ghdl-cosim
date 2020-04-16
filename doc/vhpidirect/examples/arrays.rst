@@ -4,21 +4,33 @@
 Arrays
 #######
 
+.. IMPORTANT::
+  A VHDL access that is used for a constrained/bounded array is tied to a type that specifies its length. In
+  :ref:`COSIM:VHPIDIRECT:Examples:arrays:intvector` and :ref:`COSIM:VHPIDIRECT:Examples:arrays:matrices` below, one and
+  two dimensional lengths are specified, respectively.
+  This means that a separate type needs to be declared for an array with different dimensions and/or different sizes in
+  any dimension. In order to create a single type for many differently shaped arrays, it would need to be unconstrained.
+  See :cosimsharp:`3` for work in progress regarding unconstrained types.
+
+.. _COSIM:VHPIDIRECT:Examples:arrays:intvector:
+
 Constrained/bounded integer arrays
 **********************************
 
 As explained in :ref:`Restrictions_on_foreign_declarations`, unconstrained arrays are represented by a fat pointer in C,
 and it is not suggested to use fat pointers unless it is unavoidable. Hence, it is desirable for data buffers which are
-to be represented as arrays to be constrained. However, constraining arrays in VHDL and C separatedly is error prone.
+to be represented as arrays to be constrained. However, constraining arrays in VHDL and C separately is error prone.
 
 This example includes multiple solutions to set the bounding size once only (either in C or in VHDL), and have the
-parameter passed to the other language so that matching types are defined. Moreover, independently of where is the size
+parameter passed to the other language so that matching types are defined. Moreover, independently of where the size is
 defined, it is possible to allocate and free the buffers in any of the languages. The following examples show how to
 define them in C or VHDL and have them (de)allocated in either of them.
 
 .. ATTENTION::
   Pointers/accesses MUST be freed/deallocated in the same language that was used to allocate them. Hence, it is not
-  possible to allocate in VHDL and free in C or *vice versa*.
+  possible to allocate in VHDL and free in C, nor *vice versa*.
+
+.. _COSIM:VHPIDIRECT:Examples:arrays:intvector:csized:
 
 :cosimtree:`Sized in C <vhpidirect/arrays/intvector/csized>`
 ------------------------------------------------------------
@@ -116,3 +128,68 @@ For illustrative purposes, the two vectors are populated with logic values in di
 
 .. ATTENTION::
   The integer values that are given to ``char`` variables in C which are intended to be read as VHDL logic values, must be limited to [0, 8]. This ensures that they represent one of the 9 enumerated logic values.
+.. _COSIM:VHPIDIRECT:Examples:arrays:matrices:
+
+:cosimtree:`matrices <vhpidirect/arrays/matrices>`
+**************************************************
+
+Constrained multidimensional arrays of doubles/reals
+----------------------------------------------------
+
+In many signal and image processing applications, large amounts of data need to be transferred between software and
+hardware. In software, it is common to use floating-point data types, since most general-purpose processors include
+hard floating-point units. Conversely, fixed-point formats are used in hardware, in order to optimise area and power.
+Converting data formats and using intermediate files to transfer test data to/from a simulation model can be tedious
+and error-prone.
+
+This example builds on :ref:`intvector <COSIM:VHPIDIRECT:Examples:arrays:intvector>`. Precisely, it's an extension of
+case :ref:`COSIM:VHPIDIRECT:Examples:arrays:intvector:csized`. A general procedure to share constrained multidimensional
+arrays of any size is shown. Dimensions of a 2D matrix of doubles are defined in C and a helper function is used for
+VHDL to read those values into the declaration of an *array of reals* type. Then, the pointer to the matrix (in C) is
+retrieved as an access (in VHDL), through another helper function.
+
+For completeness, IEEE's ``fixed_generic_pkg`` package is used to multiply each value with a constant using fixed-point
+formats. This is to illustrate that VHDL 2008 can be used as *fixed-point toolbox* in numerical processing environments.
+
+:cosimtree:`Array and AXI4 Stream Verification Components <vhpidirect/arrays/matrices/vunit_axis_vcs>`
+------------------------------------------------------------------------------------------------------
+
+.. HINT::
+  This example is based on `VUnit <http://vunit.github.io/>`_, an open source unit testing framework for VHDL/SystemVerilog.
+  Instead of a shell script, the main entrypoint to this example is a ``run.py`` Python script. Users who are not familiar
+  with VUnit are encouraged to first read :ref:`vunit:user_guide` and get familiar with VUnit example `array_axis_vcs <http://vunit.github.io/examples.html#id9>`_.
+
+.. figure:: img/matrices_array_axis_vcs.png
+   :alt: VUnit example `array_axis_vcs <http://vunit.github.io/examples.html#id9>`_
+   :align: center
+   :width: 500px
+
+`VUnit <http://vunit.github.io/>`_ provides an :ref:`integer_array <vunit:integer_array_pkg>` package with ``load_csv``
+and ``save_csv`` functions. Those are used in `Array and AXI4 Stream Verification Components <http://vunit.github.io/examples.html#id9>`_,
+along with AXI4 Stream components from the :ref:`vunit:vc_library`, to load data from CSV files to a UUT. While CSVs as
+intermediate files are useful for integration with Matlab, Octave, NumPy, etc., not having an equivalent `real_array`
+package posses an additional complexity in applications such as DSP or machine learning. This is because values to be
+handled in fixed-point need to be first converted from doubles to integers.
+
+.. figure:: img/matrices_vunit_axis_vcs.png
+   :alt: Modified version of the example, renamed to :cosimtree:`vunit_axis_vcs <vhpidirect/arrays/matrices/vunit_axis_vcs>`
+   :align: center
+   :width: 500px
+
+Subdir :cosimtree:`vunit_axis_vcs <vhpidirect/arrays/matrices/vunit_axis_vcs>` of this example contains a modified
+version of a VUnit example (`array_axis_vcs <http://vunit.github.io/examples.html#id9>`_), where ``integer_array``
+and CSV files are replaced with VHPIDIRECT functions, so that data is read from C directly. In fact, no additional
+co-simulation sources are included in the subdir because the ``main.c`` and ``pkg.vhd`` from the parent dir are used.
+These will share the matrix as in the parent example, which is then passed to/from the verification components to test
+the AXI Stream master/slave setup. The top-level processes ``stimuli`` and ``receive`` are the master sending and the
+slave receiving, respectively, data from/to the matrix variable. For completeness only, ``stimuli`` verifies the contents
+of the matrix before sending it, row by row.
+
+This example illustrates how to separate sources for synthesis from testbench/simulation resources, enhanced with GHDL's
+co-simulation features and with VUnit's verification components. At the same time, this is a showcase of how to combine
+a VUnit ``run.py`` script (for building and test management) along with custom VHPIDIRECT resources.
+
+.. HINT::
+  Combining VUnit's verification components with VHPIDIRECT allows to build simulation models for VHDL designs
+  with complex top-level interfaces, while providing a C API to interact with them. Find work in progress in this regard
+  at `VUnit/cosim <https://vunit.github.io/cosim/>`_.
