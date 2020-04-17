@@ -8,6 +8,11 @@ package pkg is
 	attribute foreign of c_printVar : procedure is "VHPIDIRECT printInt";
 
 	shared variable c_Var : int_ptr := c_Int_ptr;
+
+	procedure setVar ( int: integer );
+
+	impure function getVar return integer;
+
 end package pkg;
 
 package body pkg is
@@ -19,5 +24,13 @@ package body pkg is
 	procedure c_printVar is
 	begin
 		assert false report "c_printVar VHPI" severity failure;
+	end;
+
+	procedure setVar ( int: integer ) is begin
+		c_Var.all := int;
+	end;
+
+	impure function getVar return integer is begin
+		return c_Var.all;
 	end;
 end package body pkg;

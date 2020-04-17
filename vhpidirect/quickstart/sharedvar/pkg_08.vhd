@@ -14,6 +14,10 @@ package pkg is
 
 	shared variable c_Var: int_ptr_prot;
 
+	procedure setVar ( int: integer );
+
+	impure function getVar return integer;
+
 end pkg;
 
 package body pkg is
@@ -26,6 +30,14 @@ package body pkg is
 		assert false report "c_printVar VHPI" severity failure;
 	end;
 
+	procedure setVar ( int: integer ) is begin
+		c_Var.set(int);
+	end;
+
+	impure function getVar return integer is begin
+		return c_Var.get;
+	end;
+
 	type int_ptr_prot is protected body
 		variable var: int_ptr := c_Int_ptr;
 		procedure set ( i: integer) is begin
@@ -36,4 +48,3 @@ package body pkg is
 		end get;
 	end protected body int_ptr_prot;
 end pkg;
-  
