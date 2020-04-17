@@ -50,4 +50,33 @@ Since either C sources or pre-compiled ``.o`` objects can be added, in C/C++ pro
 
 If the auxillary VHPIDIRECT subprograms need to be accessed in more than one entity, it is possible to package the subprograms. This also makes it very easy to reuse the VHPIDIRECT declarations in different projects.
 
-In this example 2 different entities use a C defined ``c_printInt(val: integer)`` subprogram to print two different numbers. Subprogram declaration requirements are detailed under the :ref:`COSIM:VHPIDIRECT:Declarations` section.
+In this example two different entities use a C defined ``c_printInt(val: integer)`` subprogram to print two different numbers. Subprogram declaration requirements are detailed under the :ref:`COSIM:VHPIDIRECT:Declarations` section.
+
+.. _COSIM:VHPIDIRECT:Examples:quickstart:sharedvar:
+
+:cosimtree:`sharedvar <vhpidirect/quickstart/sharedvar>`
+********************************************************
+
+While sharing variables through packages in VHDL 1993 is flexible, in VHDL 2008 protected types need to be used.
+However, GHDL allows to relax some rules of the LRM through :option:`-frelaxed`.
+
+This example shows multiple alternatives to share variables through packages, depending on the target version of the standard.
+Three different binaries are built from the same entity, using:
+
+  * A VHDL 1993 package with ``--std=93``.
+
+  * A VHDL 1993 package with ``--std=08 -frelaxed``.
+
+  * A VHDL 2008 package with ``--std=08``.
+
+.. NOTE::
+  Procedure ``setVar`` is not strictly required. It is used to allow the same descriptions of the entity/architectures
+  to work with both VHDL 1993 and VHDL 2008. See the bodies of the procedure in :cosimtree:`pkg_93.vhd <vhpidirect/quickstart/sharedvar/pkg_93.vhd>` and :cosimtree:`pkg_08.vhd <vhpidirect/quickstart/sharedvar/pkg_08.vhd>`.
+
+As an alternative to using a shared variable in VHDL, subdir :cosimtree:`shint <vhpidirect/quickstart/sharedvar/shint>`
+contains an approach based on a helper record type which is used as a handle. Mimicking the concept of *methods* from
+Object Oriented (OO) programming, helper C functions are used to read/write the actual variables, instead of sharing
+data through an access/pointer. This approach is more verbose than others, but it works with either VHDL 1993 or VHDL
+2008 without modification and without requiring :option:`-frelaxed`. Moreover, it enhances encapsulation, as it provides
+a user-defined API between VHDL and C, which can improve maintainability when sources are reused. As a matter of fact,
+this approach is found in verification projects such as `VUnit <http://vunit.github.io/>`_ and `OSVVM <https://osvvm.org/>`_.
