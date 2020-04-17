@@ -20,6 +20,7 @@ jobs:
             vhpidirect/quickstart/random,
             vhpidirect/quickstart/math,
             vhpidirect/quickstart/customc,
+            vhpidirect/quickstart/package,
             vhpidirect/wrapping/basic,
             vhpidirect/wrapping/time,
             vhpidirect/linking/bind,
@@ -45,6 +46,7 @@ jobs:
             vhpidirect/quickstart/random,
             vhpidirect/quickstart/math,
             vhpidirect/quickstart/customc,
+            vhpidirect/quickstart/package,
             vhpidirect/wrapping/basic,
             vhpidirect/wrapping/time,
             #vhpidirect/linking/bind,  ! needs investigation, output of list-link seems to have wrong path format
