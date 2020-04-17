@@ -48,6 +48,7 @@ be available in the future.
    vhpidirect/dynamic
    vhpidirect/grt
    vhpidirect/examples/index
+   vhpidirect/mistakes
 
 Interfacing with foreign languages through VHPIDIRECT is possible on any platform.
 You can define a subprogram in a foreign language (such as `C` or
