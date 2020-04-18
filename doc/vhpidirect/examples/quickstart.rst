@@ -30,29 +30,38 @@ This example shows how to import and use ``rand`` to generate and print 10 integ
 :cosimtree:`math <vhpidirect/quickstart/math>`
 **********************************************
 
-By the same token, it is possible to include functions from system library by just providing the corresponding linker flag.
+By the same token, it is possible to include functions from system library by just providing the corresponding linker
+flag.
 
-In this example, function ``sin`` from the ``math`` library is used to compute 10 values. As in the previous example, no additional C sources are required, because the ``math`` library is already compiled and installed in the system.
+In this example, function ``sin`` from the ``math`` library is used to compute 10 values. As in the previous example,
+no additional C sources are required, because the ``math`` library is already compiled and installed in the system.
 
 .. _COSIM:VHPIDIRECT:Examples:quickstart:customc:
 
 :cosimtree:`customc <vhpidirect/quickstart/customc>`
 ****************************************************
 
-When the required functionality is not available in pre-built libraries, custom C sources and/or objects can be added to the elaboration and/or linking.
+When the required functionality is not available in pre-built libraries, custom C sources and/or objects can be added
+to the elaboration and/or linking.
 
-This example shows how to bind custom C functions in VHDL as either procedures or functions. Four cases are included: ``custom_procedure``, ``custom_procedure_withargs``, ``custom_function`` and ``custom_function_withargs``. In all cases, the parameters are defined as integers, in order to keep it simple. See :ref:`COSIM:VHPIDIRECT:Declarations` for further details.
+This example shows how to bind custom C functions in VHDL as either procedures or functions. Four cases are included:
+``custom_procedure``, ``custom_procedure_withargs``, ``custom_function`` and ``custom_function_withargs``. In all
+cases, the parameters are defined as integers, in order to keep it simple. See :ref:`COSIM:VHPIDIRECT:Declarations`
+for further details.
 
-Since either C sources or pre-compiled ``.o`` objects can be added, in C/C++ projects of moderate complexity, it might be desirable to merge all the C sources in a single object before elaborating the design.
+Since either C sources or pre-compiled ``.o`` objects can be added, in C/C++ projects of moderate complexity, it might
+be desirable to merge all the C sources in a single object before elaborating the design.
 
 .. _COSIM:VHPIDIRECT:Examples:quickstart:package:
 
 :cosimtree:`package <vhpidirect/quickstart/package>`
 ****************************************************
 
-If the auxillary VHPIDIRECT subprograms need to be accessed in more than one entity, it is possible to package the subprograms. This also makes it very easy to reuse the VHPIDIRECT declarations in different projects.
+If the auxillary VHPIDIRECT subprograms need to be accessed in more than one entity, it is possible to package the
+subprograms. This also makes it very easy to reuse the VHPIDIRECT declarations in different projects.
 
-In this example two different entities use a C defined ``c_printInt(val: integer)`` subprogram to print two different numbers. Subprogram declaration requirements are detailed under the :ref:`COSIM:VHPIDIRECT:Declarations` section.
+In this example two different entities use a C defined ``c_printInt(val: integer)`` subprogram to print two different
+numbers. Subprogram declaration requirements are detailed under the :ref:`COSIM:VHPIDIRECT:Declarations` section.
 
 .. _COSIM:VHPIDIRECT:Examples:quickstart:sharedvar:
 
