@@ -43,6 +43,9 @@ class TestExamples(TestCase):
     def _py(self, args):
         check_call([executable] + args, stderr=STDOUT)
 
+    #
+    # QuickStart
+    #
 
     def test_vhpidirect_quickstart_random(self):
         self._sh([str(self.vhpidirect / 'quickstart' / 'random' / 'run.sh')])
@@ -92,6 +95,9 @@ class TestExamples(TestCase):
     def test_vhpidirect_quickstart_cli_fcngen(self):
         self._sh([str(self.vhpidirect / 'quickstart' / 'cli' / 'fcngen' / 'run.sh')])
 
+    #
+    # Shared
+    #
 
     def test_vhpidirect_shared_shlib(self):
         self._sh([str(self.vhpidirect / 'shared' / 'shlib' / 'run.sh')])
@@ -123,6 +129,9 @@ class TestExamples(TestCase):
     def test_vhpidirect_shared_pycb(self):
         self._sh([str(self.vhpidirect / 'shared' / 'pycb' / 'run.sh')])
 
+    #
+    # Arrays
+    #
 
     def test_vhpidirect_arrays_intvector(self):
         self._sh([str(self.vhpidirect / 'arrays' / 'intvector' / 'run.sh')])
@@ -147,6 +156,9 @@ class TestExamples(TestCase):
     def test_vhpidirect_arrays_matrices_framebuffer(self):
         self._sh([str(self.vhpidirect / 'arrays' / 'matrices' / 'framebuffer' / 'run.sh')])
 
+    #
+    # VFFI/VDPI
+    #
 
     @pytest.mark.skipif(
         isWin and ('MINGW_PREFIX' not in environ),
@@ -164,6 +176,16 @@ class TestExamples(TestCase):
         self._py([str(self.vhpidirect / 'vffi_user' / 'xyce' / 'run_minimal.py'), '-v', '--clean', '--xunit-xml=%s' % str(self.report_file), '--output-path=%s' % str(self.output_path)])
         self._py([str(self.vhpidirect / 'vffi_user' / 'xyce' / 'run.py'), '-v', '--clean', '--xunit-xml=%s' % str(self.report_file), '--output-path=%s' % str(self.output_path)])
 
+    #
+    # GRT
+    #
+
+    def test_vhpidirect_grt_step(self):
+        self._sh([str(self.vhpidirect / 'grt' / 'step' / 'run.sh')])
+
+    #
+    # VPI
+    #
 
     def test_vpi_quickstart(self):
         self._sh([str(self.vpi / 'quickstart' / 'run.sh')])
