@@ -29,8 +29,6 @@ jobs:
             vhpidirect/shared/dlopen,
             vhpidirect/shared/shghdl,
             vhpidirect/arrays/intvector,
-            vhpidirect/arrays/intvector/maindefined,
-            vhpidirect/arrays/intvectorgeneric,
           ]
     runs-on: ubuntu-latest
     env:
@@ -59,8 +57,6 @@ jobs:
             #vhpidirect/shared/dlopen, ! dlfcn.h is not available on win
             #vhpidirect/shared/shghdl, ! dlfcn.h is not available on win
             vhpidirect/arrays/intvector,
-            vhpidirect/arrays/intvector/maindefined,
-            vhpidirect/arrays/intvectorgeneric,
           ]
     runs-on: windows-latest
     env:

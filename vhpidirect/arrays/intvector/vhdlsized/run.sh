@@ -4,14 +4,17 @@ set -e
 
 cd $(dirname "$0")
 
-echo "Analyze tb.vhd"
-ghdl -a tb.vhd
+for arch in 'calloc' 'vhdlalloc'; do
 
-echo "Build tb (with caux.c) [GHDL]"
-ghdl -e -Wl,caux.c tb
+echo "> Analyze pkg.vhd and tb.vhd"
+ghdl -a pkg.vhd tb.vhd
 
-echo "Execute tb (-gg_array_size=2)"
-./tb -gg_array_size=2
+echo "> Build tb_$arch (with caux.c) [GHDL]"
+ghdl -e -Wl,caux.c -o tb_"$arch" tb "$arch"
 
-echo "Execute tb (-gg_array_size=6)"
-./tb -gg_array_size=6
+echo "> Execute tb_$arch"
+./tb_"$arch"
+
+echo ""
+
+done

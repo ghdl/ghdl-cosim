@@ -45,6 +45,8 @@ This example shows how to bind custom C functions in VHDL as either procedures o
 
 Since either C sources or pre-compiled ``.o`` objects can be added, in C/C++ projects of moderate complexity, it might be desirable to merge all the C sources in a single object before elaborating the design.
 
+.. _COSIM:VHPIDIRECT:Examples:quickstart:package:
+
 :cosimtree:`package <vhpidirect/quickstart/package>`
 ****************************************************
 

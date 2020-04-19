@@ -1,18 +1,24 @@
+#include <assert.h>
 #include <malloc.h>
 #include <stddef.h>
 
-int* intArray;
-int* getIntArr_ptr(int arraySize){//function acts like a constructor so initialise the variable
-    if(intArray == NULL && arraySize > 0){
-        intArray = malloc(arraySize*sizeof(int));
-        for (int i = 0; i < arraySize; i++)
-        {
-            intArray[i] = 11*(i+1);
-        }
-    }
-    return intArray;
+int* allocIntArr(int arrSize){
+  return malloc(arrSize*sizeof(int));
 }
 
-void freePointers(){
-    free(intArray);
+void initIntArr(int* ptr, int arrSize) {
+  for (int i = 0; i < arrSize; i++) {
+    ptr[i] = 11*(i+1);
+  }
+}
+
+void checkAndPrintIntArr(int* ptr, int arrSize) {
+  for (int i = 0; i < arrSize; i++) {
+    printf("%d: %d\n", i, ptr[i]);
+    assert(ptr[i] == -3 * 11 * (i+1));
+  }
+}
+
+void freePointer(int* ptr){
+  free(ptr);
 }
