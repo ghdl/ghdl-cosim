@@ -4,98 +4,108 @@ set -e
 
 cd $(dirname "$0")
 
+for std in '08' '93'; do
 
-echo "> Analyze tb.vhd"
-ghdl -a tb.vhd
+echo "> [$std] Analyze tb.vhd"
+ghdl -a --std="$std" tb.vhd
 
 
-echo "> Build tb pass (with main.c)"
-ghdl -e -Wl,caux.c -Wl,main.c -o tb_pass tb pass
+echo "> [$std] Build tb pass"
+ghdl -e --std="$std" -Wl,caux.c -Wl,main.c -o tb"$std"_pass tb pass
 
-echo "> Execute tb_pass"
-./tb_pass
+echo "> [$std] Execute tb_pass"
+./tb"$std"_pass
 echo $?
 echo ""
 
 
-echo "> Build tb fail (with main.c)"
-ghdl -e -Wl,caux.c -Wl,main.c -o tb_fail tb fail
+echo "> [$std] Build tb-pass.so"
+ghdl -e --std="$std" -shared -Wl,-fPIC -Wl,caux.c -Wl,main.c tb pass
+mv tb-pass.so tb-fail.so
+echo ""
 
 set +e
 
-echo "> Execute tb_fail"
-./tb_fail
+echo "> [$std] Python cosim pass"
+python3 py/cosim.py
+echo ""
+
+set -e
+
+
+echo "> [$std] Build tb fail"
+ghdl -e --std="$std" -Wl,caux.c -Wl,main.c -o tb"$std"_fail tb fail
+
+set +e
+
+echo "> [$std] Execute tb_fail"
+./tb"$std"_fail
 echo $?
 echo ""
 
 set -e
 
 
-echo "> Build tb pass_sigabrt (with main_sigabrt.c)"
-ghdl -e -Wl,caux.c -Wl,main_sigabrt.c -o tb_pass_sigabrt tb pass
-
-echo "> Execute tb_pass_sigabrt"
-./tb_pass_sigabrt
-echo $?
+echo "> [$std] Build tb-fail.so"
+ghdl -e --std="$std" -shared -Wl,-fPIC -Wl,caux.c -Wl,main.c tb fail
 echo ""
-
-
-echo "> Build tb fail_sigabrt (with main_sigabrt.c)"
-ghdl -e -Wl,caux.c -Wl,main_sigabrt.c -o tb_fail_sigabrt tb fail
 
 set +e
 
-echo "> Execute tb_fail_sigabrt"
-./tb_fail_sigabrt
+echo "> [$std] Python cosim fail"
+python3 py/cosim.py
+echo ""
+
+set -e
+
+
+echo "> [$std] Build tb pass_sigabrt"
+ghdl -e --std="$std" -Wl,caux.c -Wl,main_sigabrt.c -o tb"$std"_pass_sigabrt tb pass
+
+echo "> [$std] Execute tb_pass_sigabrt"
+./tb"$std"_pass_sigabrt
 echo $?
 echo ""
 
 set -e
 
 
-echo "> Analyze --std=08 tb.vhd"
-ghdl -a --std=08 tb.vhd
-
-
-echo "> Build --std=08 tb pass (with main.c)"
-ghdl -e --std=08 -Wl,caux.c -Wl,main.c -o tb_pass08 tb pass
-
-echo "> Execute tb_pass08"
-./tb_pass08
-echo $?
+echo "> [$std] Build tb-pass.so (sigabrt)"
+ghdl -e --std="$std" -shared -Wl,-fPIC -Wl,caux.c -Wl,main_sigabrt.c tb pass
+mv tb-pass.so tb-fail.so
 echo ""
-
-
-echo "> Build --std=08 tb fail (with main.c)"
-ghdl -e --std=08 -Wl,caux.c -Wl,main.c -o tb_fail08 tb fail
 
 set +e
 
-echo "> Execute --std=08 tb_fail08"
-./tb_fail08
-echo $?
+echo "> [$std] Python cosim pass (sigabrt)"
+python3 py/cosim.py
 echo ""
 
 set -e
 
 
-echo "> Build --std=08 tb pass (with main_sigabrt.c)"
-ghdl -e --std=08 -Wl,caux.c -Wl,main_sigabrt.c -o tb_pass08_sigabrt tb pass
-
-echo "> Execute tb_pass08_sigabrt"
-./tb_pass08_sigabrt
-echo $?
-echo ""
-
-
-echo "> Build --std=08 tb fail (with main_sigabrt.c)"
-ghdl -e --std=08 -Wl,caux.c -Wl,main_sigabrt.c -o tb_fail08_sigabrt tb fail
+echo "> [$std] Build tb fail_sigabrt)"
+ghdl -e --std="$std" -Wl,caux.c -Wl,main_sigabrt.c -o tb"$std"_fail_sigabrt tb fail
 
 set +e
 
-echo "> Execute --std=08 tb_fail08_sigabrt"
-./tb_fail08_sigabrt
+echo "> [$std] Execute tb_fail_sigabrt"
+./tb"$std"_fail_sigabrt
 echo $?
 echo ""
 
 set -e
+
+echo "> [$std] Build tb-fail.so (sigabrt)"
+ghdl -e --std="$std" -shared -Wl,-fPIC -Wl,caux.c -Wl,main_sigabrt.c tb fail
+echo ""
+
+set +e
+
+echo "> [$std] Python cosim fail (sigabrt)"
+python3 py/cosim.py
+echo ""
+
+set -e
+
+done

@@ -6,7 +6,7 @@ extern int wrapper(int argc, void** argv);
 void sigabrtHandler(int sig_num) {
   // Reset handler to catch SIGABRT next time. Refer http://en.cppreference.com/w/c/program/signal
   signal(SIGABRT, sigabrtHandler);
-  printf("\nSIGABRT caught %d!\n", sig_num);
+  printf("SIGABRT caught %d!\n", sig_num);
   fflush(stdout);
 }
 
