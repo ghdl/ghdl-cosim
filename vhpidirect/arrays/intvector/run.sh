@@ -4,11 +4,10 @@ set -e
 
 cd $(dirname "$0")
 
-echo "Analyze tb.vhd"
-ghdl -a tb.vhd
+echo "! C alloc C sized:"
+./csized/run.sh
 
-echo "Build tb (with caux.c) [GHDL]"
-ghdl -e -Wl,caux.c tb
+echo ""
 
-echo "Execute tb"
-./tb
+echo "! VHDL sized:"
+./vhdlsized/run.sh
