@@ -98,6 +98,12 @@ to the compiler and/or linker. However, since it is not possible to do so with A
   ``int argc, void** argv, void** envp``. This is done for illustration purposes only, as it has no real effect on the
   exercise.
 
+:cosimtree:`exitcb <vhpidirect/quickstart/wrapping/exitcb>`
+------------------------------------------------
+
+On exit, ``ghdl_main`` behaves differently depending on the version of the standard that it used for VHDL.
+
+
 .. _COSIM:VHPIDIRECT:Examples:quickstart:linking:
 
 Linking

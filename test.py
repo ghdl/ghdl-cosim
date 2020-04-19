@@ -67,6 +67,10 @@ class TestExamples(unittest.TestCase):
         ])
 
 
+    def test_vhpidirect_quickstart_wrapping_exitcb(self):
+        self._sh([str(self.vhpidirect / 'quickstart' / 'wrapping' / 'exitcb' / 'run.sh')])
+
+
     @unittest.skipIf(
         isWin,
         'win: needs investigation, output of list-link seems to have wrong path format',
