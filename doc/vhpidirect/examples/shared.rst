@@ -14,7 +14,7 @@ Shared libs and dynamic loading
 ********************************************
 
 This example features the same functionality as :ref:`COSIM:VHPIDIRECT:Examples:quickstart:random`. However, custom C
-sources are use (as in :ref:`COSIM:VHPIDIRECT:Examples:quickstart:customc`) and these are built as a shared library.
+sources are used (as in :ref:`COSIM:VHPIDIRECT:Examples:quickstart:customc`) and these are built as a shared library.
 See :ref:`COSIM:VHPIDIRECT:Dynamic:loading_within_a_simulation` for further info.
 
 .. _COSIM:VHPIDIRECT:Examples:shared:dlopen:

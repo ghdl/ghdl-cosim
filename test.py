@@ -76,6 +76,16 @@ class TestExamples(unittest.TestCase):
         self._sh([str(self.vhpidirect / 'quickstart' / 'sharedvar' / 'run.sh')])
 
 
+    def test_vhpidirect_quickstart_cli(self):
+        self._sh([str(self.vhpidirect / 'quickstart' / 'cli' / 'run.sh')])
+
+    def test_vhpidirect_quickstart_cli_fcnargs(self):
+        self._sh([str(self.vhpidirect / 'quickstart' / 'cli' / 'fcnargs' / 'run.sh')])
+
+    def test_vhpidirect_quickstart_cli_fcngen(self):
+        self._sh([str(self.vhpidirect / 'quickstart' / 'cli' / 'fcngen' / 'run.sh')])
+
+
     def test_vhpidirect_shared_shlib(self):
         self._sh([str(self.vhpidirect / 'shared' / 'shlib' / 'run.sh')])
 
