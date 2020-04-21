@@ -91,7 +91,7 @@ begin
         info(
           to_string(x) & "," & to_string(y) & " -> " &
           to_string(to_real(val_fp)) &
-          " [" &
+          " [~" &
           to_string(val) &
           "]"
         );
