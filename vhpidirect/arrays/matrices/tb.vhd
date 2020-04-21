@@ -25,7 +25,7 @@ begin
         val := matrix(x,y);
         assert val = 0.5 + real(x) * 11.0 + real(y) * 0.11 severity error;
         matrix(x,y) := to_real(to_sfixed(val, 14, -10) * to_sfixed(0.1, 7, -8));
-        report to_string(x) & "," & to_string(y) & ": " & real'image(val) & " " & real'image(matrix(x,y)) severity note;
+        report to_string(x) & "," & to_string(y) & ": " & real'image(val) & " [~" & real'image(matrix(x,y)) & "]" severity note;
       end loop;
     end loop;
 
