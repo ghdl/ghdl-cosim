@@ -1,0 +1,49 @@
+#include <assert.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdint.h>
+#include <string.h>
+
+void sim_init(uint32_t width, uint32_t height) {
+  printf("sim_init is not required, thus empty, in this implementation\n");
+}
+
+void integer_to_raw24(int32_t *ptr, uint32_t width, uint32_t height, uint8_t *raw24) {
+  int x,y;
+  uint32_t *q = ptr;
+  uint8_t *j = raw24;
+  for ( y=0 ; y < height ; y++ ) {
+    for ( x=0 ; x < width ; x++ ) {
+      int k = *q++;
+      *(j++) = (k/65536) %256;
+      *(j++) = (k/256) %256;
+      *(j++) = k %256;
+    }
+  }
+}
+
+void save_screenshot(int32_t *ptr, uint32_t width, uint32_t height, int id) {
+  assert(ptr != NULL);
+
+  uint8_t *raw24 = malloc(width * height * 3);
+  assert((int*)raw24 != (int*)-1);
+
+  integer_to_raw24(ptr, width, height, raw24);
+
+  FILE *fptr = fopen("out/screen.raw24","w");
+  assert(fptr != NULL);
+
+  fwrite(raw24, width * height, 3, fptr);
+  fclose(fptr);
+
+  free(raw24);
+
+  char convert[65];
+  sprintf(convert, "convert -size %dx%d -depth 8 RGB:out/screen.raw24 out/%03d.png", width, height, id);
+  assert(system(convert) == 0);
+}
+
+void sim_cleanup(void) {
+  //system("convert out/*.png out/video.mpeg");
+  system("convert -delay 4 out/*.png out/video.gif");
+}
