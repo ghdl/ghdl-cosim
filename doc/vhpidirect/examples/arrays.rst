@@ -33,7 +33,7 @@ define them in C or VHDL and have them (de)allocated in either of them.
 .. _COSIM:VHPIDIRECT:Examples:arrays:intvector:csized:
 
 :cosimtree:`Sized in C <vhpidirect/arrays/intvector/csized>`
-------------------------------------------------------------
+============================================================
 
 Integer arrays fully defined in C can be passed to VHDL by first passing their size, so that an appropriate array
 type can be created in VHDL to hold the array's access (pointer). After that, another VHPIDIRECT subprogram can be
@@ -52,8 +52,10 @@ executing the simulation.
   There is no explicit example about how to have the size defined in C, but have the allocation/deallocation performed
   in VHDL. However, implementing such a solution is a matter of combining these examples with the VHDL-sized ones below.
 
+.. _COSIM:VHPIDIRECT:Examples:arrays:intvector:vhdlsized:
+
 :cosimtree:`Sized in VHDL <vhpidirect/arrays/intvector/vhdlsized>`
-------------------------------------------------------------------
+==================================================================
 
 Complementing the examples above, when the size of a bounded/constrained array is defined in VHDL, it is possible to have
 the (de)allocation performed in either VHDL or C. However, while accesses to constrained VHDL types do contain metada about
@@ -128,13 +130,14 @@ For illustrative purposes, the two vectors are populated with logic values in di
 
 .. ATTENTION::
   The integer values that are given to ``char`` variables in C which are intended to be read as VHDL logic values, must be limited to [0, 8]. This ensures that they represent one of the 9 enumerated logic values.
+
 .. _COSIM:VHPIDIRECT:Examples:arrays:matrices:
 
 :cosimtree:`Matrices <vhpidirect/arrays/matrices>`
 **************************************************
 
 Constrained multidimensional arrays of doubles/reals
-----------------------------------------------------
+====================================================
 
 In many signal and image processing applications, large amounts of data need to be transferred between software and
 hardware. In software, it is common to use floating-point data types, since most general-purpose processors include
@@ -151,8 +154,10 @@ retrieved as an access (in VHDL), through another helper function.
 For completeness, IEEE's ``fixed_generic_pkg`` package is used to multiply each value with a constant using fixed-point
 formats. This is to illustrate that VHDL 2008 can be used as *fixed-point toolbox* in numerical processing environments.
 
+.. _COSIM:VHPIDIRECT:Examples:arrays:matrices:axis:
+
 :cosimtree:`Array and AXI4 Stream Verification Components <vhpidirect/arrays/matrices/vunit_axis_vcs>`
-------------------------------------------------------------------------------------------------------
+======================================================================================================
 
 .. HINT::
   This example is based on `VUnit <http://vunit.github.io/>`_, an open source unit testing framework for VHDL/SystemVerilog.
@@ -163,6 +168,8 @@ formats. This is to illustrate that VHDL 2008 can be used as *fixed-point toolbo
    :alt: VUnit example `array_axis_vcs <http://vunit.github.io/examples.html#id9>`_
    :align: center
    :width: 500px
+
+   Block diagram of VUnit example ``array_axis_vcs``.
 
 `VUnit <http://vunit.github.io/>`_ provides an :ref:`integer_array <vunit:integer_array_pkg>` package with ``load_csv``
 and ``save_csv`` functions. Those are used in `Array and AXI4 Stream Verification Components <http://vunit.github.io/examples.html#id9>`_,
@@ -175,6 +182,8 @@ handled in fixed-point need to be first converted from doubles to integers.
    :alt: Modified version of the example, renamed to :cosimtree:`vunit_axis_vcs <vhpidirect/arrays/matrices/vunit_axis_vcs>`
    :align: center
    :width: 500px
+
+   Block diagram of the modified version of the VUnit example, renamed to :cosimtree:`vunit_axis_vcs <vhpidirect/arrays/matrices/vunit_axis_vcs>`.
 
 Subdir :cosimtree:`vunit_axis_vcs <vhpidirect/arrays/matrices/vunit_axis_vcs>` of this example contains a modified
 version of a VUnit example (`array_axis_vcs <http://vunit.github.io/examples.html#id9>`_), where ``integer_array``
@@ -193,3 +202,80 @@ a VUnit ``run.py`` script (for building and test management) along with custom V
   Combining VUnit's verification components with VHPIDIRECT allows to build simulation models for VHDL designs
   with complex top-level interfaces, while providing a C API to interact with them. Find work in progress in this regard
   at `VUnit/cosim <https://vunit.github.io/cosim/>`_.
+
+.. _COSIM:VHPIDIRECT:Examples:arrays:matrices:vga:
+
+:cosimtree:`VGA (RGB image buffer) <vhpidirect/arrays/matrices/framebuffer>`
+============================================================================
+
+.. ATTENTION::
+  These examples require `ImageMagick <https://www.imagemagick.org/>`_ and/or `Xlib <https://www.x.org/releases/current/doc/libX11/libX11/libX11.html>`_.
+
+In image generation and processing applications, it can be tedious to debug the designs by looking at waveforms or
+logs. Saving data from RAMs and/or typical graphics standards to images or video allows to spot visual artifacts easily.
+
+This example is based on :ref:`COSIM:VHPIDIRECT:Examples:arrays:intvector:vhdlsized` from :ref:`intvector <COSIM:VHPIDIRECT:Examples:arrays:intvector>`.
+A 2D array of integers is allocated in a VHDL package and it is used as a frame buffer. Each integer represents a pixel:
+the 24 least significant bits are used for R, G and B (8 bits each); while the 8 most significant are not used.
+See `Wikipedia: Color_depth#True_color_(24-bit) <https://en.wikipedia.org/wiki/Color_depth#True_color_(24-bit)>`_.
+
+In the same package, foreign function ``save_screenshot`` is defined. It accepts a pointer to an array of integers, along
+with integers defining the width and the height, and an integer used as an identifier of the frame number. Hence, unlike
+previous examples with matrices, in this example calls to the VHPIDIRECT function are atomic and do not depend on passing
+any parameter beforehand.
+
+In practice, this example provides the foundation to build *virtual screens* for simulation purposes. Two different
+implementations are shown:
+
+* With :cosimtree:`caux.c <vhpidirect/arrays/matrices/framebuffer/caux.c>`, the content of the frame buffer is saved to a binary
+  file in RGB24 format. Then, ``convert`` from `ImageMagick <https://www.imagemagick.org/>`_ is used to convert it to PNG.
+  When the simulation ends, ``convert`` is used again, to merge all the PNGs into an animated GIF.
+
+* With :cosimtree:`caux_x11.c <vhpidirect/arrays/matrices/framebuffer/caux_x11.c>`, X11 libraries are used to generate a
+  window on the desktop. Then, when ``save_screenshot`` is called, the canvas is updated with the content of the frame buffer.
+
+.. HINT::
+  The resolution of the screen (frame buffer) is hardcoded in :cosimtree:`pkg.vhd <vhpidirect/arrays/matrices/framebuffer/pkg.vhd>`.
+  At the same time, the size of the canvas (X11 window) is hardcoded in the testbenches and passed to C as arguments of ``sim_init``
+  (see :cosimtree:`caux.c <vhpidirect/arrays/matrices/framebuffer/caux.c>`). Hence, in order to use other resolutions, both sources
+  might need to be modified. Contributions to improve this mechanism are welcome!
+
+Moreover, two different architectures are provided for the testbench (:cosimtree:`tb.vhd <vhpidirect/arrays/matrices/framebuffer/tb.vhd>`):
+
+* In architecture ``test``, 16 frames/images are generated. The content of the buffer is set through literal assignments
+  such as ``screen(j,i) := 16#FFFF00#;``. The generated pattern is a yellow background and an animated cyan box (it is moved to the
+  right and to the bottom as frames advance).
+
+* In architecture ``bars``, a single frame/image is generated. The content of the buffer is set through an ``std_logic_vector(2 downto 0)``
+  (RGB) signal. A helper function (``RGB_to_integer``) provided in the package is used to convert the 3 bit signal into
+  RGB24. The generated static pattern is eight equally spaced vertical bars, each correponding to a value of the 3 bit
+  signal; from left to right: black, red, green, yellow, blue, magenta, cyan and white.
+
+:cosimtree:`Virtual VGA screen <vhpidirect/arrays/matrices/framebuffer/virt_vga>`
+---------------------------------------------------------------------------------
+
+In practical designs, it is desirable to separate sources for synthesis from simulation and testing resources. This
+subexample extends the usage of a shared frame buffer, to test a synthesizable VGA pattern generator (or any other design
+with VGA output).
+
+.. figure:: img/matrices_virt_vga.png
+   :alt: Example :cosimtree:`virt_vga <vhpidirect/arrays/matrices/framebuffer/virt_vga>`
+   :align: center
+   :width: 500px
+
+   Block diagram of example :cosimtree:`virt_vga <vhpidirect/arrays/matrices/framebuffer/virt_vga>`.
+
+The UUT instantiated in the testbench is composed of a clock frequency conversion (``vga_clk``), sync and index generator
+(``vga_sync_gen``) and a pattern generator (``pattern``). The implemented pattern is the same eight bar test described above.
+This UUT is expected to be synthesizable, even though the provided architecture for entity ``vga_clk`` is not.
+
+The *virtual VGA screen* is implemented in module ``vga_screen``. A separate sync and index generator is used to capture the
+RGB signal and to write RGB24 integers to the frame buffer. The first edges of VSYNC is used to sync frames of the capture. After
+each frame is filled, ``save_screenshot`` is executed. The visualization of the captures depends on the chosen C
+implementation: either PNG/GIF or X11, as explained above.
+
+.. TIP::
+  VHDL package :cosimtree:`vga_cfg_pkg <vhpidirect/arrays/matrices/framebuffer/virt_vga/cfg_pkg.vhd>` contains a table
+  (described as an array of records) with parameter values (pulse, porch, pixel clock rate, polarity, etc.) for +60 VGA/VESA/SXGA/XGA
+  modes. This table is used in ``vga_pattern`` and ``vga_screen``, to provide generics to ``vga_syn_gen``. However, as
+  explained in the hint above, the size of the *virtual screen* is hardcoded.
