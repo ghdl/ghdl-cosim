@@ -3,3 +3,6 @@
 *.lst
 *.o
 *.so
+*.vpi
+adder
+adder_tb
