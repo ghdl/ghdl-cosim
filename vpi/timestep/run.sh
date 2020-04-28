@@ -2,6 +2,8 @@
 
 set -e
 
+cd "$(dirname $0)"
+
 echo "Analyze ent.vhd"
 ghdl -a ent.vhd
 
