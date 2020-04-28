@@ -1,4 +1,5 @@
 Examples
 ########
 
-TBC
+See :cosimtree:`VPI examples <vpi>` directory 
+
