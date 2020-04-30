@@ -16,7 +16,13 @@ PLI_INT32 end_cb(p_cb_data data){
 
 
 void entry_point_cb() {
+
+    // cbStartOfSimulation is a callback executed at the beginning
+    // of the simulation
     register_cb(start_cb, cbStartOfSimulation, -1);
+
+    // cbStartOfSimulation is a callback executed at the beginning
+    // of the simulation
     register_cb(end_cb, cbEndOfSimulation, -1);
 }
 

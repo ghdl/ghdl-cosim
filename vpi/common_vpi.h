@@ -2,6 +2,10 @@
 #include <inttypes.h>
 #include <vpi_user.h>
 
+/*
+ * register_cb is a wrapper function around vpi_register_cb
+ * to simplify the the callback registering process
+ */
 void register_cb(PLI_INT32(*f)(p_cb_data),
                  PLI_INT32 reason,
                  int64_t cycles){

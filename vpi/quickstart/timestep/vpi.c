@@ -7,10 +7,20 @@
 
 uint32_t iteration = 0;
 
+/* In this example the simulation time is advanced from
+ * VPI. This is accomplished registering a chain of callbacks.
+ */
 
-PLI_INT32 rw_cb(p_cb_data);
+// register a cbAfterDelay callback that executes delay_ro_cb after 1 timestep
+PLI_INT32 rw_cb(p_cb_data); 
+
+// register a cbAfterDelay callback that executes delay_rw_cb after 0 timestep
 PLI_INT32 ro_cb(p_cb_data);
+
+// register a cbReadWriteSynch callback that execute rw_cb after 0 timestep
 PLI_INT32 delay_rw_cb(p_cb_data);
+
+// register a cbReadOnlySynch callback that executes ro_cb after 0 timestep
 PLI_INT32 delay_ro_cb(p_cb_data);
 
 PLI_INT32 rw_cb(p_cb_data data){
@@ -22,9 +32,12 @@ PLI_INT32 rw_cb(p_cb_data data){
 
     if(iteration < STOP_ITERATION) {
     
-        // change the last parameter to modify the simulation delay induced by the iteration
+        // change the last parameter to modify the 
+        // simulation delay induced by the iteration
         register_cb(delay_ro_cb, cbAfterDelay, 1); 
     } else {
+
+        // if the chain is executed STOP_ITERATION times, the simulation is stopped
         vpi_control(vpiFinish, 0);
     }
 

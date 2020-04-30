@@ -17,6 +17,24 @@ architecture behavioral of tb is
                              nibble2 => nibble2,
                              sum => sum,
                              carry_out => carry_out);
+
+        ent_1: entity work.ent 
+                    port map (nibble1 => nibble1,
+                             nibble2 => nibble2,
+                             sum => sum,
+                             carry_out => carry_out);
+
+        ent_2: entity work.ent 
+                    port map (nibble1 => nibble1,
+                             nibble2 => nibble2,
+                             sum => sum,
+                             carry_out => carry_out);
+
+        ent_3: entity work.ent 
+                    port map (nibble1 => nibble1,
+                             nibble2 => nibble2,
+                             sum => sum,
+                             carry_out => carry_out);
         process
 
         begin

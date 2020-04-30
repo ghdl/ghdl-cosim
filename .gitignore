@@ -8,3 +8,4 @@ ent*
 tb*
 !*.vhd
 !*.vhdl
+doc/_build/*

@@ -4,6 +4,8 @@ set -e
 
 cd "$(dirname $0)"
 
+PATH=$PATH:$(pwd)
+
 echo "Analyze ent.vhd"
 ghdl -a ent.vhd
 

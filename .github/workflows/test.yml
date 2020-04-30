@@ -32,8 +32,9 @@ jobs:
             vhpidirect/arrays/logicvector,
             vhpidirect/arrays/matrices,
             vpi/quickstart/helloworld,
-            vpi/quickstart/beginend,
+            vpi/quickstart/begin_end,
             vpi/quickstart/access,
+            vpi/quickstart/access_port,
             vpi/quickstart/timestep,
             vpi/list
           ]
@@ -83,11 +84,12 @@ jobs:
             vhpidirect/arrays/intvector,
             vhpidirect/arrays/logicvector,
             vhpidirect/arrays/matrices
-            #vpi/quickstart/helloworld, ! vpi.vpi directory has to be added to PATH on windows
-            #vpi/quickstart/beginend,   ! vpi.vpi directory has to be added to PATH on windows
-            #vpi/quickstart/access,     ! vpi.vpi directory has to be added to PATH on windows
-            #vpi/quickstart/timestep,   ! vpi.vpi directory has to be added to PATH on windows
-            #vpi/list                   ! vpi.vpi directory has to be added to PATH on windows
+            vpi/quickstart/helloworld, 
+            vpi/quickstart/begin_end,  
+            vpi/quickstart/access,     
+            vpi/quickstart/access_port,     
+            vpi/quickstart/timestep,   
+            vpi/list                   
           ]
     runs-on: windows-latest
     env:
