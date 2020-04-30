@@ -6,8 +6,6 @@ PLI_INT32 start_cb(p_cb_data data){
     (void) data;
     s_vpi_value val;
     
-    printf("Start of simulation \n");
-
     val.format = vpiBinStrVal;
     val.value.str = "0101";
     printf("set %s in tb.nibble1 \n", val.value.str);
@@ -30,8 +28,6 @@ PLI_INT32 end_cb(p_cb_data data){
     vpiHandle sum = vpi_handle_by_name("tb.sum", NULL);
     vpi_get_value(sum, &val);
     printf("get %s from tb.sum \n", val.value.str);
-
-    printf("End of simulation \n");
 
     return 0;
 }

@@ -11,7 +11,7 @@ echo "Elaborate tb"
 ghdl -e ent
 
 echo "Compile vpi.c"
-ghdl --vpi-compile gcc -c vpi.c -I./../common/ -o vpi.o
+ghdl --vpi-compile gcc -c vpi.c -I./../../ -o vpi.o
 
 echo "Link vpi.o"
 ghdl --vpi-link gcc vpi.o -o vpi.vpi

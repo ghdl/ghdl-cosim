@@ -31,6 +31,11 @@ jobs:
             vhpidirect/arrays/intvector,
             vhpidirect/arrays/logicvector,
             vhpidirect/arrays/matrices,
+            vpi/quickstart/helloworld
+            vpi/quickstart/beginend
+            vpi/quickstart/access
+            vpi/quickstart/timestep
+            vpi/list
           ]
     runs-on: ubuntu-latest
     env:
@@ -78,6 +83,11 @@ jobs:
             vhpidirect/arrays/intvector,
             vhpidirect/arrays/logicvector,
             vhpidirect/arrays/matrices,
+            vpi/quickstart/helloworld
+            vpi/quickstart/beginend
+            vpi/quickstart/access
+            vpi/quickstart/timestep
+            vpi/list
           ]
     runs-on: windows-latest
     env:

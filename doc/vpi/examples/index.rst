@@ -1,5 +1,7 @@
 Examples
 ########
 
-See :cosimtree:`VPI examples <vpi>` directory 
+.. toctree::
 
+   quickstart
+   list
