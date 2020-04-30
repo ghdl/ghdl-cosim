@@ -215,8 +215,8 @@ In image generation and processing applications, it can be tedious to debug the 
 logs. Saving data from RAMs and/or typical graphics standards to images or video allows to spot visual artifacts easily.
 
 This example is based on :ref:`COSIM:VHPIDIRECT:Examples:arrays:intvector:vhdlsized` from :ref:`intvector <COSIM:VHPIDIRECT:Examples:arrays:intvector>`.
-A 2D array of integers is allocated in a VHDL package and it is used as a frame buffer. Each integer represents a pixel:
-the 24 least significant bits are used for R, G and B (8 bits each); while the 8 most significant are not used.
+A 2D array of integers is allocated in a (generic) VHDL package and it is used as a frame buffer. Each integer represents a
+pixel: the 24 least significant bits are used for R, G and B (8 bits each); while the 8 most significant are not used.
 See `Wikipedia: Color_depth#True_color_(24-bit) <https://en.wikipedia.org/wiki/Color_depth#True_color_(24-bit)>`_.
 
 In the same package, foreign function ``save_screenshot`` is defined. It accepts a pointer to an array of integers, along
@@ -235,10 +235,12 @@ implementations are shown:
   window on the desktop. Then, when ``save_screenshot`` is called, the canvas is updated with the content of the frame buffer.
 
 .. HINT::
-  The resolution of the screen (frame buffer) is hardcoded in :cosimtree:`pkg.vhd <vhpidirect/arrays/matrices/framebuffer/pkg.vhd>`.
-  At the same time, the size of the canvas (X11 window) is hardcoded in the testbenches and passed to C as arguments of ``sim_init``
-  (see :cosimtree:`caux.c <vhpidirect/arrays/matrices/framebuffer/caux.c>`). Hence, in order to use other resolutions, both sources
-  might need to be modified. Contributions to improve this mechanism are welcome!
+  The resolution of the screen (frame buffer) is defined in :cosimtree:`pkg.vhd <vhpidirect/arrays/matrices/framebuffer/pkg.vhd>`,
+  which is a generic package. Corresponding generics are defined in the top-level entity (testbench). Hence, it is possible to
+  modify the size of the screen through CLI args.
+  At the same time, the size of the canvas (X11 window) is defined in the testbench and passed to C as arguments of ``sim_init``
+  (see :cosimtree:`caux.c <vhpidirect/arrays/matrices/framebuffer/caux.c>`). By default, the size of the window matches the
+  size of the screen (frame buffer). However, this is not a requirement.
 
 Moreover, two different architectures are provided for the testbench (:cosimtree:`tb.vhd <vhpidirect/arrays/matrices/framebuffer/tb.vhd>`):
 
@@ -247,7 +249,7 @@ Moreover, two different architectures are provided for the testbench (:cosimtree
   right and to the bottom as frames advance).
 
 * In architecture ``bars``, a single frame/image is generated. The content of the buffer is set through an ``std_logic_vector(2 downto 0)``
-  (RGB) signal. A helper function (``RGB_to_integer``) provided in the package is used to convert the 3 bit signal into
+  (RGB) signal. A helper function (``RGB_to_integer``, provided in the package) is used to convert the 3 bit signal into
   RGB24. The generated static pattern is eight equally spaced vertical bars, each correponding to a value of the 3 bit
   signal; from left to right: black, red, green, yellow, blue, magenta, cyan and white.
 
@@ -277,5 +279,6 @@ implementation: either PNG/GIF or X11, as explained above.
 .. TIP::
   VHDL package :cosimtree:`vga_cfg_pkg <vhpidirect/arrays/matrices/framebuffer/virt_vga/cfg_pkg.vhd>` contains a table
   (described as an array of records) with parameter values (pulse, porch, pixel clock rate, polarity, etc.) for +60 VGA/VESA/SXGA/XGA
-  modes. This table is used in ``vga_pattern`` and ``vga_screen``, to provide generics to ``vga_syn_gen``. However, as
-  explained in the hint above, the size of the *virtual screen* is hardcoded.
+  modes. This table is used in ``vga_pattern`` and ``vga_screen``, to provide generics to ``vga_syn_gen``. At the same time,
+  ``vga_screen`` allows to set the size of the X11 window through generics. By default, the size of the window matches the
+  resolution of the selected mode.

@@ -1,12 +1,13 @@
 library ieee;
 context ieee.ieee_std_context;
 
-use work.pkg.all;
 use work.vga_cfg_pkg.all;
 
 entity vga_screen is
   generic (
-    G_SCREEN: natural
+    G_SCREEN  : natural;
+    G_WWIDTH  : natural := 0; -- X11 window width
+    G_WHEIGHT : natural := 0  -- X11 window height
   );
   port (
     RST:   in std_logic;
@@ -15,15 +16,20 @@ entity vga_screen is
     RGB:   in std_logic_vector(2 downto 0);
     VID:   in std_logic
   );
+  constant cfg: VGA_config := VGA_configs(G_SCREEN);
+  package tb_pkg is new work.pkg
+    generic map (
+      G_WIDTH  => cfg.width,
+      G_HEIGHT => cfg.height
+    );
+  use tb_pkg.all;
 end entity;
 
 architecture arch of vga_screen is
-  constant cfg: VGA_config := VGA_configs(G_SCREEN);
+
   constant clk_period : time := (1.0/real(cfg.clk)) * 1 ms;
 
-  signal clk: std_logic := '0';
-
-  signal p_rst, p_hs, p_vs: std_logic;
+  signal clk, p_rst, p_hs, p_vs: std_logic := '0';
 
   signal x: integer range -1 to cfg.width;
   signal y: integer range -1 to cfg.height;
@@ -32,7 +38,12 @@ begin
 
   proc_init: process
   begin
-    sim_init(800, 600); -- X11 window size
+    -- X11 window size
+    if G_WWIDTH /= 0 and G_WHEIGHT /= 0 then
+      sim_init(G_WWIDTH, G_WHEIGHT);
+    else
+      sim_init(cfg.width, cfg.height);
+    end if;
     wait;
   end process;
 

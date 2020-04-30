@@ -2,11 +2,14 @@ library ieee;
 context ieee.ieee_std_context;
 
 package pkg is
-  -- TODO: use a generic package, to set the width and height through top-level generics (CLI)
+  generic (
+    G_WIDTH  : natural := 640;
+    G_HEIGHT : natural := 480
+  );
 
   type screen_t is
-    array ( natural range 0 to 480-1, --768
-            natural range 0 to 640-1 ) of integer; --1368
+    array ( natural range 0 to G_HEIGHT-1,
+            natural range 0 to G_WIDTH-1 ) of integer;
 
   shared variable screen: screen_t;
 

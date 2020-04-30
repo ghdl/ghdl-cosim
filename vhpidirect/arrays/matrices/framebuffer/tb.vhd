@@ -1,8 +1,15 @@
-use work.pkg.all;
-
 entity tb is
+  generic (
+    WIDTH  : natural := 640;
+    HEIGHT : natural := 480
+  );
+  package tb_pkg is new work.pkg
+    generic map (
+      G_WIDTH  => WIDTH,
+      G_HEIGHT => HEIGHT
+    );
+  use tb_pkg.all;
 end tb;
-
 
 architecture test of tb is
   constant c_width  : integer := screen'length(2);
@@ -12,7 +19,7 @@ begin
     variable h, i, j, d_x, d_y: integer;
     constant w : natural := 100;
   begin
-    sim_init(800, 600); -- X11 window size
+    sim_init(WIDTH, HEIGHT); -- X11 window size
     report "screen size: " & to_string(c_width) & "x" & to_string(c_height) severity note;
     report "pattern: test" severity note;
 
@@ -56,7 +63,7 @@ begin
   process
     variable color: std_logic_vector(2 downto 0) := (others=>'0');
   begin
-    sim_init(800, 600); -- X11 window size
+    sim_init(WIDTH, HEIGHT); -- X11 window size
     report "screen size: " & to_string(c_width) & "x" & to_string(c_height) severity note;
     report "pattern: bars" severity note;
 
