@@ -17,6 +17,7 @@ static uint xres;
 static uint yres;
 
 void sim_init(uint32_t width, uint32_t height) {
+  printf("sim_init %d %d\n", width, height);
   xres = width;
   yres = height;
 
