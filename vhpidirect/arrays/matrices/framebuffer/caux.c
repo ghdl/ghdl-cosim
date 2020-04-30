@@ -9,15 +9,15 @@ void sim_init(uint32_t width, uint32_t height) {
 }
 
 void integer_to_raw24(int32_t *ptr, uint32_t width, uint32_t height, uint8_t *raw24) {
-  int x,y;
+  int x, y;
   uint32_t *q = ptr;
   uint8_t *j = raw24;
-  for ( y=0 ; y < height ; y++ ) {
-    for ( x=0 ; x < width ; x++ ) {
-      int k = *q++;
-      *(j++) = (k/65536) %256;
-      *(j++) = (k/256) %256;
-      *(j++) = k %256;
+  for ( y = 0 ; y < height ; y++ ) {
+    for ( x = 0 ; x < width ; x++ ) {
+      uint8_t *u = (uint8_t*) q++;
+      *(j++) = u[2];
+      *(j++) = u[1];
+      *(j++) = u[0];
     }
   }
 }
