@@ -3,3 +3,9 @@
 *.lst
 *.o
 *.so
+*.vpi
+ent*
+tb*
+!*.vhd
+!*.vhdl
+doc/_build/*

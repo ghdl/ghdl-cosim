@@ -31,6 +31,12 @@ jobs:
             vhpidirect/arrays/intvector,
             vhpidirect/arrays/logicvector,
             vhpidirect/arrays/matrices,
+            vpi/quickstart/helloworld,
+            vpi/quickstart/begin_end,
+            vpi/quickstart/access,
+            vpi/quickstart/access_port,
+            vpi/quickstart/timestep,
+            vpi/list
           ]
     runs-on: ubuntu-latest
     env:
@@ -77,7 +83,13 @@ jobs:
             #vhpidirect/shared/shghdl, ! dlfcn.h is not available on win
             vhpidirect/arrays/intvector,
             vhpidirect/arrays/logicvector,
-            vhpidirect/arrays/matrices,
+            vhpidirect/arrays/matrices
+            #vpi/quickstart/helloworld,   ! VPI plugins needs their folder to be added to PATH   
+            #vpi/quickstart/begin_end,    ! VPI plugins needs their folder to be added to PATH 
+            #vpi/quickstart/access,       ! VPI plugins needs their folder to be added to PATH 
+            #vpi/quickstart/access_port,  ! VPI plugins needs their folder to be added to PATH      
+            #vpi/quickstart/timestep,     ! VPI plugins needs their folder to be added to PATH 
+            #vpi/list                     ! VPI plugins needs their folder to be added to PATH 
           ]
     runs-on: windows-latest
     env:
