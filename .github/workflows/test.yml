@@ -20,11 +20,11 @@ jobs:
             vhpidirect/quickstart/random,
             vhpidirect/quickstart/math,
             vhpidirect/quickstart/customc,
+            vhpidirect/quickstart/wrapping/basic,
+            vhpidirect/quickstart/wrapping/time,
+            vhpidirect/quickstart/linking/bind,
             vhpidirect/quickstart/package,
             vhpidirect/quickstart/sharedvar,
-            vhpidirect/wrapping/basic,
-            vhpidirect/wrapping/time,
-            vhpidirect/linking/bind,
             vhpidirect/shared/shlib,
             vhpidirect/shared/dlopen,
             vhpidirect/shared/shghdl,
@@ -67,11 +67,11 @@ jobs:
             vhpidirect/quickstart/random,
             vhpidirect/quickstart/math,
             vhpidirect/quickstart/customc,
+            vhpidirect/quickstart/wrapping/basic,
+            vhpidirect/quickstart/wrapping/time,
+            #vhpidirect/quickstart/linking/bind,  ! needs investigation, output of list-link seems to have wrong path format
             vhpidirect/quickstart/package,
             vhpidirect/quickstart/sharedvar,
-            vhpidirect/wrapping/basic,
-            vhpidirect/wrapping/time,
-            #vhpidirect/linking/bind,  ! needs investigation, output of list-link seems to have wrong path format
             vhpidirect/shared/shlib,
             #vhpidirect/shared/dlopen, ! dlfcn.h is not available on win
             #vhpidirect/shared/shghdl, ! dlfcn.h is not available on win

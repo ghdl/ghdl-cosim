@@ -6,12 +6,14 @@ Quick Start
 
 .. _COSIM:VHPIDIRECT:Examples:quickstart:random:
 
-:cosimtree:`random <vhpidirect/quickstart/random>`
-**************************************************
+:cosimtree:`'rand' from stdlib <vhpidirect/quickstart/random>`
+**************************************************************
 
-By default, GHDL includes the standard C library in the generated simulation models. Hence, resources from ``stdlib`` can be used without any modification to the build procedure.
+By default, GHDL includes the standard C library in the generated simulation models. Hence, resources from ``stdlib``
+can be used without any modification to the build procedure.
 
-This example shows how to import and use ``rand`` to generate and print 10 integer numbers. The VHDL code is equivalent to the following C snippet. However, note that this C source is NOT required, because ``stdlib`` is already built in.
+This example shows how to import and use ``rand`` to generate and print 10 integer numbers. The VHDL code is equivalent
+to the following C snippet. However, note that this C source is NOT required, because ``stdlib`` is already built in.
 
 .. code-block:: C
 
@@ -27,8 +29,8 @@ This example shows how to import and use ``rand`` to generate and print 10 integ
 
 .. _COSIM:VHPIDIRECT:Examples:quickstart:math:
 
-:cosimtree:`math <vhpidirect/quickstart/math>`
-**********************************************
+:cosimtree:`'sin' from libmath <vhpidirect/quickstart/math>`
+************************************************************
 
 By the same token, it is possible to include functions from system library by just providing the corresponding linker
 flag.
@@ -38,8 +40,8 @@ no additional C sources are required, because the ``math`` library is already co
 
 .. _COSIM:VHPIDIRECT:Examples:quickstart:customc:
 
-:cosimtree:`customc <vhpidirect/quickstart/customc>`
-****************************************************
+:cosimtree:`custom C <vhpidirect/quickstart/customc>`
+*****************************************************
 
 When the required functionality is not available in pre-built libraries, custom C sources and/or objects can be added
 to the elaboration and/or linking.
@@ -51,6 +53,70 @@ for further details.
 
 Since either C sources or pre-compiled ``.o`` objects can be added, in C/C++ projects of moderate complexity, it might
 be desirable to merge all the C sources in a single object before elaborating the design.
+
+.. _COSIM:VHPIDIRECT:Examples:wrapping:
+
+Wrapping ghdl_main
+******************
+
+.. _COSIM:VHPIDIRECT:Examples:quickstart:wrapping:basic:
+
+:cosimtree:`basic <vhpidirect/quickstart/wrapping/basic>`
+---------------------------------------------------------
+
+Instead of using GHDL's own entrypoint to the execution, it is possible to wrap it by providing a custom ``main``
+function. Upon existence of ``main``, execution of the simulation is triggered by calling ``ghdl_main``.
+
+This is the most basic example of such usage. ``ghdl_main`` is declared as ``extern`` in C, and arguments ``argc`` and
+``argv`` are passed without modification. However, this sets the ground for custom prepocessing and postprocessing in a
+foreign language.
+
+Other options are to just pass empty arguments (``ghdl_main(0, NULL)``) or to customize them:
+
+.. code-block:: C
+
+  char* args[] = {NULL, "--wave=wave.ghw"};
+  ghdl_main(2, args);
+
+See :ref:`COSIM:VHPIDIRECT:Wrapping` for further details about the constraints of ``argv``.
+
+:cosimtree:`time <vhpidirect/quickstart/wrapping/time>`
+-------------------------------------------------------
+
+Although most of the provided examples are written in C, VHPIDIRECT can be used with any language that supports a
+C-alike compile and link model.
+
+This example shows how to time the execution of a simulation from either C or Ada. In both cases, function ``clock`` is
+used to get the time before and after calling ``ghdl_main``. Regarding the build procedure, it is to be noted that C
+sources are elaborated with :option:`-e`, because GHDL allows to pass parameters (in this case, additional C sources)
+to the compiler and/or linker. However, since it is not possible to do so with Ada, ``gnatmake``, :option:`--bind` and
+:option:`--list-link` are used instead. See :ref:`COSIM:VHPIDIRECT:Linking` for further info about custom linking setups.
+
+.. HINT::
+  Compared to the previous example, the declaration of ``ghdl_main`` includes three arguments in this example:
+  ``int argc, void** argv, void** envp``. This is done for illustration purposes only, as it has no real effect on the
+  exercise.
+
+.. _COSIM:VHPIDIRECT:Examples:quickstart:linking:
+
+Linking
+*******
+
+:cosimtree:`bind <vhpidirect/quickstart/linking/bind>`
+------------------------------------------------------
+
+Although GHDL's elaborate command can compile and link C sources, it is sometimes preferred or required to call a
+compiler explicitly with custom arguments. This is useful, e.g., when a simulation is to be embedded in the build of an
+existing C/C++ application.
+
+This example is equivalent to :ref:`COSIM:VHPIDIRECT:Examples:quickstart:wrapping:basic`, but it shows how to use
+:option:`--bind` and :option:`--list-link` instead of :option:`-e`. See :ref:`COSIM:VHPIDIRECT:Linking` for further
+details.
+
+.. HINT::
+  Objects generated by :option:`--bind` are created in the working directory. See :ref:`gccllvm-only-programs` and
+  :ghdlsharp:`781`.
+
 
 .. _COSIM:VHPIDIRECT:Examples:quickstart:package:
 
@@ -71,8 +137,8 @@ numbers. Subprogram declaration requirements are detailed under the :ref:`COSIM:
 While sharing variables through packages in VHDL 1993 is flexible, in VHDL 2008 protected types need to be used.
 However, GHDL allows to relax some rules of the LRM through :option:`-frelaxed`.
 
-This example shows multiple alternatives to share variables through packages, depending on the target version of the standard.
-Three different binaries are built from the same entity, using:
+This example shows multiple alternatives to share variables through packages, depending on the target version of the
+standard. Three different binaries are built from the same entity, using:
 
   * A VHDL 1993 package with ``--std=93``.
 
