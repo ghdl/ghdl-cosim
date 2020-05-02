@@ -13,4 +13,10 @@
 
 # Co-simulation with GHDL
 
-This repository contains documentation and code examples about different procedures to interface VHDL with foreign languages and tools through GHDL.
+This repository contains **documentation** with code **examples** about different procedures to interface VHDL with foreign languages and tools through GHDL.
+
+Subdirs in [vhpidirect](./vhpidirect) and [vpi](./vpi) contain groups of examples to illustrate specific sets of features. Run the
+`run.sh` script in each subdir in order to build and execute the group of examples. In some cases, there are further subdirs with
+additional examples. Explanations are available in the [docs](https://ghdl.github.io/ghdl-cosim).
+
+*This repository was created recently and multiple existing examples are not published yet. Find on-going work in issue [#1](https://github.com/ghdl/ghdl-cosim/issues/1) and in [open Pull Requests](https://github.com/ghdl/ghdl-cosim/pulls)*.
