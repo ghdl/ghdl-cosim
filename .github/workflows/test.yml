@@ -31,6 +31,7 @@ jobs:
             vhpidirect/arrays/intvector,
             vhpidirect/arrays/logicvector,
             vhpidirect/arrays/matrices,
+            vpi/quickstart,
           ]
     runs-on: ubuntu-latest
     env:
@@ -73,11 +74,12 @@ jobs:
             vhpidirect/quickstart/package,
             vhpidirect/quickstart/sharedvar,
             vhpidirect/shared/shlib,
-            #vhpidirect/shared/dlopen, ! dlfcn.h is not available on win
-            #vhpidirect/shared/shghdl, ! dlfcn.h is not available on win
+            #vhpidirect/shared/dlopen,  ! dlfcn.h is not available on win
+            #vhpidirect/shared/shghdl,  ! dlfcn.h is not available on win
             vhpidirect/arrays/intvector,
             vhpidirect/arrays/logicvector,
             vhpidirect/arrays/matrices,
+            vpi/quickstart,
           ]
     runs-on: windows-latest
     env:
