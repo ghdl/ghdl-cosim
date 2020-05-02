@@ -1,8 +1,8 @@
 .. program:: ghdl
 .. _COSIM:VHPIDIRECT:Examples:shared:
 
-Shared
-######
+Shared libs and dynamic loading
+###############################
 
 .. IMPORTANT::
   As explained in :ref:`COSIM:VHPIDIRECT:Dynamic:loading_a_simulation`, in order to load binaries/libraries dynamically,
