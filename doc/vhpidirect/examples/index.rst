@@ -6,8 +6,6 @@ Examples
 .. toctree::
 
    quickstart
-   wrapping
-   linking
    shared
    arrays
    other

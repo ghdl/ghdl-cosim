@@ -43,10 +43,10 @@ This example shows how to hardcode both the length and the initial content of an
 VHDL, the pointer is passed and the content is read and modified from VHDL.
 
 If the integer array must be created or filled at runtime by some more advanced process, it is possible to execute the GHDL
-simulation within a custom ``main()`` entrypoint (see :ref:`COSIM:VHPIDIRECT:Examples:wrapping:basic`). This use case is
-included in the example too. By using ``main.c`` instead of ``caux.c``, the content of the array is written programatically
-in C, before calling ``ghdl_main``. Note that the content of the array is read from C both before and after executing the
-simulation.
+simulation within a custom ``main()`` entrypoint (see :ref:`COSIM:VHPIDIRECT:Examples:quickstart:wrapping:basic`). This use
+case is included in the example too. By using ``main.c`` instead of ``caux.c``, the content of the array is written
+programatically in C, before calling ``ghdl_main``. Note that the content of the array is read from C both before and after
+executing the simulation.
 
 .. NOTE::
   There is no explicit example about how to have the size defined in C, but have the allocation/deallocation performed
@@ -77,8 +77,8 @@ not need neither ``[c_]allocIntArr`` nor ``[c_]freePointer``.
 
 .. _COSIM:VHPIDIRECT:Examples:arrays:logicvectors:
 
-:cosimtree:`logicvector <vhpidirect/arrays/logicvector>`
-**************************************************************
+:cosimtree:`Vector of std_logic <vhpidirect/arrays/logicvector>`
+****************************************************************
 
 Commonly signals in VHDL are of a logic type or a vector thereof (``std_logic`` and ``std_logic_vector``), coming from IEEE's ``std_logic_1164`` package.
 These types can hold values other than high and low (``1`` and ``0``) and are enumerated as:
@@ -130,7 +130,7 @@ For illustrative purposes, the two vectors are populated with logic values in di
   The integer values that are given to ``char`` variables in C which are intended to be read as VHDL logic values, must be limited to [0, 8]. This ensures that they represent one of the 9 enumerated logic values.
 .. _COSIM:VHPIDIRECT:Examples:arrays:matrices:
 
-:cosimtree:`matrices <vhpidirect/arrays/matrices>`
+:cosimtree:`Matrices <vhpidirect/arrays/matrices>`
 **************************************************
 
 Constrained multidimensional arrays of doubles/reals
