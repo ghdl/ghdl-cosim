@@ -20,9 +20,9 @@ set +e
 $dcmd btdi/latex:latest bash -c "
 cd _build/latex
 #make
-pdflatex -interaction=nonstopmode GHDL.tex;
-makeindex -s python.ist GHDL.idx;
-pdflatex -interaction=nonstopmode GHDL.tex;
+pdflatex -interaction=nonstopmode GHDLcosim.tex;
+makeindex -s python.ist GHDLcosim.idx;
+pdflatex -interaction=nonstopmode GHDLcosim.tex;
 "
 
 set -e
