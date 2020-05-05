@@ -26,7 +26,7 @@ void save_screenshot(int32_t *ptr, uint32_t width, uint32_t height, int id) {
   assert(ptr != NULL);
 
   uint8_t *raw24 = malloc(width * height * 3);
-  assert((int*)raw24 != (int*)-1);
+  assert(raw24 != NULL);
 
   integer_to_raw24(ptr, width, height, raw24);
 
