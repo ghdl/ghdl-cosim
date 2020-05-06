@@ -5,7 +5,7 @@ Examples
 ########
 
 A very brief description of how to use VPI is that ``vpi_user.h`` provides dozens of functions to scan/navigate the hierarchy
-of the elaborated hardware design, and it allows to set callbacks for specific events/signals.
+of the elaborated hardware design, and it allows setting callbacks for specific events/signals.
 
 .. NOTE::
   Since VHDL sources are agnostic to the usage of VPI modules, most of the examples in this section reuse the same VHDL
