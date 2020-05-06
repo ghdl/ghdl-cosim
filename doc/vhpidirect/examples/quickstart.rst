@@ -64,12 +64,12 @@ Wrapping ghdl_main
 :cosimtree:`basic <vhpidirect/quickstart/wrapping/basic>`
 ---------------------------------------------------------
 
-Instead of using GHDL's own entrypoint to the execution, it is possible to wrap it by providing a custom ``main``
-function. Upon existence of ``main``, execution of the simulation is triggered by calling ``ghdl_main``.
+Instead of using GHDL's own entrypoint to the execution, it is possible to wrap it by providing a custom program
+entrypoint (``main`` function), wherein the execution of the simulation is triggered by calling ``ghdl_main``.
 
-This is the most basic example of such usage. ``ghdl_main`` is declared as ``extern`` in C, and arguments ``argc`` and
-``argv`` are passed without modification. However, this sets the ground for custom prepocessing and postprocessing in a
-foreign language.
+This example shows the most basic of such usage. ``ghdl_main`` is declared as ``extern`` in C, and arguments ``argc``
+and ``argv`` are passed without modification. However, this sets the ground for custom prepocessing and postprocessing
+in a foreign language.
 
 Other options are to just pass empty arguments (``ghdl_main(0, NULL)``) or to customize them:
 
@@ -84,11 +84,11 @@ See :ref:`COSIM:VHPIDIRECT:Wrapping` for further details about the constraints o
 -------------------------------------------------------
 
 Although most of the provided examples are written in C, VHPIDIRECT can be used with any language that supports a
-C-alike compile and link model.
+C-like compile and link model.
 
 This example shows how to time the execution of a simulation from either C or Ada. In both cases, function ``clock`` is
 used to get the time before and after calling ``ghdl_main``. Regarding the build procedure, it is to be noted that C
-sources are elaborated with :option:`-e`, because GHDL allows to pass parameters (in this case, additional C sources)
+sources are elaborated with :option:`-e`, because GHDL allows passing parameters (in this case, additional C sources)
 to the compiler and/or linker. However, since it is not possible to do so with Ada, ``gnatmake``, :option:`--bind` and
 :option:`--list-link` are used instead. See :ref:`COSIM:VHPIDIRECT:Linking` for further info about custom linking setups.
 
@@ -137,7 +137,7 @@ numbers. Subprogram declaration requirements are detailed under the :ref:`COSIM:
 While sharing variables through packages in VHDL 1993 is flexible, in VHDL 2008 protected types need to be used.
 However, GHDL allows to relax some rules of the LRM through :option:`-frelaxed`.
 
-This example shows multiple alternatives to share variables through packages, depending on the target version of the
+This example showcases multiple ways of sharing variables through packages, depending on the target version of the
 standard. Three different binaries are built from the same entity, using:
 
   * A VHDL 1993 package with ``--std=93``.
