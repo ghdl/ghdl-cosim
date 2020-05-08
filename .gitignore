@@ -8,3 +8,6 @@ ent*
 tb*
 !*.vhd
 !*.vhdl
+.vunit_hash
+doc/_build/
+vunit_out/

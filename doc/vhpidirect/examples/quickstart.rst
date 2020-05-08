@@ -150,6 +150,11 @@ standard. Three different binaries are built from the same entity, using:
   Procedure ``setVar`` is not strictly required. It is used to allow the same descriptions of the entity/architectures
   to work with both VHDL 1993 and VHDL 2008. See the bodies of the procedure in :cosimtree:`pkg_93.vhd <vhpidirect/quickstart/sharedvar/pkg_93.vhd>` and :cosimtree:`pkg_08.vhd <vhpidirect/quickstart/sharedvar/pkg_08.vhd>`.
 
+.. _COSIM:VHPIDIRECT:Examples:quickstart:shint:
+
+:cosimtree:`shint <vhpidirect/quickstart/sharedvar/shint>`
+-------------------------------------------------------------
+
 As an alternative to using a shared variable in VHDL, subdir :cosimtree:`shint <vhpidirect/quickstart/sharedvar/shint>`
 contains an approach based on a helper record type which is used as a handle. Mimicking the concept of *methods* from
 Object Oriented (OO) programming, helper C functions are used to read/write the actual variables, instead of sharing
@@ -157,3 +162,29 @@ data through an access/pointer. This approach is more verbose than others, but i
 2008 without modification and without requiring :option:`-frelaxed`. Moreover, it enhances encapsulation, as it provides
 a user-defined API between VHDL and C, which can improve maintainability when sources are reused. As a matter of fact,
 this approach is found in verification projects such as `VUnit <http://vunit.github.io/>`_ and `OSVVM <https://osvvm.org/>`_.
+
+.. _COSIM:VHPIDIRECT:Examples:quickstart:shrecord:
+
+:cosimtree:`shrecord <vhpidirect/quickstart/sharedvar/shrecord>`
+----------------------------------------------------------------
+
+Records are contiguous collections of types in VHDL, analogous to ``struct`` in C. This subexample quickly showcases:
+
+ - sharing a C declared struct between VHDL entities
+ - sharing a VHDL declared record with C functions
+
+This example only uses two subprograms, and does not have a globally shared variable like the other *sharedvar* examples.
+This is in order to keep the package compatible with both VHDL 93 and 08, and keep the focus on sharing a record variable.
+
+.. NOTE::
+  The records/structs have a field of type `std_logic_vector`/`char[]`, which is a variable that is more complicated than the
+  integer's in previous examples. The :ref:`COSIM:VHPIDIRECT:Examples:arrays:logicvectors` example fully explains this variable.
+
+As mentioned in :ref:`Restrictions_on_foreign_declarations`, records are passed by reference. This means that the functions
+in C recieve and return ``struct *``. In VHDL, the VHPIDIRECT subprograms will return record access types, while those with
+record arguments should not be record access types (as the record is passed by reference to the linked C function).
+
+.. NOTE::
+  There is an asymmetry: records from VHDL passed to C are passed by reference, whereas structs from C passed to VHDL are passed
+  by value (so C must pass a ``struct*``, which is handed over by value). To further spell out the consequences: VHPIDIRECT subprograms
+  take records as their arguments but return record access types.
