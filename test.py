@@ -106,6 +106,10 @@ class TestExamples(unittest.TestCase):
         self._sh([str(self.vhpidirect / 'shared' / 'shghdl' / 'run.sh')])
 
 
+    def test_vhpidirect_shared_pycb(self):
+        self._sh([str(self.vhpidirect / 'shared' / 'pycb' / 'run.sh')])
+
+
     def test_vhpidirect_arrays_intvector(self):
         self._sh([str(self.vhpidirect / 'arrays' / 'intvector' / 'run.sh')])
 

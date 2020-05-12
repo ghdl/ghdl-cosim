@@ -253,6 +253,9 @@ Moreover, two different architectures are provided for the testbench (:cosimtree
   RGB24. The generated static pattern is eight equally spaced vertical bars, each correponding to a value of the 3 bit
   signal; from left to right: black, red, green, yellow, blue, magenta, cyan and white.
 
+.. TIP::
+  These examples are written in C, but equivalent solutions can be implemented using Python libraries. See :ref:`COSIM:VHPIDIRECT:Examples:shared:pycb`.
+
 :cosimtree:`Virtual VGA screen <vhpidirect/arrays/matrices/framebuffer/virt_vga>`
 ---------------------------------------------------------------------------------
 

@@ -1,0 +1,7 @@
+VHPIDIRECT {
+  global:
+c_main;
+py_main;
+  local:
+        *;
+};

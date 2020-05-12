@@ -36,7 +36,7 @@ jobs:
         mv ../ghdl-tmp/GHDL/${WINDOWS_RELEASE}/ ../ghdl
         rm -rf ../ghdl-tmp ghdl.zip
         export PATH=$PATH:$(pwd)/../ghdl/bin
-        python -m pip install pytest vunit_hdl --progress-bar off
+        python -m pip install pytest vunit_hdl matplotlib numpy --progress-bar off
         python -m pytest -v -s -ra test.py --color=yes
 
   lin-setup:
@@ -54,7 +54,7 @@ jobs:
         ghdl --version
         sudo apt update -qq
         sudo apt install -y imagemagick
-        python -m pip install --progress-bar off pytest vunit_hdl
+        python -m pip install --progress-bar off pytest vunit_hdl matplotlib numpy
     - run: python -m pytest -v -s -ra test.py --color=yes
 
   win-setup:
@@ -67,7 +67,7 @@ jobs:
       with:
         msystem: MINGW64
         update: true
-        install: mingw-w64-x86_64-python-pip
+        install: mingw-w64-x86_64-python-pip mingw-w64-x86_64-python-numpy mingw-w64-x86_64-python-matplotlib
     - uses: actions/checkout@v2
     - uses: ghdl/setup-ghdl-ci@master
       with:

@@ -132,9 +132,10 @@ texinfo_documents = [
 # -- Sphinx.Ext.InterSphinx -----------------------------------------------
 
 intersphinx_mapping = {
-   'python': ('https://docs.python.org/3.6/', None),
+   'python': ('https://docs.python.org/3.8/', None),
    'ghdl': ('https://ghdl.readthedocs.io/en/latest', None),
-   'vunit': ('https://vunit.github.io', None)
+   'vunit': ('https://vunit.github.io', None),
+   'matplotlib': ('https://matplotlib.org/', None)
 }
 
 # -- Sphinx.Ext.ExtLinks --------------------------------------------------

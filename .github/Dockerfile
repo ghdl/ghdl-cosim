@@ -2,4 +2,4 @@ FROM ghdl/vunit:llvm
 
 RUN apt update -qq \
  && apt install -y imagemagick \
- && python3 -m pip install pytest --progress-bar off
+ && python3 -m pip install pytest matplotlib numpy --progress-bar off
