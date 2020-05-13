@@ -12,45 +12,6 @@ env:
 jobs:
 
   lin:
-    strategy:
-        fail-fast: false
-        max-parallel: 3
-        matrix:
-          task: [
-            vhpidirect/quickstart/random,
-            vhpidirect/quickstart/math,
-            vhpidirect/quickstart/customc,
-            vhpidirect/quickstart/wrapping/basic,
-            vhpidirect/quickstart/wrapping/time,
-            vhpidirect/quickstart/linking/bind,
-            vhpidirect/quickstart/package,
-            vhpidirect/quickstart/sharedvar,
-            vhpidirect/shared/shlib,
-            vhpidirect/shared/dlopen,
-            vhpidirect/shared/shghdl,
-            vhpidirect/arrays/intvector,
-            vhpidirect/arrays/logicvector,
-            vhpidirect/arrays/matrices,
-            vhpidirect/arrays/matrices/framebuffer,
-            vpi/quickstart,
-          ]
-    runs-on: ubuntu-latest
-    env:
-      DOCKER_BUILDKIT: 1
-      DOCKER_IMAGE: ghdl/ghdl:buster-llvm-7
-    steps:
-    - uses: actions/checkout@v2
-    - run: docker pull $DOCKER_IMAGE
-    - run: docker run --rm -tv $(pwd):/src -e CI $DOCKER_IMAGE /src/${{ matrix.task}}/run.sh
-
-  vunit:
-    strategy:
-        fail-fast: false
-        max-parallel: 3
-        matrix:
-          task: [
-            vhpidirect/arrays/matrices/vunit_axis_vcs,
-          ]
     runs-on: ubuntu-latest
     env:
       DOCKER_BUILDKIT: 1
@@ -58,41 +19,29 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - run: docker pull $DOCKER_IMAGE
-    - run: docker run --rm -tv $(pwd):/src -w /src/${{ matrix.task}} -e CI $DOCKER_IMAGE python3 run.py -v
+    - run: |
+        docker run --rm -tv $(pwd):/src -w /src -e CI $DOCKER_IMAGE sh -c "
+        apt update -qq
+        apt install -y imagemagick
+        python3 -m pip install pytest --progress-bar off
+        python3 -m pytest -v -s -ra test.py --color=yes
+        "
 
   win:
-    strategy:
-        fail-fast: false
-        max-parallel: 3
-        matrix:
-          task: [
-            vhpidirect/quickstart/random,
-            vhpidirect/quickstart/math,
-            vhpidirect/quickstart/customc,
-            vhpidirect/quickstart/wrapping/basic,
-            vhpidirect/quickstart/wrapping/time,
-            #vhpidirect/quickstart/linking/bind,  ! needs investigation, output of list-link seems to have wrong path format
-            vhpidirect/quickstart/package,
-            vhpidirect/quickstart/sharedvar,
-            vhpidirect/shared/shlib,
-            #vhpidirect/shared/dlopen,  ! dlfcn.h is not available on win
-            #vhpidirect/shared/shghdl,  ! dlfcn.h is not available on win
-            vhpidirect/arrays/intvector,
-            vhpidirect/arrays/logicvector,
-            vhpidirect/arrays/matrices,
-            #vhpidirect/arrays/matrices/framebuffer, ! needs ImageMagick's 'convert'
-            vpi/quickstart,
-          ]
     runs-on: windows-latest
-    env:
-      WINDOWS_RELEASE: 0.37-mingw64-llvm
     steps:
     - uses: actions/checkout@v2
-    - shell: bash
+    - uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+    - env:
+        WINDOWS_RELEASE: 0.37-mingw64-llvm
+      shell: bash
       run: |
         curl -fsSL -o ghdl.zip https://github.com/ghdl/ghdl/releases/download/v0.37/ghdl-${WINDOWS_RELEASE}.zip
         7z x ghdl.zip "-o../ghdl-tmp" -y
         mv ../ghdl-tmp/GHDL/${WINDOWS_RELEASE}/ ../ghdl
         rm -rf ../ghdl-tmp ghdl.zip
         export PATH=$PATH:$(pwd)/../ghdl/bin
-        ./${{ matrix.task}}/run.sh
+        python -m pip install pytest vunit_hdl --progress-bar off
+        python -m pytest -v -s -ra test.py --color=yes
