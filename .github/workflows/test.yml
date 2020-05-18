@@ -11,23 +11,16 @@ env:
 
 jobs:
 
-  lin:
+  lin-docker:
     runs-on: ubuntu-latest
     env:
       DOCKER_BUILDKIT: 1
-      DOCKER_IMAGE: ghdl/vunit:llvm
     steps:
     - uses: actions/checkout@v2
-    - run: docker pull $DOCKER_IMAGE
-    - run: |
-        docker run --rm -tv $(pwd):/src -w /src -e CI $DOCKER_IMAGE sh -c "
-        apt update -qq
-        apt install -y imagemagick
-        python3 -m pip install pytest --progress-bar off
-        python3 -m pytest -v -s -ra test.py --color=yes
-        "
+    - run: docker build -t cosim/test - < .github/Dockerfile
+    - run: docker run --rm -v $(pwd):/src -w /src -e CI cosim/test python3 -m pytest -v -s -ra test.py --color=yes
 
-  win:
+  win-stable:
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@v2
@@ -44,4 +37,43 @@ jobs:
         rm -rf ../ghdl-tmp ghdl.zip
         export PATH=$PATH:$(pwd)/../ghdl/bin
         python -m pip install pytest vunit_hdl --progress-bar off
+        python -m pytest -v -s -ra test.py --color=yes
+
+  lin-setup:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: ghdl/setup-ghdl-ci@master
+      with:
+        backend: llvm
+    - uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+    - name: Install dependencies
+      run: |
+        ghdl --version
+        sudo apt update -qq
+        sudo apt install -y imagemagick
+        python -m pip install --progress-bar off pytest vunit_hdl
+    - run: python -m pytest -v -s -ra test.py --color=yes
+
+  win-setup:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: eine/setup-msys2@v0
+      with:
+        msystem: MINGW64
+        update: true
+        install: mingw-w64-x86_64-python-pip
+    - uses: ghdl/setup-ghdl-ci@master
+      with:
+        backend: llvm
+    - name: Install dependencies
+      shell: msys2 {0}
+      run: |
+        ghdl --version
+        python -m pip install --progress-bar off pytest vunit_hdl
+    - shell: msys2 {0}
+      run: |
         python -m pytest -v -s -ra test.py --color=yes
