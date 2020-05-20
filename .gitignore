@@ -8,6 +8,6 @@ ent*
 tb*
 !*.vhd
 !*.vhdl
-doc/_build/*
+doc/_build
 .vunit_hash
-vhpidirect/arrays/matrices/vunit_axis_vcs/vunit_out/*
+**/vunit_out/
