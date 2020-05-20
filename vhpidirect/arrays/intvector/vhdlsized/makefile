@@ -1,4 +1,7 @@
-CC=gcc, GHDL=ghdl, CFLAGS= -fPIC, STD=93
+CC=gcc
+GHDL=ghdl
+CFLAGS= -fPIC
+STD=93
 
 WORK_DIR=.
 
@@ -25,15 +28,18 @@ vhdlalloc_tb : pkg.o tb_vhdlalloc
 
 # Compile executable
 
-tb_% : tb.o
+tb_% : tb.o mkdir_$(WORK_DIR)
 	$(GHDL) -e --workdir=$(WORK_DIR)/ --std=$(STD) -Wl,caux.c -o $@ tb $(subst tb_,,$@)
 
-c_% : %.o
+c_% : %.o mkdir_$(WORK_DIR)
 	$(GHDL) -e --workdir=$(WORK_DIR)/ --std=$(STD) -Wl,caux.c $(subst c_,,$@)
 
-%.o : %.vhd
+%.o : %.vhd mkdir_$(WORK_DIR)
 	@echo "Analyze $<"
 	$(GHDL) -a --std=$(STD) --workdir=$(WORK_DIR) $<
+
+mkdir_% :
+	mkdir -p $(subst mkdir_,,$@)
 
 # Clean
 
