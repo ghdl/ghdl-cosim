@@ -1,14 +1,12 @@
-CC=gcc
-GHDL=ghdl
-CFLAGS= -fPIC
-STD=93
+CC ?= gcc
+GHDL ?= ghdl
+CFLAGS += -fPIC
+STD ?= 93
 
-WORK_DIR=.
+WORK_DIR ?= .
 
-VHDL_DEPS = pkg.vhd tb.vhd 
-VHDL_O_DEPS = $(patsubst %.vhd,%.o,$(VHDL_DEPS))
-
-TOPLEVEL = tb
+VHDL_DEPS ?= pkg.vhd tb.vhd 
+VHDL_O_DEPS ?= $(patsubst %.vhd,%.o,$(VHDL_DEPS))
 
 # Default
 refresh : clean run
