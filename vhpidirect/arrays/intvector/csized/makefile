@@ -1,9 +1,4 @@
-CC=gcc
-GHDL=ghdl
-
-CFLAGS= -fPIC
-
-STD=93
+CC=gcc, GHDL=ghdl, CFLAGS= -fPIC, STD=93
 
 WORK_DIR=.
 
