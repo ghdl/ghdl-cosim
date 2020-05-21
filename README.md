@@ -20,3 +20,23 @@ Subdirs in [vhpidirect](./vhpidirect) and [vpi](./vpi) contain groups of example
 additional examples. Explanations are available in the [docs](https://ghdl.github.io/ghdl-cosim).
 
 *This repository was created recently and multiple existing examples are not published yet. Find on-going work in issue [#1](https://github.com/ghdl/ghdl-cosim/issues/1) and in [open Pull Requests](https://github.com/ghdl/ghdl-cosim/pulls)*.
+
+## Makefiles
+
+### Brief refresher
+
+The first rule in each makefile is the default rule executed, `afresh` will clean and then run. This is triggered by calling `make`.
+
+All makefile rules can be called by specifying the target (argument left of the rule's ':') after make: e.g. `make run`
+
+Make echoes each command before executing it, unless the line starts with `@`. All lines are echoed to the terminal, excepting `echo` calls.
+This provides transparency on the commans being executed.
+
+### Symbols used
+
+The symbols below are used in order to make it easy to create a consistent change in the make operation.
+
+- `CC?=gcc`, `CFLAGS+=-fPIC`
+  - These determine which C compiler is used and the flags that are issued with it.
+- `GHDL?=ghdl`, `STD?=93`
+  - These determine the GHDL executable called and the VHDL standard used.

@@ -45,7 +45,7 @@ supported. However, a *vhdlator*/*ghdlator* might be available in the future.
 because, as the name suggests, it is a direct interface. However, on the one hand VHPIDIRECT requires modification of
 VHDL sources, which might not be possible or desirable in certain contexts. On the other hand, VPI/VHPI allow use cases
 which are not yet possible with VHPIDIRECT, such as controlling execution time steps. It is suggested to read the quick
-start examples of both interfacing mechanisms, in order to get a feel of the differences.
+start examples of both interfacing mechanisms, in order to get a feel for the differences.
 
 
 .. toctree::
