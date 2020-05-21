@@ -20,5 +20,10 @@ Common mistakes
   In this case, ``ulimit`` needs to be modified/increased. To remove the limit, set ``ulimit -s unlimited``.
   See :ghdlsharp:`1112`.
 
+  * In Python (say, when using VUnit or cocotb), the stack size can be increased by using the `resource module`_.
+    For example ``resource.setrlimit(resource.RLIMIT_STACK, (resource.RLIM_INFINITY, resource.RLIM_INFINITY))``.
+
+.. _resource module: https://docs.python.org/3/library/resource.html#resource.setrlimit
+
 * The size of objects is supposed to be 4GB. However, users finding the limit might get different constraints, depending
   on the backend. See :ghdlsharp:`822`.
