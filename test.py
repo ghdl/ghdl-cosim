@@ -68,7 +68,8 @@ class TestExamples(unittest.TestCase):
 
     def test_vhpidirect_arrays_intvector(self):
         # check_call(self.shell + [str(self.vhpidirect / 'arrays' / 'intvector' / 'run.sh')], shell=True)
-        check_call(self.shell + ['make', 'run'], shell=True, cwd=str(self.vhpidirect / 'arrays' / 'intvector'))
+        # check_call(self.shell + ['make', 'run'], shell=True, cwd=str(self.vhpidirect / 'arrays' / 'intvector'))
+        check_call(['make', 'run'], shell=True, cwd=str(self.vhpidirect / 'arrays' / 'intvector'))
 
 
     def test_vhpidirect_arrays_logicvector(self):
