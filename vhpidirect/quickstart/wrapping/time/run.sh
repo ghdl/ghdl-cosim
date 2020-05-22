@@ -13,7 +13,7 @@ ghdl -e -Wl,main.c tb
 echo "Execute tb"
 ./tb
 
-if [ $(which gnatmake) ]; then
+if which gnatmake && [ "x$1" = "xada" ]; then
   echo "Bind tb"
   ghdl --bind tb
 
