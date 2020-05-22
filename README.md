@@ -30,7 +30,7 @@ The first rule in each makefile is the default rule executed, `afresh` will clea
 All makefile rules can be called by specifying the target (argument left of the rule's ':') after make: e.g. `make run`
 
 Make echoes each command before executing it, unless the line starts with `@`. All lines are echoed to the terminal, excepting `echo` calls.
-This provides transparency on the commans being executed.
+This provides transparency on the commands being executed.
 
 ### Symbols used
 
