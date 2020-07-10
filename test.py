@@ -22,12 +22,13 @@ class TestExamples(unittest.TestCase):
         self.vhpidirect = self.root / 'vhpidirect'
         self.vpi = self.root / 'vpi'
 
-        print('\n##[group]Log')
+        print('\n::group::Log')
         sys.stdout.flush()
 
     def tearDown(self):
-        print('##[endgroup]')
+        print('\n::endgroup::')
         sys.stdout.flush()
+
 
     def _sh(self, args):
         check_call(self.shell + args, shell=True, stderr=STDOUT)
