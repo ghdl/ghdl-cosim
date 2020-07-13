@@ -31,10 +31,10 @@ class TestExamples(unittest.TestCase):
 
 
     def _sh(self, args):
-        check_call(self.shell + args, shell=True, stderr=STDOUT)
+        check_call(self.shell + args, stderr=STDOUT)
 
     def _py(self, args):
-        check_call([executable] + args, shell=True, stderr=STDOUT)
+        check_call([executable] + args, stderr=STDOUT)
 
 
     def test_vhpidirect_quickstart_random(self):
