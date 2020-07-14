@@ -144,6 +144,15 @@ class TestExamples(unittest.TestCase):
     def test_vhpidirect_vffi_demo(self):
         self._sh([str(self.vhpidirect / 'vffi_user' / 'demo' / 'run.sh')])
 
+
+    @unittest.skipUnless(
+        'MINGW_PREFIX' in environ or not isWin,
+        "needs OpenSSL",
+    )
+    def test_vhpidirect_vffi_crypto(self):
+        self._sh([str(self.vhpidirect / 'vffi_user' / 'crypto' / 'run.sh')])
+
+
     @unittest.skipUnless(
         which('Xyce'),
         "needs Xyce",

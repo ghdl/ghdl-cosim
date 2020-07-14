@@ -60,7 +60,7 @@ jobs:
       run: |
         ghdl --version
         sudo apt update -qq
-        sudo apt install -y imagemagick
+        sudo apt install -y imagemagick libssl-dev
         python -m pip install --progress-bar off pytest vunit_hdl matplotlib numpy
     - run: python -m pytest -v -s -ra test.py --color=yes
 
@@ -74,7 +74,11 @@ jobs:
       with:
         msystem: MINGW64
         update: true
-        install: mingw-w64-x86_64-python-pip mingw-w64-x86_64-python-numpy mingw-w64-x86_64-python-matplotlib
+        install: >
+          mingw-w64-x86_64-python-pip
+          mingw-w64-x86_64-python-numpy
+          mingw-w64-x86_64-python-matplotlib
+          mingw-w64-x86_64-openssl
     - uses: actions/checkout@v2
     - uses: ghdl/setup-ghdl-ci@master
       with:

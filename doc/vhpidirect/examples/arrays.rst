@@ -70,10 +70,10 @@ each time. This is done in ``fcn`` :ref:`above <COSIM:VHPIDIRECT:Examples:arrays
 
 In this example three equivalent architectures are provided.
 
-* ``calloc``: allocation and deallocation is done in C, invoked from VHDL through ``[c_]allocIntArr`` and ``[c_]freePointer``,
+* **calloc**: allocation and deallocation is done in C, invoked from VHDL through ``[c_]allocIntArr`` and ``[c_]freePointer``,
   respectively.
-* ``vhdlallocarr``: allocation of an array is done in VHDL.
-* ``vhdlallocacc``: allocation of an access is done in VHDL.
+* **vhdlallocarr**: allocation of an array is done in VHDL.
+* **vhdlallocacc**: allocation of an access is done in VHDL.
 
 Apart from that, all three implementations are functionally equivalent:
 

@@ -4,10 +4,15 @@
 FFI/DPI Header
 ##############
 
-As explained in :ref:`COSIM:VHPIDIRECT:Declarations`, some VHDL types are exposed as fat pointers. Hence, dealing with unconstrained
-arrays and accesses might be cumbersome. At the same time, indexes of arrays with bounds of direction ``downto`` are reversed,
-``std_logic`` values correspond to an specific enumeration, etc. :cosimtree:`vffi_user.h <vhpidirect/vffi_user.h>` is a utily
-C header file for easing the usage of those complex types. The examples in this section showcase the usage of ``vffi_user.h``.
+As explained in :ref:`COSIM:VHPIDIRECT:Declarations`, dealing with some types directly as exported to C can be cumbersome:
+
+* Some VHDL types are exposed as fat pointers. Hence, dealing with unconstrained arrays and accesses is not straightforward.
+* Indexes of arrays with bounds of direction ``downto`` are reversed.
+* ``std_logic`` values correspond to an specific enumeration.
+* Etc.
+
+:cosimtree:`vffi_user.h <vhpidirect/vffi_user.h>` and :cosimtree:`vffi_user.vhd <vhpidirect/vffi_user.vhd>` are utility headers/packages
+for easing the usage of those complex types. The examples in this section showcase the usage of those utilities.
 These examples are based on the foundations shown in previous examples. Hence, reading those is strongly suggested for understanding
 the implementation details.
 
@@ -16,6 +21,7 @@ the implementation details.
   The ``vffi_user.h`` file available in this repo corresponds to the current implementation in GHDL. As the standarization process
   goes forward, GHDL is expected to be adapted. Therefore, users should expect probably breaking changes in the header file.
 
+.. _COSIM:VHPIDIRECT:Examples:vffi_user:demo:
 
 :cosimtree:`demo <vhpidirect/vffi_user/demo>`
 *********************************************
@@ -24,6 +30,35 @@ This is a synthetic example that uses all the supported/defined data types and t
 simple values, constrained arrays and multidimensional unconstrained arrays (fat pointers) to sets of C types. Hence, it is a
 regression test for the header file.
 
+.. _COSIM:VHPIDIRECT:Examples:vffi_user:crypto:
+
+:cosimtree:`crypto <vhpidirect/vffi_user/crypto>`
+*************************************************
+
+In this example, a data value and key generated in VHDL are used to compute the AES cypher using `OpenSSL <https://www.openssl.org/>`_.
+The data, the key and the output are of type ``std_logic_vector(0 to 127)`` and all of them are allocated in VHDL and passed to C
+by reference, as shown in ``vhdlallocarr`` from :ref:`COSIM:VHPIDIRECT:Examples:arrays:intvector:vhdlsized`.
+
+.. HINT::
+  This example is a reduced version of the testing infrastructure of `tmeissner/cryptocores <https://github.com/tmeissner/cryptocores>`_.
+  In that repository both encryption and decryption features of an AES IP core written in VHDL are tested using VHPIDIRECT and OpenSSL.
+  See `tmeissner/cryptocores: aes/sim/vhdl <https://github.com/tmeissner/cryptocores/tree/master/aes/sim/vhdl>`_.
+
+As explained in :ref:`Restrictions_on_foreign_declarations` and shown in :ref:`COSIM:VHPIDIRECT:Examples:arrays:logicvectors`, VHDL
+variables of types ``std_logic``or ``std_logic_vector`` are not very usable in C being arrays of ``char``. That's specially so because
+the default encoding of ``HDL_0`` and ``HDL_1`` is ``2`` and ``3``, respectively. Hence, it is almost a requirement to convert them
+into a format that is suitable for the target C function.
+
+In C, the function provided by OpenSSL expects data as arrays of bits. Hence, variables need to be converted for the memory layout
+of the data to match. This can be done in C only, and/or in VHDL too. Apart from the encryption function (:cosimtree:`encypt.c <vhpidirect/arrays/logicvector/crypto/encypt.c>`),
+an intermediate function (``cryptData``) is used (:cosimtree:`caux.c <vhpidirect/arrays/logicvector/crypto/caux.c>`). The intermediate
+function uses enums and two helper functions (``vfficharArr2bitArr`` and ``vffibitArr2charArr``) defined in :cosimtree:`vffi_user.h <vhpidirect/vffi_user.h>`. Furthermore, a ``swap`` function written in VHDL is used for reordering.
+
+.. TIP:: This example is based on VHDL and C. However, as show in :ref:`COSIM:VHPIDIRECT:Examples:shared:pycb`, using Python modules/functions
+  from VHDL is also possible. Projects such as `pyca/cryptography <https://github.com/pyca/cryptography>`_ provide equivalent features
+  to OpenSSL. Are you up to writting a variant of this example using Python? `Propose a PR <https://github.com/ghdl/ghdl-cosim/compare>`_!
+
+.. _COSIM:VHPIDIRECT:Examples:vffi_user:xyce:
 
 :cosimtree:`xyce <vhpidirect/vffi_user/xyce>`
 *********************************************
