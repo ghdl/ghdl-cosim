@@ -6,7 +6,7 @@ architecture arch of tb is
   type arr_t is array (0 to 4) of integer;
 
   procedure plot(x, y: arr_t; l: integer) is
-  begin assert false report "VHPIDIRECT plot" severity failure; end;
+  begin report "VHPIDIRECT plot" severity failure; end;
   attribute foreign of plot: procedure is "VHPIDIRECT ghdl_plot";
 
   constant x: arr_t := (1, 2, 3, 4, 5);

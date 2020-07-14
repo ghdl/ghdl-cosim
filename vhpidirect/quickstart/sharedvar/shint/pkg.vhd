@@ -25,17 +25,14 @@ package body pkg is
 
   -- VHPIDIRECT
 
-  procedure write_int ( id: integer; v: integer ) is begin
-    assert false report "VHPIDIRECT write_int" severity failure;
-  end;
+  procedure write_int ( id: integer; v: integer ) is
+  begin report "VHPIDIRECT write_int" severity failure; end;
 
-  impure function read_int ( id: integer ) return integer is begin
-    assert false report "VHPIDIRECT read_int" severity failure;
-  end;
+  impure function read_int ( id: integer ) return integer is
+  begin report "VHPIDIRECT read_int" severity failure; end;
 
-  procedure print_int ( id: integer ) is begin
-    assert false report "VHPIDIRECT print_int" severity failure;
-  end;
+  procedure print_int ( id: integer ) is
+  begin report "VHPIDIRECT print_int" severity failure; end;
 
   -- VHDL
 

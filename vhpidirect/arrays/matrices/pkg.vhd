@@ -16,9 +16,9 @@ end package pkg;
 package body pkg is
 
   function getMatSize (dim: integer) return integer is
-  begin assert false report "VHPIDIRECT getMatSize" severity failure; end;
+  begin report "VHPIDIRECT getMatSize" severity failure; end;
 
   impure function getMatPointer return matrix_acc_t is
-  begin assert false report "VHPIDIRECT getMatPointer" severity failure; end;
+  begin report "VHPIDIRECT getMatPointer" severity failure; end;
 
 end package body pkg;

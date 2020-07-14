@@ -4,9 +4,7 @@ end tb;
 architecture arch of tb is
 
   function sin (v : real) return real is
-  begin
-    assert false report "VHPIDIRECT sin" severity failure;
-  end;
+  begin report "VHPIDIRECT sin" severity failure; end;
   attribute foreign of sin : function is "VHPIDIRECT sin";
 
 begin

@@ -1,6 +1,6 @@
 architecture arch of tb is
   procedure setGenInt (val: integer) is
-  begin assert false report "VHPIDIRECT setGenInt" severity failure; end;
+  begin report "VHPIDIRECT setGenInt" severity failure; end;
   attribute foreign of setGenInt : procedure is "VHPIDIRECT setGenInt";
 begin
   process begin

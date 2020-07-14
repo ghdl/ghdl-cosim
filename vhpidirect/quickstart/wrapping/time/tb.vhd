@@ -12,17 +12,17 @@ begin
 
   process
   begin
-    assert false report "Reset" severity note;
+    report "Reset" severity note;
     rst <= '0';
     wait for 1 ns;
     rst <= '1';
     wait for 1 ns;
-    assert false report "Start of clock" severity note;
+    report "Start of clock" severity note;
     for i in 0 to 1000 loop
       clk <= not clk;
       wait for 1 ns;
     end loop;
-    assert false report "End of clock" severity note;
+    report "End of clock" severity note;
     wait;
   end process;
 

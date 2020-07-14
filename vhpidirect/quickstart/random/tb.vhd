@@ -4,9 +4,7 @@ end tb;
 architecture arch of tb is
 
   function rand return integer is
-  begin
-    assert false report "VHPIDIRECT rand" severity failure;
-  end;
+  begin report "VHPIDIRECT rand" severity failure; end;
   attribute foreign of rand : function is "VHPIDIRECT rand";
 
 begin

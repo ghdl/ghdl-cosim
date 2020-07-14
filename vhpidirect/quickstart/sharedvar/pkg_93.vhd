@@ -17,14 +17,10 @@ end package pkg;
 
 package body pkg is
 	function c_Int_ptr return int_ptr is
-	begin
-		assert false report "c_Int_ptr VHPI" severity failure;
-	end;
+	begin report "c_Int_ptr VHPI" severity failure; end;
 
 	procedure c_printVar is
-	begin
-		assert false report "c_printVar VHPI" severity failure;
-	end;
+	begin report "c_printVar VHPI" severity failure; end;
 
 	procedure setVar ( int: integer ) is begin
 		c_Var.all := int;

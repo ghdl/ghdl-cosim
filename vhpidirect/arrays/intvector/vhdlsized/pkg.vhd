@@ -17,14 +17,14 @@ end package pkg;
 
 package body pkg is
 	impure function c_allocIntArr(arraySize: integer) return int_arr_ptr is
-	begin assert false report "VHPIDIRECT c_allocIntArr" severity failure; end;
+	begin report "VHPIDIRECT c_allocIntArr" severity failure; end;
 
 	procedure c_initIntArr (variable ptr: int_arr_ptr; arraySize: integer ) is
-	begin assert false report "VHPIDIRECT c_initIntArr" severity failure; end;
+	begin report "VHPIDIRECT c_initIntArr" severity failure; end;
 
 	procedure c_checkAndPrintIntArr(variable ptr: int_arr_ptr; arraySize: integer) is
-	begin assert false report "VHPIDIRECT c_checkAndPrintIntArr" severity failure; end;
+	begin report "VHPIDIRECT c_checkAndPrintIntArr" severity failure; end;
 
 	procedure c_freePointer (variable ptr: int_arr_ptr ) is
-	begin assert false report "VHPIDIRECT c_freePointer" severity failure; end;
+	begin report "VHPIDIRECT c_freePointer" severity failure; end;
 end package body pkg;

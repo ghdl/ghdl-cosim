@@ -21,14 +21,11 @@ package pkg is
 end pkg;
 
 package body pkg is
-	impure function c_Int_ptr return int_ptr is begin
-		assert false report "VHPI" severity failure;
-	end;
+	impure function c_Int_ptr return int_ptr is
+	begin report "VHPI" severity failure; end;
 
 	procedure c_printVar is
-	begin
-		assert false report "c_printVar VHPI" severity failure;
-	end;
+	begin report "c_printVar VHPI" severity failure; end;
 
 	procedure setVar ( int: integer ) is begin
 		c_Var.set(int);
