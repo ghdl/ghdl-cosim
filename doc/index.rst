@@ -68,6 +68,12 @@ start examples of both interfacing mechanisms, in order to get a feel for the di
 
 
 .. toctree::
+   :hidden:
+
+   ci
+
+
+.. toctree::
    :caption: VHPIDIRECT
    :hidden:
 
