@@ -99,4 +99,5 @@ Composite types:
   an access to array of integers are both passed as ``int*``.
 
   As a result, it is typically possible to reuse the same C implementation for handling VHDL
-  arrays/records or their accesses/pointers. See, for example, :ref:`COSIM:VHPIDIRECT:Examples:arrays:intvector:vhdlsized`.
+  arrays/records or their accesses/pointers. See, for example, :ref:`COSIM:VHPIDIRECT:Examples:arrays:intvector:vhdlsized`
+  and/or :ref:`COSIM:VHPIDIRECT:Examples:quickstart:shrecord`.

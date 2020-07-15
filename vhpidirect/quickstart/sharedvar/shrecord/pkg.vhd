@@ -6,7 +6,7 @@ package pkg is
 	type c_struct is record
 		logic_bit : std_ulogic;
 		logic_vec : std_ulogic_vector(7 downto 0);
-		int				: integer;
+		int       : integer;
 	end record c_struct;
 
 	type c_struct_ptr is access c_struct;

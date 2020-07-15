@@ -180,14 +180,8 @@ This is in order to keep the package compatible with both VHDL 93 and 08, and ke
   the integer's in previous examples. The :ref:`COSIM:VHPIDIRECT:Examples:arrays:logicvectors` example fully explains this
   variable.
 
-As mentioned in :ref:`Restrictions_on_foreign_declarations`, records are passed by reference. This means that the functions
-in C receive and return ``struct *``. In VHDL, the VHPIDIRECT subprograms will return record access types, while those with
-record arguments should not be record access types (as the record is passed by reference to the linked C function).
-
-.. NOTE::
-  There is an asymmetry: records from VHDL passed to C are passed by reference, whereas structs from C passed to VHDL are
-  passed by value (so C must pass a ``struct*``, which is handed over by value). To further spell out the consequences:
-  VHPIDIRECT subprograms take records as their arguments but return record access types.
+As mentioned in :ref:`Restrictions_on_foreign_declarations`, both records and accesses to records are passed by reference.
+This means that the functions in C receive and return ``struct *``, regardless of the VHDL type being an access.
 
 .. _COSIM:VHPIDIRECT:Examples:quickstart:cli:
 
