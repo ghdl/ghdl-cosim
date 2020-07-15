@@ -14,7 +14,7 @@ architecture arch of tb is
 
 begin
   process begin
-    report "Hello shared/shghdl!" severity note;
+    report "Hello shared/pycb/pyghdl!" severity note;
     plot(x, y, x'length);
     wait;
   end process;
