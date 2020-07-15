@@ -68,9 +68,14 @@ the bounds, pointers in C do not. Hence, in these examples, the length is explic
 Note that other possible implementations would save the length in a variable in C, so that it does not need to be passed
 each time. This is done in ``fcn`` :ref:`above <COSIM:VHPIDIRECT:Examples:arrays:intvector:csized>`.
 
-In this example two equivalent architectures are provided. In ``calloc`,` allocation and deallocation is done in C, invoked
-from VHDL. Conversely, in ``vhdlalloc`` the allocation and deallocation is done in VHDL. Apart from that, both are
-functionally equivalent:
+In this example three equivalent architectures are provided.
+
+* ``calloc``: allocation and deallocation is done in C, invoked from VHDL through ``[c_]allocIntArr`` and ``[c_]freePointer``,
+  respectively.
+* ``vhdlallocarr``: allocation of an array is done in VHDL.
+* ``vhdlallocacc``: allocation of an access is done in VHDL.
+
+Apart from that, all three implementations are functionally equivalent:
 
 * A constrained array is allocated.
 * The content is initialized from C.
@@ -79,8 +84,12 @@ functionally equivalent:
 * The array is deallocated.
 
 Note that VHPIDIRECT resources are defined in a package (as shown in :ref:`COSIM:VHPIDIRECT:Examples:quickstart:package`).
-The same package and the corresponding C source file (``caux.c``) are used in both examples, even though ``vhdlalloc`` does
-not need neither ``[c_]allocIntArr`` nor ``[c_]freePointer``.
+The same package and the corresponding C source file (``caux.c``) are used in all three examples; however:
+
+* ``[c_]allocIntArr`` and ``[c_]freePointer`` are used by ``calloc`` only.
+* The C implementation of the functions used in ``vhdlallocarr`` and ``vhdlallocacc`` is the same, even though the definitions
+  in VHDL are different. This is because both constrained arrays and accesses to constrained arrays are mapped to the same types
+  in C. See :ref:`Restrictions_on_foreign_declarations`.
 
 .. _COSIM:VHPIDIRECT:Examples:arrays:logicvectors:
 

@@ -4,7 +4,7 @@ set -e
 
 cd $(dirname "$0")
 
-for arch in 'calloc' 'vhdlalloc'; do
+for arch in 'calloc' 'vhdlallocarr' 'vhdlallocacc'; do
 
 echo "> Analyze pkg.vhd and tb.vhd"
 ghdl -a pkg.vhd tb.vhd

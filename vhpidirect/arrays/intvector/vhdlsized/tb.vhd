@@ -4,7 +4,31 @@ entity tb is
 end entity;
 
 
-architecture vhdlalloc of tb is
+architecture vhdlallocarr of tb is
+
+begin
+
+	process
+		variable c_intArr : int_arr;
+	begin
+		report "ArraySize Interface Generic: " & integer'image(c_intArr'length);
+
+		c_initIntArrOut(c_intArr, int_arr'length);
+
+		for i in int_arr'range loop
+			report "c_intArr[" & integer'image(i) & "]: " & integer'image(c_intArr(i));
+			c_intArr(i) := -3 * c_intArr(i);
+		end loop;
+
+		c_checkAndPrintIntArrOut(c_intArr, c_intArr'length);
+
+		wait;
+	end process;
+
+end architecture;
+
+
+architecture vhdlallocacc of tb is
 
 begin
 

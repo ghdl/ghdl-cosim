@@ -92,3 +92,11 @@ Composite types:
   address/pointer and are passed to a subprogram like other non-composite types.
 
 * Files are represented by a 32 bit word, which corresponds to an index in a table.
+
+.. ATTENTION::
+  Since both constrained arrays and accesses to constrained arrays are passed by reference,
+  distinct VHDL types are mapped to the same types in C. For example, an array of integers and
+  an access to array of integers are both passed as ``int*``.
+
+  As a result, it is typically possible to reuse the same C implementation for handling VHDL
+  arrays/records or their accesses/pointers. See, for example, :ref:`COSIM:VHPIDIRECT:Examples:arrays:intvector:vhdlsized`.
