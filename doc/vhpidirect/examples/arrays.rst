@@ -35,22 +35,27 @@ define them in C or VHDL and have them (de)allocated in either of them.
 :cosimtree:`Sized in C <vhpidirect/arrays/intvector/csized>`
 ============================================================
 
-Integer arrays fully defined in C can be passed to VHDL by first passing their size, so that an appropriate array
-type can be created in VHDL to hold the array's access (pointer). After that, another VHPIDIRECT subprogram can be
-defined to return the array access.
+Integer arrays with the content fully defined in C can be passed to VHDL by first passing their size, so that an
+appropriate array type can be created in VHDL. After that, another VHPIDIRECT subprogram can be defined either to pass
+the array to be filled (allocated in VHDL), or to return the array access (pointer) allocated in C.
 
-This example shows how to hardcode both the length and the initial content of an array in C. Matching types are created in
-VHDL, the pointer is passed and the content is read and modified from VHDL.
+This example shows how to hardcode both the length and the content of an array in C, with matching types are created in
+VHDL:
 
-If the integer array must be created or filled at runtime by some more advanced process, it is possible to execute the GHDL
-simulation within a custom ``main()`` entrypoint (see :ref:`COSIM:VHPIDIRECT:Examples:quickstart:wrapping:basic`). This use
-case is included in the example too. By using ``main.c`` instead of ``caux.c``, the content of the array is written
-programatically in C, before calling ``ghdl_main``. Note that the content of the array is read from C both before and after
-executing the simulation.
+* :cosimtree:`proc <vhpidirect/arrays/intvector/csized/proc>`: an array is allocated in VHDL and a procedure is used.
+  After filling the array in C, it is read and modified from VHDL.
+
+* :cosimtree:`fcn <vhpidirect/arrays/intvector/csized/fcn>`: an array is allocated in C and the pointer is passed to
+  VHDL, where the content is read and modified.
+
+  If the integer array must be created or filled at runtime by some more advanced process, it is possible to execute the GHDL
+  simulation within a custom ``main()`` entrypoint (see :ref:`COSIM:VHPIDIRECT:Examples:quickstart:wrapping:basic`). By using
+  ``main.c`` instead of ``caux.c``, the content of the array is written programatically in C, before calling ``ghdl_main``.
+  Note that the content of the array is read from C both before and after executing the simulation.
 
 .. NOTE::
-  There is no explicit example about how to have the size defined in C, but have the allocation/deallocation performed
-  in VHDL. However, implementing such a solution is a matter of combining these examples with the VHDL-sized ones below.
+  The length (or any other argument) can also be set through top level generics and/or as a custom CLI argument. See
+  :ref:`COSIM:VHPIDIRECT:Examples:quickstart:cli`.
 
 .. _COSIM:VHPIDIRECT:Examples:arrays:intvector:vhdlsized:
 
@@ -61,9 +66,9 @@ Complementing the examples above, when the size of a bounded/constrained array i
 the (de)allocation performed in either VHDL or C. However, while accesses to constrained VHDL types do contain metada about
 the bounds, pointers in C do not. Hence, in these examples, the length is explicitly passed along with the pointer/access.
 Note that other possible implementations would save the length in a variable in C, so that it does not need to be passed
-each time. This is done in the example with ``main()`` above.
+each time. This is done in ``fcn`` :ref:`above <COSIM:VHPIDIRECT:Examples:arrays:intvector:csized>`.
 
-In this example two equivalent architectures are provided. In ``calloc`` allocation and deallocation is done in C, invoked
+In this example two equivalent architectures are provided. In ``calloc`,` allocation and deallocation is done in C, invoked
 from VHDL. Conversely, in ``vhdlalloc`` the allocation and deallocation is done in VHDL. Apart from that, both are
 functionally equivalent:
 

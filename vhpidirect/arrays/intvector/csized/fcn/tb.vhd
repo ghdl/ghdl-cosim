@@ -11,6 +11,7 @@ begin
 		attribute foreign of c_intArrSize : function is "VHPIDIRECT getIntArrSize";
 
 		type int_arr is array(0 to c_intArrSize-1) of integer;
+
 		type int_arr_ptr is access int_arr; -- represented C-side with int*
 
 		function c_intArr_ptr return int_arr_ptr is
