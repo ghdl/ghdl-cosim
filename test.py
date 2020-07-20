@@ -7,6 +7,7 @@ from sys import executable, platform
 from os import environ
 from pathlib import Path
 from subprocess import check_call, STDOUT
+from shutil import which
 import unittest
 import pytest
 
@@ -17,7 +18,7 @@ class TestExamples(unittest.TestCase):
     """
 
     def setUp(self):
-        self.shell = ['bash'] if platform == 'win32' else []
+        self.shell = [which('bash')] if platform == 'win32' else []
         self.root = Path(__file__).parent
         self.vhpidirect = self.root / 'vhpidirect'
         self.vpi = self.root / 'vpi'
