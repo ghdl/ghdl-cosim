@@ -133,7 +133,7 @@ texinfo_documents = [
 
 intersphinx_mapping = {
    'python': ('https://docs.python.org/3.8/', None),
-   'ghdl': ('https://ghdl.readthedocs.io/en/latest', None),
+   'ghdl': ('https://ghdl.github.io/ghdl', None),
    'vunit': ('https://vunit.github.io', None),
    'matplotlib': ('https://matplotlib.org/', None)
 }

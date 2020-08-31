@@ -41,7 +41,7 @@ Co-simulation with GHDL
 This repository contains **documentation** and **working examples** about how to co-simulate VHDL and other languages through
 GHDL's foreign interfaces. Since specific features of the language and the tool are used, it is suggested for users
 who are new to either `GHDL` or `VHDL` to first read the :ref:`USING:QuickStart` in the main documentation
-(`ghdl.rtfd.io <https://ghdl.rtfd.io>`_).
+(`ghdl.github.io/ghdl <https://ghdl.github.io/ghdl>`_).
 
 Three main approaches are used to co-simulate (co-execute) VHDL sources along with software applications written in a
 language other than VHDL (typically C/C++/SystemC):
