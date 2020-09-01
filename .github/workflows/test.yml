@@ -11,6 +11,14 @@ env:
 
 jobs:
 
+  xyce-docker:
+    runs-on: ubuntu-latest
+    env:
+      DOCKER_BUILDKIT: 1
+    steps:
+    - uses: actions/checkout@v2
+    - run: docker run --rm -v $(pwd):/src -w /src -e CI umarcor/cosim:xyce python3 -m pytest -v -s -ra test.py::TestExamples::test_vhpidirect_vffi_xyce --color=yes
+
   lin-docker:
     runs-on: ubuntu-latest
     env:

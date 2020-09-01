@@ -12,6 +12,9 @@ import unittest
 import pytest
 
 
+isWin = platform == 'win32'
+
+
 class TestExamples(unittest.TestCase):
     """
     Verify that example run scripts work correctly
@@ -22,6 +25,9 @@ class TestExamples(unittest.TestCase):
         self.root = Path(__file__).parent
         self.vhpidirect = self.root / 'vhpidirect'
         self.vpi = self.root / 'vpi'
+
+        self.output_path = self.root / 'examples_run_out'
+        self.report_file = self.output_path / 'xunit.xml'
 
         print('\n::group::Log')
         sys.stdout.flush()
@@ -61,9 +67,9 @@ class TestExamples(unittest.TestCase):
         ])
 
 
-    @unittest.skipUnless(
-        platform != 'win32',
-        "win: needs investigation, output of list-link seems to have wrong path format",
+    @unittest.skipIf(
+        isWin,
+        'win: needs investigation, output of list-link seems to have wrong path format',
     )
     def test_vhpidirect_quickstart_linking_bind(self):
         self._sh([str(self.vhpidirect / 'quickstart' / 'linking' / 'bind' / 'run.sh')])
@@ -91,17 +97,17 @@ class TestExamples(unittest.TestCase):
         self._sh([str(self.vhpidirect / 'shared' / 'shlib' / 'run.sh')])
 
 
-    @unittest.skipUnless(
-        platform != 'win32',
-        "win: dlfcn.h is not available on win",
+    @unittest.skipIf(
+        isWin,
+        'win: dlfcn.h is not available on win',
     )
     def test_vhpidirect_shared_dlopen(self):
         self._sh([str(self.vhpidirect / 'shared' / 'dlopen' / 'run.sh')])
 
 
-    @unittest.skipUnless(
-        platform != 'win32',
-        "win: dlfcn.h is not available on win",
+    @unittest.skipIf(
+        isWin,
+        'win: dlfcn.h is not available on win',
     )
     def test_vhpidirect_shared_shghdl(self):
         self._sh([str(self.vhpidirect / 'shared' / 'shghdl' / 'run.sh')])
@@ -127,8 +133,8 @@ class TestExamples(unittest.TestCase):
         self._py([str(self.vhpidirect / 'arrays' / 'matrices' / 'vunit_axis_vcs' / 'run.py'), '-v'])
 
 
-    @unittest.skipUnless(
-        platform != 'win32',
+    @unittest.skipIf(
+        isWin,
         "win: needs ImageMagick's 'convert'",
     )
     def test_vhpidirect_arrays_matrices_framebuffer(self):
@@ -137,6 +143,14 @@ class TestExamples(unittest.TestCase):
 
     def test_vhpidirect_vffi_demo(self):
         self._sh([str(self.vhpidirect / 'vffi_user' / 'demo' / 'run.sh')])
+
+    @unittest.skipUnless(
+        which('Xyce'),
+        "needs Xyce",
+    )
+    def test_vhpidirect_vffi_xyce(self):
+        self._py([str(self.vhpidirect / 'vffi_user' / 'xyce' / 'run_minimal.py'), '-v', '--clean', '--xunit-xml=%s' % str(self.report_file), '--output-path=%s' % str(self.output_path)])
+        self._py([str(self.vhpidirect / 'vffi_user' / 'xyce' / 'run.py'), '-v', '--clean', '--xunit-xml=%s' % str(self.report_file), '--output-path=%s' % str(self.output_path)])
 
 
     def test_vpi_quickstart(self):

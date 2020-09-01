@@ -1,7 +1,9 @@
 *.ali
 *.cf
 *.lst
+*.mt0
 *.o
+*.prn
 *.so
 *.vpi
 ent*
