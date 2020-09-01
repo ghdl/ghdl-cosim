@@ -8,4 +8,5 @@ Examples
    quickstart
    shared
    arrays
+   vffi_user
    other

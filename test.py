@@ -135,5 +135,9 @@ class TestExamples(unittest.TestCase):
         self._sh([str(self.vhpidirect / 'arrays' / 'matrices' / 'framebuffer' / 'run.sh')])
 
 
+    def test_vhpidirect_vffi_demo(self):
+        self._sh([str(self.vhpidirect / 'vffi_user' / 'demo' / 'run.sh')])
+
+
     def test_vpi_quickstart(self):
         self._sh([str(self.vpi / 'quickstart' / 'run.sh')])
