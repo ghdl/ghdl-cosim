@@ -17,8 +17,7 @@ jobs:
       DOCKER_BUILDKIT: 1
     steps:
     - uses: actions/checkout@v2
-    - run: docker build -t cosim/test - < .github/Dockerfile
-    - run: docker run --rm -v $(pwd):/src -w /src -e CI cosim/test python3 -m pytest -v -s -ra test.py --color=yes
+    - run: docker run --rm -v $(pwd):/src -w /src -e CI ghdl/cosim:matplotlib python3 -m pytest -v -s -ra test.py --color=yes
 
   win-stable:
     runs-on: windows-latest
