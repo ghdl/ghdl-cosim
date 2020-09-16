@@ -5,6 +5,10 @@
 Introduction
 ============
 
+.. ATTENTION:: As explained in the :ref:`home page <COSIM>`, GHDL's implementation of VHPIDIRECT is not compliant with the standard,
+  and the standarization of a FFI/DPI is being discussed in the VASG. As a result, in this documentation VHPIDIRECT, VFFI, FFI,
+  VDPI and/or DPI might be used as synonyms for referring to the new standardized interface, which is currently work in progress.
+
 Interfacing with foreign languages through VHPIDIRECT is possible on any platform. You can reuse or define a subprogram
 in a foreign language (such as `C` or `Ada`) and import it into a VHDL design.
 

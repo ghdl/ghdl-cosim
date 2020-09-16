@@ -55,10 +55,17 @@ language other than VHDL (typically C/C++/SystemC):
 * Generation of C/C++ models/sources through a transpiler.
 
 VPI and VHPI are complex APIs which allow to inspect the hierarchy, set callbacks and/or assign signals. Because
-provided features are similar, GHDL supports VPI only. Furthermore, as an easier to use alternative, GHDL features a
-custom coexecution procedure named VHPIDIRECT, similar to SystemVerilog's DPI (`Direct Programming Interface <https://en.wikipedia.org/wiki/SystemVerilog_DPI>`_).
+provided features are similar but VPI was published years before VHPI, GHDL supports VPI only. Furthermore, as an
+easier to use alternative, GHDL features a custom coexecution interface named VHPIDIRECT, similar to SystemVerilog's
+DPI (`Direct Programming Interface <https://en.wikipedia.org/wiki/SystemVerilog_DPI>`_).
 As of today, generation of C++/SystemC models à la `Verilator <https://www.veripool.org/wiki/verilator>`_ is not
 supported. However, a *vhdlator*/*ghdlator* might be available in the future.
+
+.. ATTENTION:: In fact, VHPIDIRECT is defined as part of VHPI in VHDL 2008 LRM. However, GHDL's implementation is not
+  compliant with the standard. This is probably because VHPIDIRECT was implemented in GHDL based on some draft,
+  before VHDL 2008 was official. Nevertheless, the VASG is currently discussing the addition of a Foreign Function
+  Interface (FFI) or Direct Programming Interface (DPI) to the next revision of the standard. See `[LCS-202x] VHDL DPI/FFI based on GHDL’s implementation of VHPIDIRECT <https://umarcor.github.io/ghdl-cosim/vhdl202x/index.html>`_
+  (`PDF <https://github.com/umarcor/ghdl-cosim/blob/gh-pages/vhdl202x/vhdl202x-lcs-dpi.pdf>`_).
 
 :ref:`VHPIDIRECT <COSIM:VHPIDIRECT:Intro>` is easier to use than :ref:`VPI <COSIM:VPI:Intro>`/:ref:`VHPI <COSIM:VHPI:Intro>`
 because, as the name suggests, it is a direct interface. However, on the one hand VHPIDIRECT requires modification of
