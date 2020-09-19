@@ -41,6 +41,8 @@ begin
       v_rec  : rec_t;
       v_enum : enum_t;
       v_std  : std_logic;
+      v_stdv_downto    : std_logic_vector(3 downto 0);
+      v_stdv_to        : std_logic_vector(0 to 3);
       v_str  : string;
       v_natural1D_int  : int_natural1D_t;
       v_natural1D_real : real_natural1D_t;
@@ -68,6 +70,8 @@ begin
       v_rec  => ('y', 5),
       v_enum => busy,
       v_std  => 'Z',
+      v_stdv_downto    => "LXZ1",
+      v_stdv_to        => ('L', 'X', 'Z', '1'),
       v_str  => "hellostr",
       v_natural1D_int  => (11, 22, 33, 44, 55),
       v_natural1D_real => (0.5, 1.75, 3.33, -0.125, -0.67, -2.21),

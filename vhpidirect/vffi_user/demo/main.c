@@ -40,6 +40,8 @@ void testCinterface(
   rec_t*               v_rec,
   vhpiSmallEnumT       v_enum,
   vhpiSmallEnumT       v_std,
+  vhpiSmallEnumT*      v_stdv_downto,
+  vhpiSmallEnumT*      v_stdv_to,
   vffiNaturalDimArr_t* v_str,
   vffiNaturalDimArr_t* v_natural1D_int,
   vffiNaturalDimArr_t* v_natural1D_real,
@@ -106,6 +108,22 @@ void testCinterface(
   ghaGStart("std_logic");
   printf("v_std : %d [%c] %d [%c]\n", v_std, std_logic_char[v_std], HDL_Z, std_logic_char[HDL_Z]);
   assert(v_std == HDL_Z);
+  ghaGEnd();
+
+  ghaGStart("std_logic_vector (downto)");
+  printf("v_stdv_downto : %p\n", v_stdv_downto);
+  assert(v_stdv_downto[0] == HDL_L);
+  assert(v_stdv_downto[1] == HDL_X);
+  assert(v_stdv_downto[2] == HDL_Z);
+  assert(v_stdv_downto[3] == HDL_1);
+  ghaGEnd();
+
+  ghaGStart("std_logic_vector (to)");
+  printf("v_stdv_to : %p\n", v_stdv_to);
+  assert(v_stdv_to[0] == HDL_L);
+  assert(v_stdv_to[1] == HDL_X);
+  assert(v_stdv_to[2] == HDL_Z);
+  assert(v_stdv_to[3] == HDL_1);
   ghaGEnd();
 
   ghaGStart("String");
