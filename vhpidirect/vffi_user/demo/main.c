@@ -27,8 +27,6 @@ typedef struct rec_t {
 // Enumeration that matches 'enum_t' in VHDL
 typedef enum {standby, start, busy, done} enum_t;
 
-//int32_t* vec;
-
 // Function to be called from VHDL as a foreign subprogram
 void testCinterface(
   vhpiCharT            v_char,
@@ -103,6 +101,11 @@ void testCinterface(
   ghaGStart("Enumeration");
   printf("v_enum : %d %d\n", v_enum, busy);
   assert(v_enum == busy);
+  ghaGEnd();
+
+  ghaGStart("std_logic");
+  printf("v_std : %d [%c] %d [%c]\n", v_std, std_logic_char[v_std], HDL_Z, std_logic_char[HDL_Z]);
+  assert(v_std == HDL_Z);
   ghaGEnd();
 
   ghaGStart("String");

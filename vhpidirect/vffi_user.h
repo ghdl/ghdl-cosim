@@ -9,6 +9,20 @@
 
 #include <vhpi_user.h>
 
+// std_logic
+static const char std_logic_char[] = { 'U', 'X', '0', '1', 'Z', 'W', 'L', 'H', '-'};
+enum std_logic_states {
+  HDL_U = vhpiU,         /* uninitialized */
+  HDL_X = vhpiX,         /* unknown */
+  HDL_0 = vhpi0,         /* forcing 0 */
+  HDL_1 = vhpi1,         /* forcing 1 */
+  HDL_Z = vhpiZ,         /* high impedance */
+  HDL_W = vhpiW,         /* weak unknown */
+  HDL_L = vhpiL,         /* weak 0 */
+  HDL_H = vhpiH,         /* weak 1 */
+  HDL_D = vhpiDontCare   /* don't care */
+};
+
 // Range/bounds of a dimension of an unconstrained array with dimensions of type 'natural'
 typedef struct {
   int32_t left;
