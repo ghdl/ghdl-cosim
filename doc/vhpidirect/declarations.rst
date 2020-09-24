@@ -94,6 +94,16 @@ Composite types:
 * Files are represented by a 32 bit word, which corresponds to an index in a table.
 
 .. ATTENTION::
+  The internal representation of arrays is little-endian left-to-right, regardless of the
+  bounds. As a result, when used from C, indexes always correspond to direction ``to``; thus,
+  indexes for arrays with direction ``downto`` are reversed between VHDL and C:
+
+  .. code-block:: vhdl
+
+     constant stdv: std_logic_vector(3 downto 0) := "UX10"; -- a(0) in VHDL corresponds to a[3] in C, both print '0'
+     constant stdv: std_logic_vector(0 to 3)     := "UX10"; -- a(0) in VHDL corresponds to a[0] in C, both print 'U'
+
+.. ATTENTION::
   Since both constrained arrays and accesses to constrained arrays are passed by reference,
   distinct VHDL types are mapped to the same types in C. For example, an array of integers and
   an access to array of integers are both passed as ``int*``.
