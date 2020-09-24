@@ -21,7 +21,8 @@ the implementation details.
 *********************************************
 
 This is a synthetic example that uses all the supported/defined data types and the helper functions in ``vffi_user.h`` for converting
-fat pointers to sets of C types. Hence, it is a regression test for the header file.
+simple values, constrained arrays and multidimensional unconstrained arrays (fat pointers) to sets of C types. Hence, it is a
+regression test for the header file.
 
 
 :cosimtree:`xyce <vhpidirect/vffi_user/xyce>`
