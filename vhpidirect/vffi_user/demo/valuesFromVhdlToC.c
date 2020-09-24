@@ -28,7 +28,7 @@ typedef struct rec_t {
 typedef enum {standby, start, busy, done} enum_t;
 
 // Function to be called from VHDL as a foreign subprogram
-void testCinterface(
+void passValuesFromVhdlToC(
   vhpiCharT            v_char,
   vhpiIntT             v_int,
   uint32_t             v_nat,

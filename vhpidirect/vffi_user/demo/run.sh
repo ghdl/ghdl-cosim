@@ -4,11 +4,11 @@ set -e
 
 cd $(dirname "$0")
 
-echo "Analyze tb.vhd"
-ghdl -a --std=08 -O0 -g tb.vhd
+echo "Analyze valuesFromVhdlToC.vhd"
+ghdl -a --std=08 -O0 -g valuesFromVhdlToC.vhd
 
-echo "Build tb (with main.c and headers)"
-ghdl -e --std=08 -O0 -g -Wl,-I../../ -Wl,main.c tb
+echo "Build tb (with valuesFromVhdlToC.c and headers)"
+ghdl -e --std=08 -O0 -g -Wl,-I../../ -Wl,valuesFromVhdlToC.c -o tb_valuesFromVhdlToC tb_valuesFromVhdlToC
 
 echo "Execute tb"
-./tb
+./tb_valuesFromVhdlToC

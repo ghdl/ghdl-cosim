@@ -2,10 +2,10 @@ use std.textio.line;
 library ieee;
 context ieee.ieee_std_context;
 
-entity tb is
+entity tb_valuesFromVhdlToC is
 end;
 
-architecture arch of tb is
+architecture arch of tb_valuesFromVhdlToC is
 
   type rec_t is record
     r_char: character;
@@ -29,7 +29,7 @@ begin
 
   process
 
-    procedure testCinterface(
+    procedure passValuesFromVhdlToC(
       v_char : character;
       v_int  : integer;
       v_nat  : natural;
@@ -53,12 +53,12 @@ begin
       v_natural1D_enum : enum_natural1D_t;
       v_natural2D_real : real_natural2D_t
     ) is
-    begin report "VHPIDIRECT testCinterface" severity failure; end;
-    attribute foreign of testCinterface : procedure is "VHPIDIRECT testCinterface";
+    begin report "VHPIDIRECT passValuesFromVhdlToC" severity failure; end;
+    attribute foreign of passValuesFromVhdlToC : procedure is "VHPIDIRECT passValuesFromVhdlToC";
 
   begin
 
-    testCinterface(
+    passValuesFromVhdlToC(
       v_char => 'k',
       v_int  => -6,
       v_nat  => 9,
