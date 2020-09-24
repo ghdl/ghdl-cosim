@@ -5,8 +5,11 @@ FFI/DPI Header
 ##############
 
 As explained in :ref:`COSIM:VHPIDIRECT:Declarations`, some VHDL types are exposed as fat pointers. Hence, dealing with unconstrained
-arrays and accesses might be cumbersome. :cosimtree:`vffi_user.h <vhpidirect/vffi_user.h>` is a utily C header file for easing
-the usage of those complex types. The examples in this section showcase the usage of ``vffi_user.h``.
+arrays and accesses might be cumbersome. At the same time, indexes of arrays with bounds of direction ``downto`` are reversed,
+``std_logic`` values correspond to an specific enumeration, etc. :cosimtree:`vffi_user.h <vhpidirect/vffi_user.h>` is a utily
+C header file for easing the usage of those complex types. The examples in this section showcase the usage of ``vffi_user.h``.
+These examples are based on the foundations shown in previous examples. Hence, reading those is strongly suggested for understanding
+the implementation details.
 
 .. ATTENTION:: As explained in the :ref:`home page <COSIM>`, GHDL's implementation of VHPIDIRECT is not compliant with the standard,
   and the standarization of a FFI/DPI is being discussed in the VASG (see `[LCS-202x] VHDL DPI/FFI based on GHDL’s implementation of VHPIDIRECT <https://umarcor.github.io/ghdl-cosim/vhdl202x/index.html>`_).
