@@ -37,6 +37,12 @@ typedef struct {
   range_t* bounds;
 } vffiNaturalDimArr_t;
 
+// Access to an unconstrained array with 1 dimension of type 'natural'
+typedef struct {
+  range_t* range;
+  uint8_t  data[];
+} vffiNaturalDimArrAccess_t;
+
 // Convert a fat pointer of an unconstrained string, to a (null terminated) C string
 char* vffiNullTerminatedString(
   vffiNaturalDimArr_t* ptr
@@ -64,6 +70,13 @@ void vffiNaturalDimArrGet(
   for (int i=0; i<num; i++) {
     len[num-1-i] = bounds[i].len;
   }
+}
+
+char* vffiNullTerminatedStringAccess(vffiNaturalDimArrAccess_t *ptr) {
+  // Add a null character, because GHDL strings are not null-terminated
+  char *string = malloc(ptr->range[0].len + 1);
+  strncpy(string, ptr->data, ptr->range[0].len);
+  string[ptr->range[0].len] = '\0';
 }
 
 #endif

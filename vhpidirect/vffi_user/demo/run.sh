@@ -12,3 +12,13 @@ ghdl -e --std=08 -O0 -g -Wl,-I../../ -Wl,valuesFromVhdlToC.c -o tb_valuesFromVhd
 
 echo "Execute tb"
 ./tb_valuesFromVhdlToC
+
+
+echo "Analyze valuesFromVhdlToC.vhd"
+ghdl -a --std=08 -O0 -g accessesFromVhdlToC.vhd
+
+echo "Build tb (with accessesFromVhdlToC.c and headers)"
+ghdl -e --std=08 -O0 -g -Wl,-I../../ -Wl,accessesFromVhdlToC.c -o tb_accessesFromVhdlToC tb_accessesFromVhdlToC
+
+echo "Execute tb"
+./tb_accessesFromVhdlToC
