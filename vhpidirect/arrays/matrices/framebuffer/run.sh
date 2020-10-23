@@ -36,5 +36,3 @@ if [ -n "$DISPLAY" ]; then
   echo "> Execute tb_testX11"
   ./tb_testX11
 fi
-
-./virt_vga/run.sh

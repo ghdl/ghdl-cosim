@@ -113,8 +113,9 @@ As a result, at runtime, when VHDL calls the external function, the Python callb
   testbench instead.
 
 .. TIP::
-  In :ref:`COSIM:VHPIDIRECT:Examples:arrays:matrices:vga` two "virtual screen backends" are shown: writing PNG/GIF with
-  ImageMagick or drawing a window with ``X11/Xlib.h``. Those are written in C, but equivalent solutions can be implemented
-  using Python libraries such as `matplotlib <https://matplotlib.org/>`_, `panda3d <https://www.panda3d.org/>`_,
-  `pygame <https://www.pygame.org>`_, `cocos2dpy <http://cocos2d.org/#cocos2dpy>`_, `pyglet <http://pyglet.org/>`_, etc.
+  In `dbhi/vboard: VGA test pattern <https://github.com/dbhi/vboard/tree/main/vga>`_, this example and :ref:`COSIM:VHPIDIRECT:Examples:arrays:matrices:vga`
+  are combined for providing a *virtual VGA screen* using Python's `NumPy <https://numpy.org/>`_, `Pillow <https://python-pillow.org/>`_
+  and `Tkinter <https://docs.python.org/3/library/tkinter.html>`_.
+  Equivalent solutions can be implemented using Python libraries such as `matplotlib <https://matplotlib.org/>`_,
+  `panda3d <https://www.panda3d.org/>`_, `pygame <https://www.pygame.org>`_, `cocos2dpy <http://cocos2d.org/#cocos2dpy>`_, `pyglet <http://pyglet.org/>`_, etc.
   Do you want to take up the challenge? `Propose a PR <https://github.com/ghdl/ghdl-cosim/compare>`_!

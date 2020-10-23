@@ -259,34 +259,9 @@ Moreover, two different architectures are provided for the testbench (:cosimtree
   signal; from left to right: black, red, green, yellow, blue, magenta, cyan and white.
 
 .. TIP::
-  These examples are written in C, but equivalent solutions can be implemented using Python libraries. See :ref:`COSIM:VHPIDIRECT:Examples:shared:pycb`.
-
-:cosimtree:`Virtual VGA screen <vhpidirect/arrays/matrices/framebuffer/virt_vga>`
----------------------------------------------------------------------------------
-
-In practical designs, it is desirable to separate sources for synthesis from simulation and testing resources. This
-subexample extends the usage of a shared frame buffer, to test a synthesizable VGA pattern generator (or any other design
-with VGA output).
-
-.. figure:: img/matrices_virt_vga.png
-   :alt: Example :cosimtree:`virt_vga <vhpidirect/arrays/matrices/framebuffer/virt_vga>`
-   :align: center
-   :width: 500px
-
-   Block diagram of example :cosimtree:`virt_vga <vhpidirect/arrays/matrices/framebuffer/virt_vga>`.
-
-The UUT instantiated in the testbench is composed of a clock frequency conversion (``vga_clk``), sync and index generator
-(``vga_sync_gen``) and a pattern generator (``pattern``). The implemented pattern is the same eight bar test described above.
-This UUT is expected to be synthesizable, even though the provided architecture for entity ``vga_clk`` is not.
-
-The *virtual VGA screen* is implemented in module ``vga_screen``. A separate sync and index generator is used to capture the
-RGB signal and to write RGB24 integers to the frame buffer. The first edges of VSYNC is used to sync frames of the capture. After
-each frame is filled, ``save_screenshot`` is executed. The visualization of the captures depends on the chosen C
-implementation: either PNG/GIF or X11, as explained above.
-
-.. TIP::
-  VHDL package :cosimtree:`vga_cfg_pkg <vhpidirect/arrays/matrices/framebuffer/virt_vga/cfg_pkg.vhd>` contains a table
-  (described as an array of records) with parameter values (pulse, porch, pixel clock rate, polarity, etc.) for +60 VGA/VESA/SXGA/XGA
-  modes. This table is used in ``vga_pattern`` and ``vga_screen``, to provide generics to ``vga_syn_gen``. At the same time,
-  ``vga_screen`` allows to set the size of the X11 window through generics. By default, the size of the window matches the
-  resolution of the selected mode.
+  In `dbhi/vboard: VGA test pattern <https://github.com/dbhi/vboard/tree/main/vga>`_ a *virtual VGA screen* is implemented based
+  on this shared frame buffer example. A test core is provided, which captures the VSYNC, HSYNC and RGB signals of a UUT, and writes
+  RGB24 integers to the buffer. Then, apart from Imagemagick, `Tkinter <https://docs.python.org/3/library/tkinter.html>`_
+  is supported. Tkinter is the Tcl/Tk interface built in Python. Hence, `dbhi/vboard: vga/test/tkinter <https://github.com/dbhi/vboard/tree/main/vga#tkinter-desktop-window>`_
+  shows how to combine this framebuffer example with :ref:`COSIM:VHPIDIRECT:Examples:shared:pycb`. The result is similar to
+  using ``X11/Xlib.h``, but `NumPy <https://numpy.org/>`_ and `Pillow <https://python-pillow.org/>`_ are used, instead of coding in C.
