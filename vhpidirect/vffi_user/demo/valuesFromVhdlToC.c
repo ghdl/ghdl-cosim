@@ -53,6 +53,8 @@ void passValuesFromVhdlToC(
   vffiNaturalDimArr_t* v_natural2D_real
 ) {
 
+  printf("· passValuesFromVhdlToC\n");
+
   ghaGStart("Character");
   printf("v_char : %c\n", v_char);
   assert(v_char == 'k');

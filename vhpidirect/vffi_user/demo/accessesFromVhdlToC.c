@@ -23,6 +23,8 @@ void passAccessesFromVhdlToC(
   vffiNaturalDimArr_t* v_natural1D_int
 ) {
 
+  printf("· passAccessesFromVhdlToC\n");
+
   int* len = malloc(2 * sizeof(int));
 
   ghaGStart("Unconstrained natural 1D array of Integer");
