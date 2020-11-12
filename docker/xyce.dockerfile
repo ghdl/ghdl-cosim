@@ -1,4 +1,4 @@
-FROM ghdl/vunit:llvm-master AS build
+FROM ghdl/cosim:py AS build
 
 RUN apt-get update -qq && \
 DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
@@ -96,7 +96,7 @@ make DESTDIR=/tmp -j$(nproc) install
 
 #--
 
-FROM ghdl/vunit:llvm-master
+FROM ghdl/cosim:py
 
 COPY --from=build /tmp/usr/local /usr/local
 
