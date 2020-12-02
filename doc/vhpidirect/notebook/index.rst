@@ -9,4 +9,5 @@ contains articles and discussions to address common questions and mistakes.
 
 .. toctree::
 
+   howtouseghdlfromc
    mistakes
