@@ -27,6 +27,47 @@ enum std_logic_states {
   HDL_D = vhpiDontCare   /* don't care */
 };
 
+// Compress an array of std_logic (char) to an array of bits (8 times smaller)
+void vfficharArr2bitArr(
+  char* din,
+  unsigned char* dout,
+  int blen
+) {
+  for (int i = 0; i < blen; i++) {
+    char d = 1;
+    for (int y = 0; y < 8; y++) {
+      if ((*din == HDL_1) || (*din == HDL_H)) {
+        *dout |= d;
+      } else {
+        *dout &= ~(d);
+      }
+      d<<=1;
+      din++;
+    }
+    dout++;
+  }
+  return;
+}
+
+// Extract an array of bits to an array of std_logic (char) (8 times larger)
+void vffibitArr2charArr(
+  unsigned char* din,
+  char* dout,
+  int blen
+) {
+  for (int i = 0; i < blen; i++) {
+    char d = *din;
+    for (int y = 0; y < 8; y++) {
+      *dout++ = (d & 1 == 1) ? HDL_1 : HDL_0;
+      d>>=1;
+    }
+    din++;
+  }
+  return;
+}
+
+#endif
+
 
 /*
 *  Fat pointer types
@@ -94,49 +135,3 @@ char* vffiNullTerminatedStringAccess(
   strncpy(string, ptr->data, ptr->range[0].len);
   string[ptr->range[0].len] = '\0';
 }
-
-
-/*
-*  Array of std_logic to/from array of bits
-*/
-
-// Compress an array of std_logic to an array of bits (8 times smaller)
-void vfficharArr2bitArr(
-  char* din,
-  unsigned char* dout,
-  int blen
-) {
-  for (int i = 0; i < blen; i++) {
-    char d = 1;
-    for (int y = 0; y < 8; y++) {
-      if ((*din == HDL_1) || (*din == HDL_H)) {
-        *dout |= d;
-      } else {
-        *dout &= ~(d);
-      }
-      d<<=1;
-      din++;
-    }
-    dout++;
-  }
-  return;
-}
-
-// Extract an array of bits to an array of std_logic (8 times larger)
-void vffibitArr2charArr(
-  unsigned char* din,
-  char* dout,
-  int blen
-) {
-  for (int i = 0; i < blen; i++) {
-    char d = *din;
-    for (int y = 0; y < 8; y++) {
-      *dout++ = (d & 1 == 1) ? HDL_1 : HDL_0;
-      d>>=1;
-    }
-    din++;
-  }
-  return;
-}
-
-#endif
