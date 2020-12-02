@@ -52,7 +52,8 @@ into a format that is suitable for the target C function.
 In C, the function provided by OpenSSL expects data as arrays of bits. Hence, variables need to be converted for the memory layout
 of the data to match. This can be done in C only, and/or in VHDL too. Apart from the encryption function (:cosimtree:`encrypt.c <vhpidirect/vffi_user/crypto/encrypt.c>`),
 an intermediate function (``cryptData``) is used (:cosimtree:`caux.c <vhpidirect/vffi_user/crypto/c/caux.c>`). The intermediate
-function uses enums and two helper functions (``vfficharArr2bitArr`` and ``vffibitArr2charArr``) defined in :cosimtree:`vffi_user.h <vhpidirect/vffi_user.h>`. Furthermore, a ``swap`` function written in VHDL is used for reordering.
+function uses enums and two helper functions (``vfficharArr2bitArr`` and ``vffibitArr2charArr``) defined in :cosimtree:`vffi_user.h <vhpidirect/vffi_user.h>`.
+Furthermore, a ``reverseBitsInBytes`` function written in VHDL is used for reordering (see :cosimtree:`vffi_user-body.vhd <vhpidirect/vffi_user-body.vhd>`).
 
 .. TIP:: This example is based on VHDL and C. However, as show in :ref:`COSIM:VHPIDIRECT:Examples:shared:pycb`, using Python modules/functions
   from VHDL is also possible. Projects such as `pyca/cryptography <https://github.com/pyca/cryptography>`_ provide equivalent features

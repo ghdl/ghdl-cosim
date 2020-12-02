@@ -2,7 +2,7 @@ library ieee;
 context ieee.ieee_std_context;
 
 library ghdl;
-use ghdl.vffi_user.swap;
+use ghdl.vffi_user.reverseBitsInBytes;
 
 entity tb is
 end;
@@ -32,9 +32,14 @@ begin
 
     report "Hello crypto!" severity note;
 
-    cryptData(swap(vin), swap(vkey), vout, vin'length/8);
+    cryptData(
+      reverseBitsInBytes(vin),
+      reverseBitsInBytes(vkey),
+      vout,
+      vin'length/8
+    );
 
-    assert swap(vout) = vexp severity failure;
+    assert reverseBitsInBytes(vout) = vexp severity failure;
 
     wait;
   end process;
