@@ -91,7 +91,7 @@ start examples of both interfacing mechanisms, in order to get a feel for the di
    vhpidirect/dynamic
    vhpidirect/grt
    vhpidirect/examples/index
-   vhpidirect/mistakes
+   vhpidirect/notebook/index
 
 
 .. toctree::

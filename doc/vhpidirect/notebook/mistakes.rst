@@ -1,6 +1,6 @@
 .. program:: ghdl
 
-.. _COSIM:VHPIDIRECT:Mistakes:
+.. _COSIM:VHPIDIRECT:Notebook:Mistakes:
 
 Common mistakes
 ===============
