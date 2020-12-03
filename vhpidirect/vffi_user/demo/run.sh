@@ -29,4 +29,18 @@ ghdl -e --std=08 -O0 -g -Wl,-I../../ -Wl,accessesFromVhdlToC.c -o tb_accessesFro
 echo "Execute tb"
 ./tb_accessesFromVhdlToC
 
+
+[ -n "$CI" ] && echo '::group::Log' || true
+
+echo "Analyze valuesFromCToVhdl.vhd"
+ghdl -a --std=08 -O0 -g accessesFromCToVhdl.vhd
+
+echo "Build tb (with accessesFromCToVhdl.c and headers)"
+ghdl -e --std=08 -O0 -g -Wl,-I../../ -Wl,accessesFromCToVhdl.c -o tb_accessesFromCToVhdl tb_accessesFromCToVhdl
+
+[ -n "$CI" ] && echo '::endgroup::' || true
+
+echo "Execute tb"
+./tb_accessesFromCToVhdl
+
 [ -n "$CI" ] && echo '::group::End' || true

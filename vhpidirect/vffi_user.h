@@ -93,6 +93,11 @@ typedef struct {
   uint8_t  data[];
 } vffiNaturalDimArrAccess_t;
 
+// A line, which is an access to an unconstrained string
+typedef struct {
+  range_t range;
+  char    data[];
+} vffiLine_t;
 
 /*
 *  Convert fat pointers to C types
@@ -134,4 +139,21 @@ char* vffiNullTerminatedStringAccess(
   char *string = malloc(ptr->range[0].len + 1);
   strncpy(string, ptr->data, ptr->range[0].len);
   string[ptr->range[0].len] = '\0';
+}
+
+
+/*
+*  Convert C types to fat pointers
+*/
+
+// Convert a (null terminated) C string to a fat pointer of a line
+vffiLine_t* lineFromString(char *str) {
+  uint32_t length = strlen(str);
+  vffiLine_t *line = malloc(sizeof(vffiLine_t) + sizeof(char) * length);
+  line->range.left = 1;
+  line->range.right = length;
+  line->range.dir = 0;
+  line->range.len = length;
+  strncpy(line->data, str, length);
+  return line;
 }
