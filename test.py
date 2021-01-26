@@ -75,10 +75,6 @@ class TestExamples(unittest.TestCase):
         self._sh([str(self.vhpidirect / 'quickstart' / 'wrapping' / 'exitcb' / 'py' / 'vunit_run.sh')])
 
 
-    @unittest.skipIf(
-        isWin,
-        'win: needs investigation, output of list-link seems to have wrong path format',
-    )
     def test_vhpidirect_quickstart_linking_bind(self):
         self._sh([str(self.vhpidirect / 'quickstart' / 'linking' / 'bind' / 'run.sh')])
 
