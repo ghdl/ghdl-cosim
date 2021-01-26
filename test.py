@@ -105,18 +105,10 @@ class TestExamples(unittest.TestCase):
         self._sh([str(self.vhpidirect / 'shared' / 'shlib' / 'run.sh')])
 
 
-    @unittest.skipIf(
-        isWin,
-        'win: dlfcn.h is not available on win',
-    )
     def test_vhpidirect_shared_dlopen(self):
         self._sh([str(self.vhpidirect / 'shared' / 'dlopen' / 'run.sh')])
 
 
-    @unittest.skipIf(
-        isWin,
-        'win: dlfcn.h is not available on win',
-    )
     def test_vhpidirect_shared_shghdl(self):
         self._sh([str(self.vhpidirect / 'shared' / 'shghdl' / 'run.sh')])
 
