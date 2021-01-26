@@ -27,25 +27,6 @@ jobs:
     - uses: actions/checkout@v2
     - run: docker run --rm -v $(pwd):/src -w /src -e CI ghdl/cosim:matplotlib python3 -m pytest -v -s -ra test.py --color=yes
 
-  win-stable:
-    runs-on: windows-latest
-    steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-python@v2
-      with:
-        python-version: 3.8
-    - env:
-        WINDOWS_RELEASE: 0.37-mingw64-llvm
-      shell: bash
-      run: |
-        curl -fsSL -o ghdl.zip https://github.com/ghdl/ghdl/releases/download/v0.37/ghdl-${WINDOWS_RELEASE}.zip
-        7z x ghdl.zip "-o../ghdl-tmp" -y
-        mv ../ghdl-tmp/GHDL/${WINDOWS_RELEASE}/ ../ghdl
-        rm -rf ../ghdl-tmp ghdl.zip
-        export PATH=$PATH:$(pwd)/../ghdl/bin
-        python -m pip install pytest vunit_hdl matplotlib numpy --progress-bar off
-        python -m pytest -v -s -ra test.py --color=yes
-
   lin-setup:
     runs-on: ubuntu-latest
     steps:
@@ -83,5 +64,25 @@ jobs:
     - uses: ghdl/setup-ghdl-ci@master
       with:
         backend: llvm
+    - run: python -m pip install --progress-bar off pytest vunit_hdl
+    - run: python -m pytest -v -s -ra test.py --color=yes
+
+  win-msys:
+    runs-on: windows-latest
+    defaults:
+      run:
+        shell: msys2 {0}
+    steps:
+    - uses: msys2/setup-msys2@v2
+      with:
+        msystem: MINGW64
+        update: true
+        install: >
+          mingw-w64-x86_64-ghdl-llvm
+          mingw-w64-x86_64-python-pip
+          mingw-w64-x86_64-python-numpy
+          mingw-w64-x86_64-python-matplotlib
+          mingw-w64-x86_64-openssl
+    - uses: actions/checkout@v2
     - run: python -m pip install --progress-bar off pytest vunit_hdl
     - run: python -m pytest -v -s -ra test.py --color=yes
