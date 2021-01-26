@@ -2,9 +2,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+// TODO: Use different procedures for Linux, Windows and macOS
+// See https://github.com/ghdl/ghdl/tree/master/testsuite/gna/issue803
+
 int main(int argc, void** argv) {
 
-  void* h = dlopen("./tb.so", RTLD_LAZY);
+  void* h = dlopen("./tb.lib", RTLD_LAZY);
   if (!h){
     fprintf(stderr, "%s\n", dlerror());
     exit(1);
@@ -37,7 +40,7 @@ int main(int argc, void** argv) {
     dlclose(h);
 
     if (i<2) {
-      h = dlopen("./tb.so", RTLD_LAZY);
+      h = dlopen("./tb.lib", RTLD_LAZY);
       if (!h){
         fprintf(stderr, "%s\n", dlerror());
         exit(1);
