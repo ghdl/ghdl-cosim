@@ -1,3 +1,4 @@
+from sys import platform
 from pathlib import Path
 import ctypes
 import _ctypes
@@ -15,7 +16,10 @@ def dlopen(path):
 
 
 def dlclose(obj):
-    _ctypes.dlclose(obj._handle)
+    if platform == "win32":
+        _ctypes.FreeLibrary(obj._handle)
+    else:
+        _ctypes.dlclose(obj._handle)
 
 
 def enc_args(args):
@@ -24,12 +28,10 @@ def enc_args(args):
         xargs[idx] = ctypes.create_string_buffer(arg.encode('utf-8'))
     return xargs
 
+
 def run(path, argc, argv):
     print("PY RUN ENTER")
     ghdl = dlopen(path)
-    ghdl.main(argc, argv)
-    # FIXME With VHDL 93, the execution is Aborted and Python exits here
-
+    ghdl.entry(argc, argv)
     dlclose(ghdl)
-
     print("PY RUN EXIT")
