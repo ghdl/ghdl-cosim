@@ -4,6 +4,11 @@ set -e
 
 cd $(dirname "$0")
 
+_os='linux'
+case "$(uname)" in
+  MINGW*) _os='windows';;
+esac
+
 echo "Analyze tb.vhd"
 ghdl -a tb.vhd
 
@@ -28,25 +33,31 @@ echo "Execute tb_o"
 
 # OR
 
-echo "Bind tb"
-ghdl --bind tb
+if [ "x${_os}" != "xwindows" ]; then
+  # FIXME: This should work on MSYS2, but the output of '--list-link' is broken.
+  # The returned paths contain mixed '\' and '/'.
 
-echo "Build tb (with main.c) [GCC]"
-gcc main.c -Wl,`ghdl --list-link tb` -o tb_lc
+  echo "Bind tb"
+  ghdl --bind tb
 
-echo "Execute tb_lc"
-./tb_lc
+  echo "Build tb (with main.c) [GCC]"
+  gcc main.c -Wl,`ghdl --list-link tb` -o tb_lc
 
-# OR
+  echo "Execute tb_lc"
+  ./tb_lc
 
-echo "Build main.c"
-gcc -c main.c
+  # OR
 
-echo "Bind tb"
-ghdl --bind tb
+  echo "Build main.c"
+  gcc -c main.c
 
-echo "Build tb (with main.o) [GCC]"
-gcc main.o -Wl,`ghdl --list-link tb` -o tb_lo
+  echo "Bind tb"
+  ghdl --bind tb
 
-echo "Execute tb_lo"
-./tb_lo
+  echo "Build tb (with main.o) [GCC]"
+  gcc main.o -Wl,`ghdl --list-link tb` -o tb_lo
+
+  echo "Execute tb_lo"
+  ./tb_lo
+
+fi
