@@ -8,6 +8,16 @@ Shared libs and dynamic loading
   As explained in :ref:`COSIM:VHPIDIRECT:Dynamic:loading_a_simulation`, in order to load binaries/libraries dynamically,
   those need to be built as position independent code/executables (PIC/PIE).
 
+This set of examples is an introduction from scratch for users who are familiar with C, but who have never built or loaded
+shared libraries (``*.so``, ``*.dll`` or ``*.dyn``):
+
+* :ref:`COSIM:VHPIDIRECT:Examples:shared:shlib`: write C code and compile it as a shared library.
+* :ref:`COSIM:VHPIDIRECT:Examples:shared:dlopen`: write two shared libraries in C, and write a main C program for loading and executing both of them.
+* :ref:`COSIM:VHPIDIRECT:Examples:shared:shghdl`: build a simulation as a shared library, and write a main C program for loading and executing it.
+* :ref:`COSIM:VHPIDIRECT:Examples:shared:py`: build a simulation as a shared library, and write a Python script for loading and executing it.
+* :ref:`COSIM:VHPIDIRECT:Examples:shared:pycb`: build a simulation as a shared library, and write a Python script for loading it and replacing callbacks
+  through ``ctypes`` before executing the simulation.
+
 .. _COSIM:VHPIDIRECT:Examples:shared:shlib:
 
 :cosimtree:`shlib <vhpidirect/shared/shlib>`
@@ -62,23 +72,36 @@ symbols in the shared libraries.
   :ref:`COSIM:VHPIDIRECT:Dynamic:generating_shared_libraries`. In this example, this case is also tested. However, this
   is not suggested at all, since it won't work on all platforms.
 
-.. WARNING::
-  Currently, failing simulations that are dynamically loaded do produce an *Abortion*. This forces any C or Python
-  wrapper/caller to exit inmediately, without running any post-check. See :ghdlsharp:`803` and :cosimsharp:`15` for
-  further details.
-
 .. _COSIM:VHPIDIRECT:Examples:shared:py:
 
-py
-**
+:cosimtree:`py <vhpidirect/shared/py>`
+**************************************
 
 `Python <https://www.python.org/>`_'s :py:mod:`ctypes` module is a built-in "*foreign function library for Python*", which
 "*provides C compatible data types, and allows calling functions in DLLs or shared libraries*". Thus, it is posible to
 reproduce :ref:`COSIM:VHPIDIRECT:Examples:shared:shghdl` by loading and executing the simulation from Python, instead of
-C. In fact, this is the foundation of `VUnit/cosim <https://github.com/VUnit/cosim>`_.
+C.
 
-Nonethless, this example has not been added yet because of :cosimsharp:`15`. As soon as GHDL is fixed so that both successful
-and failing simulations exit cleanly, a minimal Python example will be added here.
+This example uses the testbench and C sources from :ref:`COSIM:VHPIDIRECT:Examples:quickstart:wrapping:exitcb`, but the simulation
+is built as a shared library and loaded dynamically from Python. A helper Python module is used for providing OS agnostic
+utilities (see :cosimtree:`pyaux.py <vhpidirect/shared/py/pyaux.py>`).
+
+.. WARNING::
+  On some Linux environments, failing simulations that are dynamically loaded from Python do produce an *Abortion*. This
+  forces the wrapper/caller to exit inmediately, without running any post-check. See :ghdlsharp:`803` and :cosimsharp:`15` for
+  further details.
+
+:cosimtree:`py/vunit <vhpidirect/shared/py/vunit>`
+==================================================
+
+This is equivalent to the previous example (:ref:`COSIM:VHPIDIRECT:Examples:shared:py`). Instead of calling GHDL's CLI explicitly,
+VUnit's Python aided plumbing is used. This allows including any of VUnit's VHDL features into the simulation models, which
+are then to be loaded dynamically from Python. In fact, this is the foundation of `VUnit/cosim <https://github.com/VUnit/cosim>`_.
+
+.. WARNING::
+  On some Linux environments, using VHDL 2008 works but VHDL 1993 does not return cleanly in case of failure. An *Abortion* is
+  produced, which prevents the regular after-simulation execution of VUnit. See :ghdlsharp:`803` and :cosimsharp:`15` for
+  further details.
 
 .. _COSIM:VHPIDIRECT:Examples:shared:pycb:
 

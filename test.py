@@ -71,10 +71,6 @@ class TestExamples(unittest.TestCase):
         self._sh([str(self.vhpidirect / 'quickstart' / 'wrapping' / 'exitcb' / 'run.sh')])
 
 
-    def test_vhpidirect_quickstart_wrapping_exitcb_py(self):
-        self._sh([str(self.vhpidirect / 'quickstart' / 'wrapping' / 'exitcb' / 'py' / 'vunit_run.sh')])
-
-
     def test_vhpidirect_quickstart_linking_bind(self):
         self._sh([str(self.vhpidirect / 'quickstart' / 'linking' / 'bind' / 'run.sh')])
 
@@ -107,6 +103,13 @@ class TestExamples(unittest.TestCase):
 
     def test_vhpidirect_shared_shghdl(self):
         self._sh([str(self.vhpidirect / 'shared' / 'shghdl' / 'run.sh')])
+
+
+    def test_vhpidirect_shared_py(self):
+        self._sh([str(self.vhpidirect / 'shared' / 'py' / 'run.sh')])
+
+    def test_vhpidirect_shared_py_vunit(self):
+        self._sh([str(self.vhpidirect / 'shared' / 'py' / 'vunit' / 'run.sh')])
 
 
     def test_vhpidirect_shared_pycb(self):

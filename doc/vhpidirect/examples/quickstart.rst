@@ -98,11 +98,19 @@ to the compiler and/or linker. However, since it is not possible to do so with A
   ``int argc, void** argv, void** envp``. This is done for illustration purposes only, as it has no real effect on the
   exercise.
 
+.. _COSIM:VHPIDIRECT:Examples:quickstart:wrapping:exitcb:
+
 :cosimtree:`exitcb <vhpidirect/quickstart/wrapping/exitcb>`
-------------------------------------------------
+-----------------------------------------------------------
 
-On exit, ``ghdl_main`` behaves differently depending on the version of the standard that it used for VHDL.
+When wrapped in a foreign language, calls to ``ghdl_main`` should return an exit code and allow the regular execution of the
+wrapper, so that users can handle simulation results in there. However, bugs might result in failures that exit immediately
+through an abortion signal. This example shows how to register an exit handler and a signal handler, to allow executing
+custom code regardless of crashes in the simulation.
 
+In VHDL 1993, simulation termination statements and exit codes that simulators should produce were undefined. Therefore, it was
+common practice to termine the simulations through reports of severity ``failure``. When wrapping GHDL, such strategies
+might result in undesired exit procedures. Using VHDL 2008 is suggested.
 
 .. _COSIM:VHPIDIRECT:Examples:quickstart:linking:
 

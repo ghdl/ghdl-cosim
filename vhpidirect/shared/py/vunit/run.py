@@ -28,13 +28,12 @@ ROOT = Path(__file__).resolve().parent
 
 vu = VUnit.from_argv(vhdl_standard=getenv('VUNIT_VHDL_STANDARD', '2008'))
 
-lib = vu.add_library('lib').add_source_files(str(ROOT / 'vunit_tb.vhd'))
+lib = vu.add_library('lib').add_source_files(str(ROOT / 'tb.vhd'))
 
 vu.set_sim_option('ghdl.elab_flags', [
     '-shared',
     '-Wl,-fPIC',
-    '-Wl,' + str(ROOT.parent / 'caux.c'),
-    '-Wl,' + str(ROOT.parent / 'main_sigabrt.c')
+    '-Wl,' + str(ROOT.parent.parent.parent / 'quickstart' / 'wrapping' / 'exitcb' / 'main.c')
 ])
 
 vu.set_sim_option("ghdl.elab_e", True)
