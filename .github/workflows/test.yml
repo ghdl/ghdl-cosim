@@ -88,3 +88,30 @@ jobs:
     - uses: actions/checkout@v2
     - run: python -m pip install --progress-bar off pytest vunit_hdl
     - run: python -m pytest -v -s -ra test.py --color=yes
+
+#--
+
+  lin-setup-vffi-demo:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: ghdl/setup-ghdl-ci@master
+      with:
+        backend: llvm
+    - run: ./vhpidirect/vffi_user/demo/run.sh
+
+  win-setup-vffi-demo:
+    runs-on: windows-latest
+    defaults:
+      run:
+        shell: msys2 {0}
+    steps:
+    - uses: msys2/setup-msys2@v2
+      with:
+        msystem: MINGW64
+        update: true
+    - uses: actions/checkout@v2
+    - uses: ghdl/setup-ghdl-ci@master
+      with:
+        backend: llvm
+    - run: ./vhpidirect/vffi_user/demo/run.sh
