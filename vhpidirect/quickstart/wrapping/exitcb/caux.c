@@ -23,5 +23,5 @@ int entry(int argc, void** argv) {
   int ecode = ghdl_main(argc, argv);
   printf("Bye entry <%d>!\n", ecode);
 
-  return 0;
+  return ecode;
 }

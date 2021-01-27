@@ -32,6 +32,6 @@ def enc_args(args):
 def run(path, argc, argv):
     print("PY RUN ENTER")
     ghdl = dlopen(path)
-    ghdl.entry(argc, argv)
+    _ret = ghdl.entry(argc, argv)
     dlclose(ghdl)
-    print("PY RUN EXIT")
+    print("PY RUN EXIT <%d>" % _ret)

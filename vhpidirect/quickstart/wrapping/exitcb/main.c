@@ -1,5 +1,6 @@
 extern int entry(int argc, void** argv);
 
 int main(int argc, void** argv) {
-  return entry(argc, argv);
+  entry(argc, argv);
+  return 0;
 }
