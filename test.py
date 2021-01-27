@@ -8,14 +8,14 @@ from os import environ
 from pathlib import Path
 from subprocess import check_call, STDOUT
 from shutil import which
-import unittest
+from unittest import TestCase
 import pytest
 
 
 isWin = platform == 'win32'
 
 
-class TestExamples(unittest.TestCase):
+class TestExamples(TestCase):
     """
     Verify that example run scripts work correctly
     """
@@ -105,9 +105,17 @@ class TestExamples(unittest.TestCase):
         self._sh([str(self.vhpidirect / 'shared' / 'shghdl' / 'run.sh')])
 
 
+    @pytest.mark.xfail(
+        not isWin,
+        reason="abortion is produced on some Linux environements"
+    )
     def test_vhpidirect_shared_py(self):
         self._sh([str(self.vhpidirect / 'shared' / 'py' / 'run.sh')])
 
+    @pytest.mark.xfail(
+        not isWin,
+        reason="abortion is produced on some Linux environements"
+    )
     def test_vhpidirect_shared_py_vunit(self):
         self._sh([str(self.vhpidirect / 'shared' / 'py' / 'vunit' / 'run.sh')])
 
@@ -132,25 +140,25 @@ class TestExamples(unittest.TestCase):
         self._py([str(self.vhpidirect / 'arrays' / 'matrices' / 'vunit_axis_vcs' / 'run.py'), '-v'])
 
 
-    @unittest.skipIf(
+    @pytest.mark.skipif(
         isWin,
-        "win: needs ImageMagick's 'convert'",
+        reason="win: needs ImageMagick's 'convert'",
     )
     def test_vhpidirect_arrays_matrices_framebuffer(self):
         self._sh([str(self.vhpidirect / 'arrays' / 'matrices' / 'framebuffer' / 'run.sh')])
 
 
-    @unittest.skipUnless(
-        'MINGW_PREFIX' in environ or not isWin,
-        "needs OpenSSL",
+    @pytest.mark.skipif(
+        isWin and ('MINGW_PREFIX' not in environ),
+        reason="needs OpenSSL",
     )
     def test_vhpidirect_vffi_crypto(self):
         self._sh([str(self.vhpidirect / 'vffi_user' / 'crypto' / 'run.sh')])
 
 
-    @unittest.skipUnless(
-        which('Xyce'),
-        "needs Xyce",
+    @pytest.mark.skipif(
+        not which('Xyce'),
+        reason="needs Xyce",
     )
     def test_vhpidirect_vffi_xyce(self):
         self._py([str(self.vhpidirect / 'vffi_user' / 'xyce' / 'run_minimal.py'), '-v', '--clean', '--xunit-xml=%s' % str(self.report_file), '--output-path=%s' % str(self.output_path)])
