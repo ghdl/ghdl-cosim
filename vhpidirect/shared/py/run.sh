@@ -24,7 +24,7 @@ for std in '08' '93'; do
     echo ""
 
     echo "> [$std] Python load and run tb-${item}.${_ext}"
-    PYTHONPATH=$(pwd) python3 -c 'from pyaux import run; run("./tb-'"${item}.${_ext}"'", 0, None)'
+    python3 -c 'from pyaux import run; run("./tb-'"${item}.${_ext}"'", 0, None)'
     echo ""
   done
 
