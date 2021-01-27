@@ -77,7 +77,7 @@ except Exception as ex:
 
 # -- Options for HTML output ----------------------------------------------
 
-html_logo = "_static/logow.svg"
+html_logo = "_static/logo.png"
 
 html_theme_options = {
     'logo_only': True,
