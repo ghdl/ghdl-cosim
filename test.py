@@ -137,10 +137,6 @@ class TestExamples(unittest.TestCase):
         self._sh([str(self.vhpidirect / 'arrays' / 'matrices' / 'framebuffer' / 'run.sh')])
 
 
-    def test_vhpidirect_vffi_demo(self):
-        self._sh([str(self.vhpidirect / 'vffi_user' / 'demo' / 'run.sh')])
-
-
     @unittest.skipUnless(
         'MINGW_PREFIX' in environ or not isWin,
         "needs OpenSSL",
