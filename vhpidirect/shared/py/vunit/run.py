@@ -33,7 +33,7 @@ lib = vu.add_library('lib').add_source_files(str(ROOT / 'tb.vhd'))
 vu.set_sim_option('ghdl.elab_flags', [
     '-shared',
     '-Wl,-fPIC',
-    '-Wl,' + str(ROOT.parent.parent.parent / 'quickstart' / 'wrapping' / 'exitcb' / 'main.c')
+    '-Wl,' + str(ROOT.parent.parent.parent / 'quickstart' / 'wrapping' / 'exitcb' / 'caux.c')
 ])
 
 vu.set_sim_option("ghdl.elab_e", True)

@@ -18,7 +18,7 @@ for std in '08' '93'; do
 
   for item in 'pass' 'fail'; do
     echo "> [$std] Build tb-${item}"
-    ghdl -e --std="$std" -Wl,-fPIC -Wl,main.c tb ${item}
+    ghdl -e --std="$std" -Wl,-fPIC -Wl,caux.c -Wl,main.c tb ${item}
     echo ""
 
     echo "> [$std]Run tb-${item}"

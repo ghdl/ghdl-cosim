@@ -20,7 +20,7 @@ for std in '08' '93'; do
 
   for item in 'pass' 'fail'; do
     echo "> [$std] Build tb-${item}.${_ext}"
-    ghdl -e --std="$std" -shared -Wl,-fPIC -Wl,"${_exitcbdir}"/main.c tb ${item}
+    ghdl -e --std="$std" -shared -Wl,-fPIC -Wl,"${_exitcbdir}"/caux.c tb ${item}
     echo ""
 
     echo "> [$std] Python load and run tb-${item}.${_ext}"
