@@ -11,47 +11,77 @@ env:
 
 jobs:
 
+
   xyce-docker:
+    name: '🛳️ ghdl/cosim:xyce'
     runs-on: ubuntu-latest
     env:
       DOCKER_BUILDKIT: 1
     steps:
-    - uses: actions/checkout@v2
-    - run: docker run --rm -v $(pwd):/src -w /src -e CI ghdl/cosim:xyce python3 -m pytest -v -s -ra test.py::TestExamples::test_vhpidirect_vffi_xyce --color=yes
+
+    - name: '🧰 Checkout'
+      uses: actions/checkout@v2
+
+    - name: '🚧 Run tests'
+      run: docker run --rm -v $(pwd):/src -w /src -e CI ghdl/cosim:xyce python3 -m pytest -v -s -ra test.py::TestExamples::test_vhpidirect_vffi_xyce --color=yes
+
 
   lin-docker:
+    name: '🛳️ ghdl/cosim:matplotlib'
     runs-on: ubuntu-latest
     env:
       DOCKER_BUILDKIT: 1
     steps:
-    - uses: actions/checkout@v2
-    - run: docker run --rm -v $(pwd):/src -w /src -e CI ghdl/cosim:matplotlib python3 -m pytest -v -s -ra test.py --color=yes
+
+    - name: '🧰 Checkout'
+      uses: actions/checkout@v2
+
+    - name: '🚧 Run tests'
+      run: docker run --rm -v $(pwd):/src -w /src -e CI ghdl/cosim:matplotlib python3 -m pytest -v -s -ra test.py --color=yes
+
 
   lin-setup:
+    name: '🐧Ubuntu · nightly LLVM'
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - uses: ghdl/setup-ghdl-ci@master
+
+    - name: '🧰 Checkout'
+      uses: actions/checkout@v2
+
+    - name: '⚙️ Setup GHDL (LLVM)'
+      uses: ghdl/setup-ghdl-ci@master
       with:
         backend: llvm
-    - uses: actions/setup-python@v2
+
+    - name: '🐍 Setup Python'
+      uses: actions/setup-python@v2
       with:
         python-version: 3.8
-    - name: Install dependencies
+
+    - name: '⚙️ Install dependencies'
       run: |
         ghdl --version
         sudo apt update -qq
         sudo apt install -y imagemagick libssl-dev
         python -m pip install --progress-bar off pytest vunit_hdl matplotlib numpy
-    - run: python -m pytest -v -s -ra test.py --color=yes
+
+    - name: '🚧 Run tests'
+      run: python -m pytest -v -s -ra test.py --color=yes
+
 
   win-setup:
+    name: '🟪 MSYS2 · nightly LLVM'
     runs-on: windows-latest
     defaults:
       run:
         shell: msys2 {0}
     steps:
-    - uses: msys2/setup-msys2@v2
+
+    - name: '🧰 Checkout'
+      uses: actions/checkout@v2
+
+    - name: '🟪 Setup MSYS2'
+      uses: msys2/setup-msys2@v2
       with:
         msystem: MINGW64
         update: true
@@ -61,20 +91,32 @@ jobs:
           mingw-w64-x86_64-python-matplotlib
           mingw-w64-x86_64-openssl
           mingw-w64-x86_64-dlfcn
-    - uses: actions/checkout@v2
-    - uses: ghdl/setup-ghdl-ci@master
+
+    - name: '⚙️ Setup GHDL (LLVM)'
+      uses: ghdl/setup-ghdl-ci@master
       with:
         backend: llvm
-    - run: python -m pip install --progress-bar off pytest vunit_hdl
-    - run: python -m pytest -v -s -ra test.py --color=yes
+
+    - name: '🐍 Install dependencies'
+      run: python -m pip install --progress-bar off pytest vunit_hdl
+
+    - name: '🚧 Run tests'
+      run: python -m pytest -v -s -ra test.py --color=yes
+
 
   win-msys:
+    name: '🟪 MSYS2 · pacman LLVM'
     runs-on: windows-latest
     defaults:
       run:
         shell: msys2 {0}
     steps:
-    - uses: msys2/setup-msys2@v2
+
+    - name: '🧰 Checkout'
+      uses: actions/checkout@v2
+
+    - name: '🟪 Setup MSYS2'
+      uses: msys2/setup-msys2@v2
       with:
         msystem: MINGW64
         update: true
@@ -85,33 +127,53 @@ jobs:
           mingw-w64-x86_64-python-matplotlib
           mingw-w64-x86_64-openssl
           mingw-w64-x86_64-dlfcn
-    - uses: actions/checkout@v2
-    - run: python -m pip install --progress-bar off pytest vunit_hdl
-    - run: python -m pytest -v -s -ra test.py --color=yes
+
+    - name: '🐍 Install dependencies'
+      run: python -m pip install --progress-bar off pytest vunit_hdl
+
+    - name: '🚧 Run tests'
+      run: python -m pytest -v -s -ra test.py --color=yes
 
 #--
 
   lin-setup-vffi-demo:
+    name: '🐧Ubuntu · nightly LLVM · VFFI'
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - uses: ghdl/setup-ghdl-ci@master
+
+    - name: '🧰 Checkout'
+      uses: actions/checkout@v2
+
+    - name: '⚙️ Setup GHDL (LLVM)'
+      uses: ghdl/setup-ghdl-ci@master
       with:
         backend: llvm
-    - run: ./vhpidirect/vffi_user/demo/run.sh
+
+    - name: '🚧 Run tests'
+      run: ./vhpidirect/vffi_user/demo/run.sh
+
 
   win-setup-vffi-demo:
+    name: '🟪 MSYS2 · nightly LLVM · VFFI'
     runs-on: windows-latest
     defaults:
       run:
         shell: msys2 {0}
     steps:
-    - uses: msys2/setup-msys2@v2
+
+    - name: '🧰 Checkout'
+      uses: actions/checkout@v2
+
+    - name: '🟪 Setup MSYS2'
+      uses: msys2/setup-msys2@v2
       with:
         msystem: MINGW64
         update: true
-    - uses: actions/checkout@v2
-    - uses: ghdl/setup-ghdl-ci@master
+
+    - name: '⚙️ Setup GHDL (LLVM)'
+      uses: ghdl/setup-ghdl-ci@master
       with:
         backend: llvm
-    - run: ./vhpidirect/vffi_user/demo/run.sh
+
+    - name: '🚧 Run tests'
+      run: ./vhpidirect/vffi_user/demo/run.sh

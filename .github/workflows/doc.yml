@@ -1,15 +1,28 @@
 name: 'doc'
-on: [push, pull_request]
+
+on:
+  push:
+  pull_request:
+
 jobs:
-  linux:
+
+
+  btd:
+    name: '📓 Docs'
     if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - uses: buildthedocs/btd@v0
+
+    - name: '🧰 Checkout'
+      uses: actions/checkout@v2
+
+    - name: '📓 BuildTheDocs (BTD)'
+      uses: buildthedocs/btd@v0
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
-    - uses: actions/upload-artifact@master
+
+    - name: '📤 Upload artifact: HTML'
+      uses: actions/upload-artifact@master
       with:
         name: doc
         path: doc/_build/html
