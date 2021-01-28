@@ -76,12 +76,11 @@ For example, in Python:
 
   args = ['-gGENA="value"', 'gGENB="value"']
 
-  xargs = (ctypes.POINTER(ctypes.c_char) * (len(args) + 1))()
-  for i, arg in enumerate(args):
-      xargs[i] = ctypes.create_string_buffer(arg.encode('utf-8'))
-  return args[0], xargs
+  xargs = (ctypes.POINTER(ctypes.c_char) * (len(args)+1))()
+  for idx, arg in enumerate(args):
+      xargs[idx+1] = ctypes.create_string_buffer(arg.encode('utf-8'))
 
-  gbin.main(len(xargv)-1, xargv)
+  gbin.main(len(xargs)-1, xargs)
 
   import _ctypes
   # On GNU/Linux
