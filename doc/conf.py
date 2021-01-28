@@ -77,8 +77,6 @@ except Exception as ex:
 
 # -- Options for HTML output ----------------------------------------------
 
-html_logo = "_static/logo.png"
-
 html_theme_options = {
     'logo_only': True,
     'home_breadcrumbs': False,
@@ -97,6 +95,9 @@ html_theme = "_theme"
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
+
+html_logo = str(Path(html_static_path[0]) / "logo.png")
+html_favicon = str(Path(html_static_path[0]) / "icon.ico")
 
 # Output file base name for HTML help builder.
 htmlhelp_basename = 'GHDLcosimdoc'
