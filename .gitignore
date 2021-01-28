@@ -1,5 +1,7 @@
 *.ali
 *.cf
+*.exe
+*.log
 *.lst
 *.mt0
 *.o
@@ -11,5 +13,6 @@ tb*
 !*.vhd
 !*.vhdl
 .vunit_hash
+__pycache__
 doc/_build/
 vunit_out/
