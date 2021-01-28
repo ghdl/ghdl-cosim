@@ -26,12 +26,27 @@ jobs:
       run: echo "$(pwd)/.github/bin" >> $GITHUB_PATH
 
     - name: '🚧 Run tests'
-      run: dockerRun ghdl/cosim:xyce python3 -m pytest -v -s -ra test.py::TestExamples::test_vhpidirect_vffi_xyce --color=yes
+      run: |
+        dockerRun ghdl/cosim:xyce \
+          python3 -m pytest -v -s -ra \
+          tests/test_vhpidirect_vffi.py::TestVFFI::test_xyce \
+          --color=yes
 
 
   lin-docker:
-    name: '🛳️ ghdl/cosim:matplotlib'
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      max-parallel: 3
+      matrix:
+        test:
+        - vhpidirect_quickstart
+        - vhpidirect_grt
+        - vhpidirect_shared
+        - vhpidirect_arrays
+        - vhpidirect_vffi
+        - vpi_quickstart
+    name: '🛳️ ghdl/cosim:matplotlib · ${{ matrix.test }}'
     env:
       DOCKER_BUILDKIT: 1
     steps:
@@ -43,12 +58,27 @@ jobs:
       run: echo "$(pwd)/.github/bin" >> $GITHUB_PATH
 
     - name: '🚧 Run tests'
-      run: dockerRun ghdl/cosim:matplotlib python3 -m pytest -v -s -ra test.py --color=yes
+      run: |
+        dockerRun ghdl/cosim:matplotlib \
+          python3 -m pytest -v -s -ra \
+          tests/test_${{ matrix.test }}.py \
+          --color=yes
 
 
   lin-setup:
-    name: '🐧Ubuntu · nightly LLVM'
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      max-parallel: 3
+      matrix:
+        test:
+        - vhpidirect_quickstart
+        - vhpidirect_grt
+        - vhpidirect_shared
+        - vhpidirect_arrays
+        - vhpidirect_vffi
+        - vpi_quickstart
+    name: '🐧 Ubuntu LLVM · ${{ matrix.test }}'
     steps:
 
     - name: '🧰 Checkout'
@@ -72,12 +102,23 @@ jobs:
         python -m pip install --progress-bar off pytest vunit_hdl matplotlib numpy
 
     - name: '🚧 Run tests'
-      run: python -m pytest -v -s -ra test.py --color=yes
+      run: python -m pytest -v -s -ra tests/test_${{ matrix.test }}.py --color=yes
 
 
   win-setup:
-    name: '🟪 MSYS2 · nightly LLVM'
     runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      max-parallel: 3
+      matrix:
+        test:
+        - vhpidirect_quickstart
+        - vhpidirect_grt
+        - vhpidirect_shared
+        - vhpidirect_arrays
+        - vhpidirect_vffi
+        - vpi_quickstart
+    name: '🟪 MSYS2 nightly · ${{ matrix.test }}'
     defaults:
       run:
         shell: msys2 {0}
@@ -107,12 +148,23 @@ jobs:
       run: python -m pip install --progress-bar off pytest vunit_hdl
 
     - name: '🚧 Run tests'
-      run: python -m pytest -v -s -ra test.py --color=yes
+      run: python -m pytest -v -s -ra tests/test_${{ matrix.test }}.py --color=yes
 
 
   win-msys:
-    name: '🟪 MSYS2 · pacman LLVM'
     runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      max-parallel: 3
+      matrix:
+        test:
+        - vhpidirect_quickstart
+        - vhpidirect_grt
+        - vhpidirect_shared
+        - vhpidirect_arrays
+        - vhpidirect_vffi
+        - vpi_quickstart
+    name: '🟪 MSYS2 pacman · ${{ matrix.test }}'
     defaults:
       run:
         shell: msys2 {0}
@@ -138,7 +190,7 @@ jobs:
       run: python -m pip install --progress-bar off pytest vunit_hdl
 
     - name: '🚧 Run tests'
-      run: python -m pytest -v -s -ra test.py --color=yes
+      run: python -m pytest -v -s -ra tests/test_${{ matrix.test }}.py --color=yes
 
 #--
 
