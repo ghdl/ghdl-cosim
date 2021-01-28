@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+
+set -e
+
+docker run --rm -v /$(pwd)://wrk -w //wrk -e CI $@
