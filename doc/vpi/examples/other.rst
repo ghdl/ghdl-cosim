@@ -17,10 +17,10 @@ VHPI.
 GHDL VPI virtual board
 ======================
 
-A VPI application that virtualizes the IOs of a Digilent Nexys-4 like board. It provides a testbench and a matching GUI for
-users/students to test their designs as if they had a physical board, instead of examining waveforms. Yet, waves are dumped
-and can be inspected in GTKWave, as in a traditional workflow. Available peripherals are 7 segment displays, buttons,
-switches and LEDs.
+`GHDL VPI virtual board <https://gitlab.ensta-bretagne.fr/bollenth/ghdl-vpi-virtual-board>`__ is a VPI application that
+virtualizes the IOs of a Digilent Nexys-4 like board. It provides a testbench and a matching GUI for users/students to test
+their designs as if they had a physical board, instead of examining waveforms. Yet, waves are dumped and can be inspected in
+GTKWave, as in a traditional workflow. Available peripherals are 7 segment displays, buttons, switches and LEDs.
 
 .. image:: https://gitlab.ensta-bretagne.fr/bollenth/ghdl-vpi-virtual-board/-/raw/master/images/screenshot_main_window.png
    :align: center
