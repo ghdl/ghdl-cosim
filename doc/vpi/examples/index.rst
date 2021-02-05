@@ -18,3 +18,4 @@ of the elaborated hardware design, and it allows setting callbacks for specific 
 .. toctree::
 
    quickstart
+   other

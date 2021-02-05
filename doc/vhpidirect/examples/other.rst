@@ -3,7 +3,7 @@
 Other co-simulation projects
 ############################
 
-This sections contains references to other co-simulation projects based on GHDL and VHPIDIRECT.
+This section contains references to other co-simulation projects based on GHDL and VHPIDIRECT.
 
 
 ghdlex and netpp
