@@ -1,0 +1,332 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Using GRT &mdash; GHDL-cosim latest documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../_static/icon.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Examples" href="examples/index.html" />
+    <link rel="prev" title="Dynamic loading" href="dynamic.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                latest
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../ci.html">Continuous Integration</a></li>
+</ul>
+<p class="caption"><span class="caption-text">VHPIDIRECT</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="declarations.html">Type declarations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wrapping.html">Wrapping a simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linking.html">Linking object files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dynamic.html">Dynamic loading</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Using GRT</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#from-ada">From Ada</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples/index.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebook/index.html">Notebook</a></li>
+</ul>
+<p class="caption"><span class="caption-text">VPI</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../vpi/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vpi/examples/index.html">Examples</a></li>
+</ul>
+<p class="caption"><span class="caption-text">VPHI</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../vhpi/index.html">Introduction</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">GHDL-cosim</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Using GRT</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            
+              <a href="https://github.com/ghdl/ghdl-cosim/blob/master/doc/vhpidirect/grt.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="using-grt">
+<span id="cosim-vhpidirect-grt"></span><h1>Using GRT<a class="headerlink" href="#using-grt" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="from-ada">
+<h2>From Ada<a class="headerlink" href="#from-ada" title="Permalink to this headline">¶</a></h2>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This topic is only for advanced users who know how to use <cite>Ada</cite>
+and <cite>GNAT</cite>. This is provided only for reference; we have tested
+this once before releasing <cite>GHDL</cite> 0.19, but this is not checked at
+each release.</p>
+</div>
+<p>The simulator kernel of <cite>GHDL</cite> named <em class="dfn">GRT</em> is written in
+<cite>Ada95</cite> and contains a very light and slightly adapted version
+of <cite>VHPI</cite>. Since it is an <cite>Ada</cite> implementation it is
+called <em class="dfn">AVHPI</em>. Although being tough, you may interface to <cite>AVHPI</cite>.</p>
+<p>For using <cite>AVHPI</cite>, you need the sources of <cite>GHDL</cite> and to recompile
+them (at least the <cite>GRT</cite> library). This library is usually compiled with
+a <cite>No_Run_Time</cite> pragma, so that the user does not need to install the
+<cite>GNAT</cite> runtime library. However, you certainly want to use the usual
+runtime library and want to avoid this pragma. For this, reset the
+<cite>GRT_PRAGMA_FLAG</cite> variable.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ make GRT_PRAGMA_FLAG= grt-all
+</pre></div>
+</div>
+<p>Since <cite>GRT</cite> is a self-contained library, you don’t want
+<cite>gnatlink</cite> to fetch individual object files (furthermore this
+doesn’t always work due to tricks used in <cite>GRT</cite>). For this,
+remove all the object files and make the <code class="file docutils literal notranslate"><span class="pre">.ali</span></code> files read-only.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ rm *.o
+$ chmod -w *.ali
+</pre></div>
+</div>
+<p>You may then install the sources files and the <code class="file docutils literal notranslate"><span class="pre">.ali</span></code> files. I have never
+tested this step.</p>
+<p>You are now ready to use it.</p>
+<p>Here is an example, <code class="file docutils literal notranslate"><span class="pre">test_grt.adb</span></code> which displays the top
+level design name.</p>
+<div class="highlight-Ada notranslate"><div class="highlight"><pre><span></span><span class="kn">with</span> <span class="nn">System</span><span class="p">;</span> <span class="kn">use</span> <span class="nn">System</span><span class="p">;</span>
+<span class="kn">with</span> <span class="nn">Grt.Avhpi</span><span class="p">;</span> <span class="kn">use</span> <span class="nn">Grt.Avhpi</span><span class="p">;</span>
+<span class="kn">with</span> <span class="nn">Ada.Text_IO</span><span class="p">;</span> <span class="kn">use</span> <span class="nn">Ada.Text_IO</span><span class="p">;</span>
+<span class="kn">with</span> <span class="nn">Ghdl_Main</span><span class="p">;</span>
+
+<span class="kd">procedure</span> <span class="nf">Test_Grt</span> <span class="kr">is</span>
+  <span class="c1">--  VHPI handle.</span>
+  <span class="n">H</span> <span class="p">:</span> <span class="n">VhpiHandleT</span><span class="p">;</span>
+  <span class="n">Status</span> <span class="p">:</span> <span class="kt">Integer</span><span class="p">;</span>
+
+  <span class="c1">--  Name.</span>
+  <span class="n">Name</span> <span class="p">:</span> <span class="kt">String</span> <span class="p">(</span><span class="mi">1</span> <span class="p">..</span> <span class="mi">64</span><span class="p">);</span>
+  <span class="n">Name_Len</span> <span class="p">:</span> <span class="kt">Integer</span><span class="p">;</span>
+<span class="kr">begin</span>
+  <span class="c1">--  Elaborate and run the design.</span>
+  <span class="n">Status</span> <span class="p">:=</span> <span class="n">Ghdl_Main</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">Null_Address</span><span class="p">);</span>
+
+  <span class="c1">--  Display the status of the simulation.</span>
+  <span class="n">Put_Line</span> <span class="p">(</span><span class="s">&quot;Status is &quot;</span> <span class="o">&amp;</span> <span class="kt">Integer</span><span class="p">&#39;</span><span class="na">Image</span> <span class="p">(</span><span class="n">Status</span><span class="p">));</span>
+
+  <span class="c1">--  Get the root instance.</span>
+  <span class="n">Get_Root_Inst</span><span class="p">(</span><span class="n">H</span><span class="p">);</span>
+
+  <span class="c1">--  Disp its name using vhpi API.</span>
+  <span class="n">Vhpi_Get_Str</span> <span class="p">(</span><span class="n">VhpiNameP</span><span class="p">,</span> <span class="n">H</span><span class="p">,</span> <span class="n">Name</span><span class="p">,</span> <span class="n">Name_Len</span><span class="p">);</span>
+  <span class="n">Put_Line</span> <span class="p">(</span><span class="s">&quot;Root instance name: &quot;</span> <span class="o">&amp;</span> <span class="n">Name</span> <span class="p">(</span><span class="mi">1</span> <span class="p">..</span> <span class="n">Name_Len</span><span class="p">));</span>
+<span class="kr">end</span> <span class="nf">Test_Grt</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>First, analyze and bind your design:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ghdl -a counter.vhdl
+$ ghdl --bind counter
+</pre></div>
+</div>
+<p>Then build the whole:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ gnatmake test_grt -aL`grt_ali_path` -aI`grt_src_path` -largs
+ `ghdl --list-link counter`
+</pre></div>
+</div>
+<p>Finally, run your design:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ./test_grt
+Status is  0
+Root instance name: counter
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="examples/index.html" class="btn btn-neutral float-right" title="Examples" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="dynamic.html" class="btn btn-neutral float-left" title="Dynamic loading" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Tristan Gingold and contributors
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/buildthedocs/sphinx.theme">theme</a>
+    
+    provided by <a href="https://buildthedocs.github.io">Build the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

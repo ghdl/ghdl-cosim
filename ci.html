@@ -1,0 +1,282 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Continuous Integration &mdash; GHDL-cosim latest documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="_static/icon.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Introduction" href="vhpidirect/index.html" />
+    <link rel="prev" title="Co-simulation with GHDL" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html">
+          
+
+          
+            
+            <img src="_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                latest
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Continuous Integration</a></li>
+</ul>
+<p class="caption"><span class="caption-text">VHPIDIRECT</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="vhpidirect/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vhpidirect/declarations.html">Type declarations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vhpidirect/wrapping.html">Wrapping a simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vhpidirect/linking.html">Linking object files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vhpidirect/dynamic.html">Dynamic loading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vhpidirect/grt.html">Using GRT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vhpidirect/examples/index.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vhpidirect/notebook/index.html">Notebook</a></li>
+</ul>
+<p class="caption"><span class="caption-text">VPI</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="vpi/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vpi/examples/index.html">Examples</a></li>
+</ul>
+<p class="caption"><span class="caption-text">VPHI</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="vhpi/index.html">Introduction</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">GHDL-cosim</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Continuous Integration</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            
+              <a href="https://github.com/ghdl/ghdl-cosim/blob/master/doc/ci.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="continuous-integration">
+<span id="cosim-ci"></span><h1>Continuous Integration<a class="headerlink" href="#continuous-integration" title="Permalink to this headline">¶</a></h1>
+<p>Since the main purpose of this repository is to provide reproducible and documented examples for users to learn, all of
+them are tested periodically in a <a class="reference external" href="https://en.wikipedia.org/wiki/Continuous_integration">Continuous Integration (CI)</a>
+service. Currently, <a class="reference external" href="https://github.com/features/actions">GitHub Actions</a> is used and four different jobs/environments
+are tested:</p>
+<ul>
+<li><p>GNU/Linux:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Docker image <code class="docutils literal notranslate"><span class="pre">ghdl/vunit:llvm</span></code> from <a class="reference external" href="https://github.com/ghdl/docker">ghdl/docker</a>.</p></li>
+<li><p>Latest <em>nightly</em> release installed through Action <a class="reference external" href="https://github.com/ghdl/setup-ghdl-ci">ghdl/setup-ghdl-ci</a> on
+Ubuntu.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Windows:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Latest stable release for MINGW64 with LLVM backend.</p></li>
+<li><p>Latest <em>nightly</em> release installed through Action <a class="reference external" href="https://github.com/ghdl/setup-ghdl-ci">ghdl/setup-ghdl-ci</a> on
+MINGW64.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>MSYS2 is set up with Action <a class="reference external" href="https://github.com/msys2/setup-msys2">msys2/setup-msys2</a>.</p>
+</div>
+</div></blockquote>
+</li>
+</ul>
+<p>The entrypoints of the examples are shell scripts (<code class="docutils literal notranslate"><span class="pre">run.sh</span></code>), makefiles (see <a class="reference external" href="https://github.com/ghdl/ghdl-cosim/issues/24">ghdl-cosim#24</a>), or Python scripts
+(<code class="docutils literal notranslate"><span class="pre">run.py</span></code>). To handle all of them with a common interface, <a class="reference external" href="https://pytest.org">pytest</a> is used. Hence the full test suite
+is defined in <a class="reference external" href="https://github.com/ghdl/ghdl-cosim/blob/master/test.py">test.py</a>. Details about which examples are not supported on specific platforms can
+be found there.</p>
+<p>Past runs can be inspected at <a class="reference external" href="https://github.com/ghdl/ghdl-cosim/actions?query=workflow%3Atest">ghdl/ghdl-cosim/actions</a>.
+It can be useful for users to know what to expect before executing the examples themselves.</p>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="vhpidirect/index.html" class="btn btn-neutral float-right" title="Introduction" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="Co-simulation with GHDL" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Tristan Gingold and contributors
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/buildthedocs/sphinx.theme">theme</a>
+    
+    provided by <a href="https://buildthedocs.github.io">Build the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

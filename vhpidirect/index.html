@@ -1,0 +1,272 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Introduction &mdash; GHDL-cosim latest documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../_static/icon.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Type declarations" href="declarations.html" />
+    <link rel="prev" title="Continuous Integration" href="../ci.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                latest
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../ci.html">Continuous Integration</a></li>
+</ul>
+<p class="caption"><span class="caption-text">VHPIDIRECT</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="declarations.html">Type declarations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wrapping.html">Wrapping a simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linking.html">Linking object files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dynamic.html">Dynamic loading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="grt.html">Using GRT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/index.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebook/index.html">Notebook</a></li>
+</ul>
+<p class="caption"><span class="caption-text">VPI</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../vpi/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vpi/examples/index.html">Examples</a></li>
+</ul>
+<p class="caption"><span class="caption-text">VPHI</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../vhpi/index.html">Introduction</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">GHDL-cosim</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Introduction</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            
+              <a href="https://github.com/ghdl/ghdl-cosim/blob/master/doc/vhpidirect/index.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="introduction">
+<span id="cosim-vhpidirect-intro"></span><h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>As explained in the <a class="reference internal" href="../index.html#cosim"><span class="std std-ref">home page</span></a>, GHDL’s implementation of VHPIDIRECT is not compliant with the standard,
+and the standarization of a FFI/DPI is being discussed in the VASG. As a result, in this documentation VHPIDIRECT, VFFI, FFI,
+VDPI and/or DPI might be used as synonyms for referring to the new standardized interface, which is currently work in progress.</p>
+</div>
+<p>Interfacing with foreign languages through VHPIDIRECT is possible on any platform. You can reuse or define a subprogram
+in a foreign language (such as <cite>C</cite> or <cite>Ada</cite>) and import it into a VHDL design.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>GHDL supports different backends, and not all of them generate binary artifacts. Precisely, <code class="docutils literal notranslate"><span class="pre">mcode</span></code> is an in-memory
+backend. Hence, the examples need to be built/executed with either LLVM or GCC backends. A few of them, the ones that
+do not require linking object files, can be used with mcode.</p>
+</div>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>As a consequence of the runtime copyright, you are not allowed to distribute an
+executable produced by GHDL without allowing access to the VHDL sources. See
+<a class="reference external" href="https://ghdl.github.io/ghdl/licenses.html#intro-copyrights" title="(in GHDL v2.0.0-dev)"><span>Copyrights | Licenses</span></a>.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>See <a class="reference external" href="https://github.com/ghdl/ghdl/issues/1053">ghdl#1053</a> for on-going work with regard to VHPIDIRECT.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="declarations.html" class="btn btn-neutral float-right" title="Type declarations" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../ci.html" class="btn btn-neutral float-left" title="Continuous Integration" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Tristan Gingold and contributors
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/buildthedocs/sphinx.theme">theme</a>
+    
+    provided by <a href="https://buildthedocs.github.io">Build the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,302 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Other co-simulation projects &mdash; GHDL-cosim latest documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/icon.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Notebook" href="../notebook/index.html" />
+    <link rel="prev" title="FFI/DPI Header" href="vffi_user.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html">
+          
+
+          
+            
+            <img src="../../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                latest
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../ci.html">Continuous Integration</a></li>
+</ul>
+<p class="caption"><span class="caption-text">VHPIDIRECT</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../declarations.html">Type declarations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wrapping.html">Wrapping a simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../linking.html">Linking object files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dynamic.html">Dynamic loading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../grt.html">Using GRT</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html">Quick Start</a></li>
+<li class="toctree-l2"><a class="reference internal" href="grt.html">GRT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="shared.html">Shared libs and dynamic loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="arrays.html">Arrays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vffi_user.html">FFI/DPI Header</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Other co-simulation projects</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ghdlex-and-netpp">ghdlex and netpp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vunit">VUnit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ygdes-com">ygdes.com</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../notebook/index.html">Notebook</a></li>
+</ul>
+<p class="caption"><span class="caption-text">VPI</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../vpi/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vpi/examples/index.html">Examples</a></li>
+</ul>
+<p class="caption"><span class="caption-text">VPHI</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../vhpi/index.html">Introduction</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">GHDL-cosim</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">Examples</a> &raquo;</li>
+        
+      <li>Other co-simulation projects</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            
+              <a href="https://github.com/ghdl/ghdl-cosim/blob/master/doc/vhpidirect/examples/other.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="other-co-simulation-projects">
+<span id="cosim-vhpidirect-examples-other"></span><h1>Other co-simulation projects<a class="headerlink" href="#other-co-simulation-projects" title="Permalink to this headline">¶</a></h1>
+<p>This section contains references to other co-simulation projects based on GHDL and VHPIDIRECT.</p>
+<div class="section" id="ghdlex-and-netpp">
+<h2>ghdlex and netpp<a class="headerlink" href="#ghdlex-and-netpp" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://section5.ch/index.php/netpp/">netpp (network property protocol)</a> is a communication library allowing to expose
+variables or other properties of an application to the network as abstract ‘Properties’. Its basic philosophy is that a
+device always knows its capabilities. netpp capable devices can be explored by command line, Python scripts or GUI applications.
+Properties of a device - be it virtual or real - are typically described by a static description in an XML device description
+language, but they can also be constructed on the fly.</p>
+<p><a class="reference external" href="https://github.com/hackfin/ghdlex">ghdlex</a> is a set of C extensions to facilitate data exchange between a GHDL simulation
+and external applications. VHPIDIRECT mechanisms are used to wrap GHDL data types into structures usable from a C library.
+<cite>ghdlex</cite> uses the <a class="reference external" href="https://section5.ch/index.php/netpp/">netpp</a> library to expose virtual entities (such as pins or RAM)
+to the network. It also demonstrates simple data I/O through unix pipes. A few VHDL example entities are provided, such as
+a virtual console, FIFOs, RAM.</p>
+<p>The author of <cite>netpp</cite> and <cite>ghdlex</cite> is also working on <a class="reference external" href="https://github.com/hackfin/MaSoCist">MaSoCist</a>, a linux’ish build
+system for System on Chip designs, based on GHDL. It allows to handle more complex setup, e.g. how a RISC-V architecture
+(for example) is regress-tested using a virtual debug interface.</p>
+</div>
+<div class="section" id="vunit">
+<h2>VUnit<a class="headerlink" href="#vunit" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://github.com/VUnit/vunit">VUnit</a> is an open source unit testing framework for VHDL/SystemVerilog. Sharing memory
+buffers between foreign C or Python applications and VHDL testbenches is supported through GHDL’s VHPIDIRECT features.
+Buffers are accessed from VHDL as either strings, arrays of bytes or arrays of 32 bit integers. See
+<a class="reference external" href="https://github.com/VUnit/cosim">VUnit/cosim</a> for details about the API.</p>
+</div>
+<div class="section" id="ygdes-com">
+<h2>ygdes.com<a class="headerlink" href="#ygdes-com" title="Permalink to this headline">¶</a></h2>
+<p>Yann Guidon is a many-hack who tried to push GHDL’s VHPIDIRECT over the edge in a series of articles around 2010 (as
+you can read this, GHDL recovered very well since).</p>
+<p>GHDL is an essential tool to design Free HW designs and Yann is still trying to hack it beyond its intended scope, to
+fill voids in the Free Software landscape that keep him from designing more microprocessor cores.
+He is mostly active on Hackaday.io (<a class="reference external" href="https://hackaday.io/whygee">hackaday.io/whygee</a>) and working on converging
+projects such as:</p>
+<ul class="simple">
+<li><p>The YGREC8 microcontroller core: <a class="reference external" href="http://ygrec8.com">ygrec8.com</a>.</p></li>
+<li><p>An embedded webserver for co-simulations: <a class="reference external" href="https://hackaday.io/project/20042-micro-http-server-in-c">micro HTTP server in C</a>.</p></li>
+<li><p>A VHDL library of gates that doubles as other verification tool (including hopefully an Automatic Test Pattern Generator):
+<a class="reference external" href="https://hackaday.io/project/162594-vhdl-library-for-gate-level-verification">VHDL library for gate-level verification</a>.</p></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../notebook/index.html" class="btn btn-neutral float-right" title="Notebook" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="vffi_user.html" class="btn btn-neutral float-left" title="FFI/DPI Header" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Tristan Gingold and contributors
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/buildthedocs/sphinx.theme">theme</a>
+    
+    provided by <a href="https://buildthedocs.github.io">Build the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

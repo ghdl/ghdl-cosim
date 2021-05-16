@@ -1,0 +1,397 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Shared libs and dynamic loading &mdash; GHDL-cosim latest documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/icon.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Arrays" href="arrays.html" />
+    <link rel="prev" title="GRT" href="grt.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html">
+          
+
+          
+            
+            <img src="../../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                latest
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../ci.html">Continuous Integration</a></li>
+</ul>
+<p class="caption"><span class="caption-text">VHPIDIRECT</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../declarations.html">Type declarations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wrapping.html">Wrapping a simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../linking.html">Linking object files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dynamic.html">Dynamic loading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../grt.html">Using GRT</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html">Quick Start</a></li>
+<li class="toctree-l2"><a class="reference internal" href="grt.html">GRT</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Shared libs and dynamic loading</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#shlib">shlib</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dlopen">dlopen</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#shghdl">shghdl</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#py">py</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#py-vunit">py/vunit</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#pycb">pycb</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="arrays.html">Arrays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vffi_user.html">FFI/DPI Header</a></li>
+<li class="toctree-l2"><a class="reference internal" href="other.html">Other co-simulation projects</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../notebook/index.html">Notebook</a></li>
+</ul>
+<p class="caption"><span class="caption-text">VPI</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../vpi/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vpi/examples/index.html">Examples</a></li>
+</ul>
+<p class="caption"><span class="caption-text">VPHI</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../vhpi/index.html">Introduction</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">GHDL-cosim</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">Examples</a> &raquo;</li>
+        
+      <li>Shared libs and dynamic loading</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            
+              <a href="https://github.com/ghdl/ghdl-cosim/blob/master/doc/vhpidirect/examples/shared.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="shared-libs-and-dynamic-loading">
+<span id="cosim-vhpidirect-examples-shared"></span><h1>Shared libs and dynamic loading<a class="headerlink" href="#shared-libs-and-dynamic-loading" title="Permalink to this headline">¶</a></h1>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>As explained in <a class="reference internal" href="../dynamic.html#cosim-vhpidirect-dynamic-loading-a-simulation"><span class="std std-ref">Loading a simulation</span></a>, in order to load binaries/libraries dynamically,
+those need to be built as position independent code/executables (PIC/PIE).</p>
+</div>
+<p>This set of examples is an introduction from scratch for users who are familiar with C, but who have never built or loaded
+shared libraries (<code class="docutils literal notranslate"><span class="pre">*.so</span></code>, <code class="docutils literal notranslate"><span class="pre">*.dll</span></code> or <code class="docutils literal notranslate"><span class="pre">*.dyn</span></code>):</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#cosim-vhpidirect-examples-shared-shlib"><span class="std std-ref">shlib</span></a>: write C code and compile it as a shared library.</p></li>
+<li><p><a class="reference internal" href="#cosim-vhpidirect-examples-shared-dlopen"><span class="std std-ref">dlopen</span></a>: write two shared libraries in C, and write a main C program for loading and executing both of them.</p></li>
+<li><p><a class="reference internal" href="#cosim-vhpidirect-examples-shared-shghdl"><span class="std std-ref">shghdl</span></a>: build a simulation as a shared library, and write a main C program for loading and executing it.</p></li>
+<li><p><a class="reference internal" href="#cosim-vhpidirect-examples-shared-py"><span class="std std-ref">py</span></a>: build a simulation as a shared library, and write a Python script for loading and executing it.</p></li>
+<li><p><a class="reference internal" href="#cosim-vhpidirect-examples-shared-pycb"><span class="std std-ref">pycb</span></a>: build a simulation as a shared library, and write a Python script for loading it and replacing callbacks
+through <code class="docutils literal notranslate"><span class="pre">ctypes</span></code> before executing the simulation.</p></li>
+</ul>
+<div class="section" id="shlib">
+<span id="cosim-vhpidirect-examples-shared-shlib"></span><h2><a class="reference external" href="https://github.com/ghdl/ghdl-cosim/blob/master/vhpidirect/shared/shlib">shlib</a><a class="headerlink" href="#shlib" title="Permalink to this headline">¶</a></h2>
+<p>This example features the same functionality as <a class="reference internal" href="quickstart.html#cosim-vhpidirect-examples-quickstart-random"><span class="std std-ref">‘rand’ from stdlib</span></a>. However, custom C
+sources are used (as in <a class="reference internal" href="quickstart.html#cosim-vhpidirect-examples-quickstart-customc"><span class="std std-ref">custom C</span></a>) and these are built as a shared library.
+See <a class="reference internal" href="../dynamic.html#cosim-vhpidirect-dynamic-loading-within-a-simulation"><span class="std std-ref">Loading foreign objects from within a simulation</span></a> for further info.</p>
+</div>
+<div class="section" id="dlopen">
+<span id="cosim-vhpidirect-examples-shared-dlopen"></span><h2><a class="reference external" href="https://github.com/ghdl/ghdl-cosim/blob/master/vhpidirect/shared/dlopen">dlopen</a><a class="headerlink" href="#dlopen" title="Permalink to this headline">¶</a></h2>
+<p>Although this example does not include a simulation built with GHDL, it is a test and the introduction to the next
+example. In this test, two separate shared libraries are built from C sources, both including a function named
+<code class="docutils literal notranslate"><span class="pre">ghdl_main</span></code>. Then, in a main C application, both shared libraries are dynamically loaded at the same time, and both
+are executed (one after the other).</p>
+<p>This example tests whether symbol <code class="docutils literal notranslate"><span class="pre">ghdl_main</span></code> is visible in the shared libraries, and whether the same symbol name
+can be loaded from multiple shared libraries (and used) at the same time.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If the symbol is not found, try adding <cite>-g</cite>, <cite>-rdynamic</cite> and/or <cite>-O0</cite> when building the shared libraries. Tools such
+as <code class="docutils literal notranslate"><span class="pre">objdump</span></code>, <code class="docutils literal notranslate"><span class="pre">readelf</span></code> or <code class="docutils literal notranslate"><span class="pre">nm</span></code> can be used to check if a symbol is visible. For instance, <code class="docutils literal notranslate"><span class="pre">objdump</span> <span class="pre">-d</span> <span class="pre">corea.so</span> <span class="pre">|</span> <span class="pre">grep</span> <span class="pre">ghdl_main</span></code>.</p>
+</div>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>Building multiple designs as separate artifacts and dynamically loading them at the same time is a naive approach to
+multi-core simulation with GHDL. It is also a possible solution for coarse grained co-simulation with Verilator.</p>
+</div>
+</div>
+<div class="section" id="shghdl">
+<span id="cosim-vhpidirect-examples-shared-shghdl"></span><h2><a class="reference external" href="https://github.com/ghdl/ghdl-cosim/blob/master/vhpidirect/shared/shghdl">shghdl</a><a class="headerlink" href="#shghdl" title="Permalink to this headline">¶</a></h2>
+<p>This example is complementary to <a class="reference internal" href="#cosim-vhpidirect-examples-shared-shlib"><span class="std std-ref">shlib</span></a>, since the VHDL simulation is built as a
+shared library, which is then loaded from a main C application (as in <a class="reference internal" href="#cosim-vhpidirect-examples-shared-dlopen"><span class="std std-ref">dlopen</span></a>).</p>
+<p>When <code class="docutils literal notranslate"><span class="pre">main</span></code> is executed:</p>
+<ul class="simple">
+<li><p>The shared libray is loaded, symbol <code class="docutils literal notranslate"><span class="pre">print_something</span></code> is searched for, and it is executed.</p></li>
+<li><p>Symbol <code class="docutils literal notranslate"><span class="pre">ghdl_main</span></code> is searched for, and it is executed three times. Unfortunately, GHDL does not currently support
+reseting/restarting the simulation runtime. Hence, in this example the shared library is unloaded and loaded again
+before calling <code class="docutils literal notranslate"><span class="pre">ghdl_main</span></code> after the first time.</p></li>
+</ul>
+<p>See <a class="reference internal" href="../dynamic.html#cosim-vhpidirect-dynamic-generating-shared-libraries"><span class="std std-ref">Generating shared libraries</span></a> for further details with regard to the visibility of
+symbols in the shared libraries.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>On GNU/linux, both executable binaries and shared libraries use the ELF format. As a result, although hackish, it is
+possible to load an executable binary dynamically, i.e. without using any of the <code class="docutils literal notranslate"><span class="pre">shared</span></code> options explained in
+<a class="reference internal" href="../dynamic.html#cosim-vhpidirect-dynamic-generating-shared-libraries"><span class="std std-ref">Generating shared libraries</span></a>. In this example, this case is also tested. However, this
+is not suggested at all, since it won’t work on all platforms.</p>
+</div>
+</div>
+<div class="section" id="py">
+<span id="cosim-vhpidirect-examples-shared-py"></span><h2><a class="reference external" href="https://github.com/ghdl/ghdl-cosim/blob/master/vhpidirect/shared/py">py</a><a class="headerlink" href="#py" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://www.python.org/">Python</a>’s <a class="reference external" href="https://docs.python.org/3.8/library/ctypes.html#module-ctypes" title="(in Python v3.8)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ctypes</span></code></a> module is a built-in “<em>foreign function library for Python</em>”, which
+“<em>provides C compatible data types, and allows calling functions in DLLs or shared libraries</em>”. Thus, it is posible to
+reproduce <a class="reference internal" href="#cosim-vhpidirect-examples-shared-shghdl"><span class="std std-ref">shghdl</span></a> by loading and executing the simulation from Python, instead of
+C.</p>
+<p>This example uses the testbench and C sources from <a class="reference internal" href="quickstart.html#cosim-vhpidirect-examples-quickstart-wrapping-exitcb"><span class="std std-ref">exitcb</span></a>, but the simulation
+is built as a shared library and loaded dynamically from Python. A helper Python module is used for providing OS agnostic
+utilities (see <a class="reference external" href="https://github.com/ghdl/ghdl-cosim/blob/master/vhpidirect/shared/py/pyaux.py">pyaux.py</a>).</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>On some Linux environments, failing simulations that are dynamically loaded from Python do produce an <em>Abortion</em>. This
+forces the wrapper/caller to exit inmediately, without running any post-check. See <a class="reference external" href="https://github.com/ghdl/ghdl/issues/803">ghdl#803</a> and <a class="reference external" href="https://github.com/ghdl/ghdl-cosim/issues/15">ghdl-cosim#15</a> for
+further details.</p>
+</div>
+<div class="section" id="py-vunit">
+<h3><a class="reference external" href="https://github.com/ghdl/ghdl-cosim/blob/master/vhpidirect/shared/py/vunit">py/vunit</a><a class="headerlink" href="#py-vunit" title="Permalink to this headline">¶</a></h3>
+<p>This is equivalent to the previous example (<a class="reference internal" href="#cosim-vhpidirect-examples-shared-py"><span class="std std-ref">py</span></a>). Instead of calling GHDL’s CLI explicitly,
+VUnit’s Python aided plumbing is used. This allows including any of VUnit’s VHDL features into the simulation models, which
+are then to be loaded dynamically from Python. In fact, this is the foundation of <a class="reference external" href="https://github.com/VUnit/cosim">VUnit/cosim</a>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>On some Linux environments, using VHDL 2008 works but VHDL 1993 does not return cleanly in case of failure. An <em>Abortion</em> is
+produced, which prevents the regular after-simulation execution of VUnit. See <a class="reference external" href="https://github.com/ghdl/ghdl/issues/803">ghdl#803</a> and <a class="reference external" href="https://github.com/ghdl/ghdl-cosim/issues/15">ghdl-cosim#15</a> for
+further details.</p>
+</div>
+</div>
+</div>
+<div class="section" id="pycb">
+<span id="cosim-vhpidirect-examples-shared-pycb"></span><h2><a class="reference external" href="https://github.com/ghdl/ghdl-cosim/blob/master/vhpidirect/shared/pycb">pycb</a><a class="headerlink" href="#pycb" title="Permalink to this headline">¶</a></h2>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>This example is conceptually built on top of <a class="reference internal" href="#cosim-vhpidirect-examples-shared-shghdl"><span class="std std-ref">shghdl</span></a> and <a class="reference internal" href="#cosim-vhpidirect-examples-shared-py"><span class="std std-ref">py</span></a>;
+so it is strongly suggested to carefully read those first. Since Pyhon and <a class="reference external" href="https://docs.python.org/3.8/library/ctypes.html#module-ctypes" title="(in Python v3.8)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">ctypes</span></code></a> are used, a good understanding of
+the underlaying C syntax and semantics is required.</p>
+</div>
+<p>The main purpose of this example is to showcase how to execute an arbitrary Python function from a VHDL testbench, by calling
+it as a regular VHDL procedure/function and passing (complex) parameters from the VHDL domain. Precisely, function <code class="docutils literal notranslate"><span class="pre">plot(x,y)</span></code>
+from <a class="reference external" href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.html#module-matplotlib.pyplot" title="(in Matplotlib v3.4.1)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">matplotlib.pyplot</span></code></a> is used to draw <code class="docutils literal notranslate"><span class="pre">x,y</span></code> graphs from constrained arrays of integers in VHDL. The scheme is as
+follows:</p>
+<ul class="simple">
+<li><p>A <strong>function prototype is defined in C</strong>. This is the definition that will be <em>common</em> to C, VHDL and Python. The prototype
+in this example is <code class="docutils literal notranslate"><span class="pre">(int*</span> <span class="pre">x,</span> <span class="pre">int*</span> <span class="pre">y,</span> <span class="pre">int</span> <span class="pre">l)</span></code>, i.e. two pointers to arrays of integers are passed, and a third argument
+tells the length.</p></li>
+<li><p>(optional) A default implementation of the function is written in C. This is just a placeholder/canary.</p></li>
+<li><p>A <strong>function pointer variable is created</strong>, and it is initialized to the address of the default implementation.</p></li>
+<li><p>The <strong>function pointer variable is used</strong> (dereferenced and executed) <strong>either from C, or from VHDL through VHPIDIRECT</strong>.</p></li>
+<li><p><strong>C/VHDL sources are built as a shared library</strong>.</p></li>
+<li><p><strong>From Python</strong>, an alternative implementation of the function is written. <strong>After loading the library, but before executing
+the simulation, the function pointer variable is set</strong> to the address of the alternative implementation.</p></li>
+</ul>
+<p>As a result, at runtime, when VHDL calls the external function, the Python callback is executed.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For didactic purposes, the run script in this example first uses C and Python only. I.e., arrays are initialized in C and
+plotted in Python. Then, in subdir <a class="reference external" href="https://github.com/ghdl/ghdl-cosim/blob/master/vhpidirect/shared/pycb/pyghdl">pycb</a>, arrays are initialized in a VHDL
+testbench instead.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>In <a class="reference external" href="https://github.com/dbhi/vboard/tree/main/vga">dbhi/vboard: VGA test pattern</a>, this example and <a class="reference internal" href="arrays.html#cosim-vhpidirect-examples-arrays-matrices-vga"><span class="std std-ref">VGA (RGB image buffer)</span></a>
+are combined for providing a <em>virtual VGA screen</em> using Python’s <a class="reference external" href="https://numpy.org/">NumPy</a>, <a class="reference external" href="https://python-pillow.org/">Pillow</a>
+and <a class="reference external" href="https://docs.python.org/3/library/tkinter.html">Tkinter</a>.
+Equivalent solutions can be implemented using Python libraries such as <a class="reference external" href="https://matplotlib.org/">matplotlib</a>,
+<a class="reference external" href="https://www.panda3d.org/">panda3d</a>, <a class="reference external" href="https://www.pygame.org">pygame</a>, <a class="reference external" href="http://cocos2d.org/#cocos2dpy">cocos2dpy</a>, <a class="reference external" href="http://pyglet.org/">pyglet</a>, etc.
+Do you want to take up the challenge? <a class="reference external" href="https://github.com/ghdl/ghdl-cosim/compare">Propose a PR</a>!</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="arrays.html" class="btn btn-neutral float-right" title="Arrays" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="grt.html" class="btn btn-neutral float-left" title="GRT" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Tristan Gingold and contributors
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/buildthedocs/sphinx.theme">theme</a>
+    
+    provided by <a href="https://buildthedocs.github.io">Build the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

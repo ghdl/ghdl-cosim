@@ -1,0 +1,252 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Co-simulation with GHDL &mdash; GHDL-cosim latest documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="_static/icon.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Continuous Integration" href="ci.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="#">
+          
+
+          
+            
+            <img src="_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                latest
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="ci.html">Continuous Integration</a></li>
+</ul>
+<p class="caption"><span class="caption-text">VHPIDIRECT</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="vhpidirect/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vhpidirect/declarations.html">Type declarations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vhpidirect/wrapping.html">Wrapping a simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vhpidirect/linking.html">Linking object files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vhpidirect/dynamic.html">Dynamic loading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vhpidirect/grt.html">Using GRT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vhpidirect/examples/index.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vhpidirect/notebook/index.html">Notebook</a></li>
+</ul>
+<p class="caption"><span class="caption-text">VPI</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="vpi/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="vpi/examples/index.html">Examples</a></li>
+</ul>
+<p class="caption"><span class="caption-text">VPHI</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="vhpi/index.html">Introduction</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">GHDL-cosim</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="co-simulation-with-ghdl">
+<span id="cosim"></span><h1>Co-simulation with GHDL<a class="headerlink" href="#co-simulation-with-ghdl" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="index-0"></span><span class="target" id="index-1"></span><span class="target" id="index-2"></span><span class="target" id="index-3"></span><span class="target" id="index-4"></span><span class="target" id="index-5"></span><a class="reference external image-reference" href="https://github.com/ghdl/ghdl-cosim" id="index-6"><img alt="_images/logo.png" class="align-center" src="_images/logo.png" style="width: 500px;" /></a>
+<p style="text-align: center;">
+  <a title="GitHub Repository" href="https://github.com/ghdl/ghdl-cosim"><img src="https://img.shields.io/badge/-ghdl/ghdl--cosim-323131.svg?longCache=true&style=flat-square&logo=github"></a><!--
+  -->
+  <a title="GHDL documentation" href="http://ghdl.github.io/ghdl"><img src="https://img.shields.io/website.svg?label=doc:%20ghdl&longCache=true&style=flat-square&url=http%3A%2F%2Fghdl.github.io%2Fghdl%2Findex.html"></a><!--
+  -->
+  <a title="Join the chat at https://gitter.im/ghdl1/Lobby" href="https://gitter.im/ghdl1/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge"><img src="https://img.shields.io/badge/chat-on%20gitter-4db797.svg?longCache=true&style=flat-square&logo=gitter&logoColor=e8ecef"></a><!--
+  -->
+</p>
+
+<hr><p>This repository contains <strong>documentation</strong> and <strong>working examples</strong> about how to co-simulate VHDL and other languages through
+GHDL’s foreign interfaces. Since specific features of the language and the tool are used, it is suggested for users
+who are new to either <cite>GHDL</cite> or <cite>VHDL</cite> to first read the <a class="reference external" href="https://ghdl.github.io/ghdl/quick_start/index.html#using-quickstart" title="(in GHDL v2.0.0-dev)"><span>Quick Start Guide</span></a> in the main documentation
+(<a class="reference external" href="https://ghdl.github.io/ghdl">ghdl.github.io/ghdl</a>).</p>
+<p>Three main approaches are used to co-simulate (co-execute) VHDL sources along with software applications written in a
+language other than VHDL (typically C/C++/SystemC):</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Verilog_Procedural_Interface">Verilog Procedural Interface</a> (VPI), also known as
+Program Language Interface (PLI) 2.0.</p></li>
+<li><p><a class="reference external" href="https://ieeexplore.ieee.org/document/4299594">VHDL Programming Interface</a> (VHPI), or specific implementations,
+such as Foreign Language Interface (FLI).</p></li>
+<li><p>Generation of C/C++ models/sources through a transpiler.</p></li>
+</ul>
+<p>VPI and VHPI are complex APIs which allow to inspect the hierarchy, set callbacks and/or assign signals. Because
+provided features are similar but VPI was published years before VHPI, GHDL supports VPI only. Furthermore, as an
+easier to use alternative, GHDL features a custom coexecution interface named VHPIDIRECT, similar to SystemVerilog’s
+DPI (<a class="reference external" href="https://en.wikipedia.org/wiki/SystemVerilog_DPI">Direct Programming Interface</a>).
+As of today, generation of C++/SystemC models à la <a class="reference external" href="https://www.veripool.org/wiki/verilator">Verilator</a> is not
+supported. However, a <em>vhdlator</em>/<em>ghdlator</em> might be available in the future.</p>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>In fact, VHPIDIRECT is defined as part of VHPI in VHDL 2008 LRM. However, GHDL’s implementation is not
+compliant with the standard. This is probably because VHPIDIRECT was implemented in GHDL based on some draft,
+before VHDL 2008 was official. Nevertheless, the VASG is currently discussing the addition of a Foreign Function
+Interface (FFI) or Direct Programming Interface (DPI) to the next revision of the standard. See <a class="reference external" href="https://umarcor.github.io/ghdl-cosim/vhdl202x/index.html">[LCS-202x] VHDL DPI/FFI based on GHDL’s implementation of VHPIDIRECT</a>
+(<a class="reference external" href="https://github.com/umarcor/ghdl-cosim/blob/gh-pages/vhdl202x/vhdl202x-lcs-dpi.pdf">PDF</a>).</p>
+</div>
+<p><a class="reference internal" href="vhpidirect/index.html#cosim-vhpidirect-intro"><span class="std std-ref">VHPIDIRECT</span></a> is easier to use than <a class="reference internal" href="vpi/index.html#cosim-vpi-intro"><span class="std std-ref">VPI</span></a>/<a class="reference internal" href="vhpi/index.html#cosim-vhpi-intro"><span class="std std-ref">VHPI</span></a>
+because, as the name suggests, it is a direct interface. However, on the one hand VHPIDIRECT requires modification of
+VHDL sources, which might not be possible or desirable in certain contexts. On the other hand, VPI/VHPI allow use cases
+which are not yet possible with VHPIDIRECT, such as controlling execution time steps. It is suggested to read the quick
+start examples of both interfacing mechanisms, in order to get a feel for the differences.</p>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="ci.html" class="btn btn-neutral float-right" title="Continuous Integration" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Tristan Gingold and contributors
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/buildthedocs/sphinx.theme">theme</a>
+    
+    provided by <a href="https://buildthedocs.github.io">Build the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,258 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Introduction &mdash; GHDL-cosim latest documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../_static/icon.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Examples" href="examples/index.html" />
+    <link rel="prev" title="Common mistakes" href="../vhpidirect/notebook/mistakes.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                latest
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../ci.html">Continuous Integration</a></li>
+</ul>
+<p class="caption"><span class="caption-text">VHPIDIRECT</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../vhpidirect/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vhpidirect/declarations.html">Type declarations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vhpidirect/wrapping.html">Wrapping a simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vhpidirect/linking.html">Linking object files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vhpidirect/dynamic.html">Dynamic loading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vhpidirect/grt.html">Using GRT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vhpidirect/examples/index.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vhpidirect/notebook/index.html">Notebook</a></li>
+</ul>
+<p class="caption"><span class="caption-text">VPI</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/index.html">Examples</a></li>
+</ul>
+<p class="caption"><span class="caption-text">VPHI</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../vhpi/index.html">Introduction</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">GHDL-cosim</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Introduction</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            
+              <a href="https://github.com/ghdl/ghdl-cosim/blob/master/doc/vpi/index.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="introduction">
+<span id="cosim-vpi-intro"></span><h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
+<p>Verilog Procedural Interface (VPI) is part of the IEEE Std 1364: <a class="reference external" href="https://ieeexplore.ieee.org/document/1620780">1364-2005 - IEEE Standard for Verilog Hardware Description Language</a>.
+It allows Verilog code to invoke C functions, and C functions to invoke Verilog system tasks. VPI is sometimes referred to
+as PLI 2, because it replaced the deprecated Program Language Interface (PLI).</p>
+<p>VPI provides advanced features, at the cost of having to learn the API. Since this is the user and reference manual for GHDL,
+an introduction to VPI is not included. Thus, the reader should have at least a basic knowledge of the interface. A good knowledge of the reference manual.</p>
+<p>Unlike VHPIDIRECT, which allows and requires the user to define a custom API between VHDL and C, VPI is itself a pre-defined
+API. Hence, all VPI modules need to include a standard header file, <code class="docutils literal notranslate"><span class="pre">vpi_user.h</span></code>. At the same time, VPI modules need to be
+built as shared libraries, and they are dynamically loaded at runtime. This is similar to example <a class="reference internal" href="../vhpidirect/examples/shared.html#cosim-vhpidirect-examples-shared-shlib"><span class="std std-ref">shlib</span></a>.
+However, when using VPI, VHDL sources are agnostic to the existence of C sources.</p>
+<p>Information about GHDL’s commands related to VPI is available at <a class="reference external" href="https://ghdl.github.io/ghdl/using/InvokingGHDL.html#vpi-build-commands" title="(in GHDL v2.0.0-dev)"><span>VPI/VHPI build commands</span></a> and <a class="reference external" href="https://ghdl.github.io/ghdl/using/Simulation.html#cmdoption-ghdl-vpi" title="(in GHDL v2.0.0-dev)"><code class="xref std std-option docutils literal notranslate"><span class="pre">--vpi</span></code></a>.</p>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="examples/index.html" class="btn btn-neutral float-right" title="Examples" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../vhpidirect/notebook/mistakes.html" class="btn btn-neutral float-left" title="Common mistakes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Tristan Gingold and contributors
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/buildthedocs/sphinx.theme">theme</a>
+    
+    provided by <a href="https://buildthedocs.github.io">Build the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,347 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Dynamic loading &mdash; GHDL-cosim latest documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../_static/icon.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Using GRT" href="grt.html" />
+    <link rel="prev" title="Linking object files" href="linking.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                latest
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../ci.html">Continuous Integration</a></li>
+</ul>
+<p class="caption"><span class="caption-text">VHPIDIRECT</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="declarations.html">Type declarations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wrapping.html">Wrapping a simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linking.html">Linking object files</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Dynamic loading</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#loading-foreign-objects-from-within-a-simulation">Loading foreign objects from within a simulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#generating-shared-libraries">Generating shared libraries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#loading-a-simulation">Loading a simulation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="grt.html">Using GRT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/index.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebook/index.html">Notebook</a></li>
+</ul>
+<p class="caption"><span class="caption-text">VPI</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../vpi/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vpi/examples/index.html">Examples</a></li>
+</ul>
+<p class="caption"><span class="caption-text">VPHI</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../vhpi/index.html">Introduction</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">GHDL-cosim</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Dynamic loading</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            
+              <a href="https://github.com/ghdl/ghdl-cosim/blob/master/doc/vhpidirect/dynamic.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="dynamic-loading">
+<span id="cosim-vhpidirect-dynamic"></span><h1>Dynamic loading<a class="headerlink" href="#dynamic-loading" title="Permalink to this headline">¶</a></h1>
+<p>Building either foreign resources or the VHDL simulation model as shared libraries allows to decouple the build procedures.</p>
+<div class="section" id="loading-foreign-objects-from-within-a-simulation">
+<span id="cosim-vhpidirect-dynamic-loading-within-a-simulation"></span><h2>Loading foreign objects from within a simulation<a class="headerlink" href="#loading-foreign-objects-from-within-a-simulation" title="Permalink to this headline">¶</a></h2>
+<p>Instead of linking and building foreign objects along with GHDL, it is also possible to load foreign resources dynamically.
+In order to do so, provide the path and name of the shared library where the resource is to be loaded from. For example:</p>
+<div class="highlight-VHDL notranslate"><div class="highlight"><pre><span></span><span class="k">attribute</span> <span class="n">foreign</span> <span class="k">of</span> <span class="n">get_rand</span><span class="o">:</span> <span class="k">function</span> <span class="k">is</span> <span class="s">&quot;VHPIDIRECT ./getrand.so get_rand&quot;</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="generating-shared-libraries">
+<span id="cosim-vhpidirect-dynamic-generating-shared-libraries"></span><h2>Generating shared libraries<a class="headerlink" href="#generating-shared-libraries" title="Permalink to this headline">¶</a></h2>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Ensure reading and understanding <a class="reference internal" href="linking.html#cosim-vhpidirect-linking"><span class="std std-ref">Linking object files</span></a> before this one.</p>
+</div>
+<p>There are three possibilities to elaborate simulation models as shared libraries, instead of executable binaries:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ghdl</span> <span class="pre">-e</span> <span class="pre">-shared</span> <span class="pre">[options...]</span> <span class="pre">primary_unit</span> <span class="pre">[secondary_unit]</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ghdl</span> <span class="pre">-e</span> <span class="pre">-Wl,-shared</span> <span class="pre">-Wl,-Wl,--version-script=./file.ver</span> <span class="pre">-Wl,-Wl,-u,ghdl_main</span> <span class="pre">[options...]</span> <span class="pre">primary_unit</span> <span class="pre">[secondary_unit]</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gcc</span> <span class="pre">-shared</span> <span class="pre">-Wl,`ghdl</span> <span class="pre">--list-link</span> <span class="pre">tb`</span> <span class="pre">-Wl,--version-script=./file.ver</span> <span class="pre">-Wl,-u,ghdl_main</span></code></p></li>
+</ul>
+<p>The only difference between the two later procedures is the entrypoint (GHDL or GCC). Preference depends on the additional
+options that users need to provide. The main difference with the former is that it will make all symbols visible in the
+resulting shared library. In the other two procedures, visible symbols will be the ones defined in the default <code class="docutils literal notranslate"><span class="pre">grt.ver</span></code>
+added by GHDL and the <code class="docutils literal notranslate"><span class="pre">file.ver</span></code> provided by the user. Note that <code class="docutils literal notranslate"><span class="pre">file.ver</span></code> must include <code class="docutils literal notranslate"><span class="pre">ghdl_main</span></code> and any other
+added by the user. See example <a class="reference internal" href="examples/shared.html#cosim-vhpidirect-examples-shared-shghdl"><span class="std std-ref">shghdl</span></a> and <a class="reference external" href="https://github.com/ghdl/ghdl-cosim/issues/2">ghdl-cosim#2</a>.</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>When GHDL is configured with <code class="docutils literal notranslate"><span class="pre">--default-pic</span></code> explicitly, it uses it implicitly when executing any <a class="reference external" href="https://ghdl.github.io/ghdl/using/InvokingGHDL.html#cmdoption-ghdl-a" title="(in GHDL v2.0.0-dev)"><code class="xref std std-option docutils literal notranslate"><span class="pre">-a</span></code></a>,
+<a class="reference external" href="https://ghdl.github.io/ghdl/using/InvokingGHDL.html#cmdoption-ghdl-e" title="(in GHDL v2.0.0-dev)"><code class="xref std std-option docutils literal notranslate"><span class="pre">-e</span></code></a> or <a class="reference external" href="https://ghdl.github.io/ghdl/using/InvokingGHDL.html#cmdoption-ghdl-r" title="(in GHDL v2.0.0-dev)"><code class="xref std std-option docutils literal notranslate"><span class="pre">-r</span></code></a> command. Hence, it is not required to provide these arguments (fPIC/PIE) to GHDL. However,
+these might need to be provided when building C sources with GCC. Otherwise linker errors such as the following are produced:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">relocation</span> <span class="n">R_X86_64_PC32</span> <span class="n">against</span> <span class="n">symbol</span> <span class="o">*</span> <span class="n">can</span> <span class="ow">not</span> <span class="n">be</span> <span class="n">used</span> <span class="n">when</span> <span class="n">making</span> <span class="n">a</span> <span class="n">shared</span> <span class="nb">object</span><span class="p">;</span> <span class="n">recompile</span> <span class="k">with</span> <span class="o">-</span><span class="n">fPIC</span>
+</pre></div>
+</div>
+</div>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>For further details regarding how to call <code class="docutils literal notranslate"><span class="pre">ghdl_main</span></code> see <a class="reference internal" href="wrapping.html#starting-a-simulation-from-a-foreign-program"><span class="std std-ref">Wrapping a simulation</span></a>.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Alternatively, if the shared library is built with <a class="reference external" href="https://ghdl.github.io/ghdl/using/CommandReference.html#cmdoption-ghdl-bind" title="(in GHDL v2.0.0-dev)"><code class="xref std std-option docutils literal notranslate"><span class="pre">--bind</span></code></a> and <a class="reference external" href="https://ghdl.github.io/ghdl/using/CommandReference.html#cmdoption-ghdl-list-link" title="(in GHDL v2.0.0-dev)"><code class="xref std std-option docutils literal notranslate"><span class="pre">--list-link</span></code></a>, the output from the later
+can be filtered with tools such as <code class="docutils literal notranslate"><span class="pre">sed</span></code> in order to remove the default version script (accomplished in <a class="reference external" href="https://github.com/ghdl/ghdl/issues/640">ghdl#640</a>),
+and make all symbols visible by default. However, this procedure is only recommended in edge cases where other solutions
+don’t fit.</p>
+</div>
+</div>
+<div class="section" id="loading-a-simulation">
+<span id="cosim-vhpidirect-dynamic-loading-a-simulation"></span><h2>Loading a simulation<a class="headerlink" href="#loading-a-simulation" title="Permalink to this headline">¶</a></h2>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>By default, GHDL uses <code class="docutils literal notranslate"><span class="pre">grt.ver</span></code> to limit which symbols are exposed in the generated artifacts, and <code class="docutils literal notranslate"><span class="pre">ghdl_main</span></code> is not
+included. See <a class="reference internal" href="#cosim-vhpidirect-dynamic-generating-shared-libraries"><span class="std std-ref">Generating shared libraries</span></a> for guidelines to generate shared objects with
+visible or filtered symbols.</p>
+</div>
+<p>In order to generate a position independent executable (PIE), be it an executable binary
+or a shared library, GHDL must be built with config option <code class="docutils literal notranslate"><span class="pre">--default-pic</span></code>. This will ensure
+that all the libraries and sources analyzed by GHDL generate position independent code (PIC).</p>
+<p>PIE binaries can be loaded and executed from any language that supports C-alike signatures and types
+(C, C++, golang, Python, Rust, etc.). This allows seamless co-simulation using concurrent/parallel execution features available
+in each language: pthreads, goroutines/gochannels, multiprocessing/queues, etc. Moreover, it provides a mechanism to execute
+multiple GHDL simulations in parallel.</p>
+<p>For example, in Python:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ctypes</span>
+<span class="n">gbin</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">CDLL</span><span class="p">(</span><span class="n">bin_path</span><span class="p">)</span>
+
+<span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;-gGENA=&quot;value&quot;&#39;</span><span class="p">,</span> <span class="s1">&#39;gGENB=&quot;value&quot;&#39;</span><span class="p">]</span>
+
+<span class="n">xargs</span> <span class="o">=</span> <span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">POINTER</span><span class="p">(</span><span class="n">ctypes</span><span class="o">.</span><span class="n">c_char</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">))()</span>
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">arg</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">args</span><span class="p">):</span>
+    <span class="n">xargs</span><span class="p">[</span><span class="n">idx</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">ctypes</span><span class="o">.</span><span class="n">create_string_buffer</span><span class="p">(</span><span class="n">arg</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
+
+<span class="n">gbin</span><span class="o">.</span><span class="n">main</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">xargs</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">xargs</span><span class="p">)</span>
+
+<span class="kn">import</span> <span class="nn">_ctypes</span>
+<span class="c1"># On GNU/Linux</span>
+<span class="n">_ctypes</span><span class="o">.</span><span class="n">dlclose</span><span class="p">(</span><span class="n">gbin</span><span class="o">.</span><span class="n">_handle</span><span class="p">)</span>
+<span class="c1"># On Windows</span>
+<span class="c1">#_ctypes.FreeLibrary(gbin._handle)</span>
+</pre></div>
+</div>
+<p>See a complete example written in C in <a class="reference internal" href="examples/shared.html#cosim-vhpidirect-examples-shared-shghdl"><span class="std std-ref">shghdl</span></a>.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>As explained in <a class="reference internal" href="wrapping.html#starting-a-simulation-from-a-foreign-program"><span class="std std-ref">Wrapping a simulation</span></a>, <code class="docutils literal notranslate"><span class="pre">ghdl_main</span></code> must be called once, since reseting/restarting
+the simulation runtime is not supported yet (see <a class="reference external" href="https://github.com/ghdl/ghdl/issues/1184">ghdl#1184</a>). When it is loaded dynamically, this means that the binary
+file/library needs to be unloaded from memory and loaded again (as in <a class="reference internal" href="examples/shared.html#cosim-vhpidirect-examples-shared-shghdl"><span class="std std-ref">shghdl</span></a>).</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>See <a class="reference external" href="https://github.com/ghdl/ghdl/issues/803">ghdl#803</a> for details about expected differences in the exit codes, depending on the version of the VHDL standard
+that is used.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="grt.html" class="btn btn-neutral float-right" title="Using GRT" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="linking.html" class="btn btn-neutral float-left" title="Linking object files" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Tristan Gingold and contributors
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/buildthedocs/sphinx.theme">theme</a>
+    
+    provided by <a href="https://buildthedocs.github.io">Build the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

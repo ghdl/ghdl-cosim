@@ -1,0 +1,306 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Linking object files &mdash; GHDL-cosim latest documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../_static/icon.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Dynamic loading" href="dynamic.html" />
+    <link rel="prev" title="Wrapping a simulation" href="wrapping.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                latest
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../ci.html">Continuous Integration</a></li>
+</ul>
+<p class="caption"><span class="caption-text">VHPIDIRECT</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="declarations.html">Type declarations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wrapping.html">Wrapping a simulation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Linking object files</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#linking-foreign-object-files-to-ghdl">Linking foreign object files to GHDL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#linking-ghdl-object-files-to-ada-c">Linking GHDL object files to Ada/C</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dynamic.html">Dynamic loading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="grt.html">Using GRT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/index.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebook/index.html">Notebook</a></li>
+</ul>
+<p class="caption"><span class="caption-text">VPI</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../vpi/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vpi/examples/index.html">Examples</a></li>
+</ul>
+<p class="caption"><span class="caption-text">VPHI</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../vhpi/index.html">Introduction</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">GHDL-cosim</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Linking object files</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            
+              <a href="https://github.com/ghdl/ghdl-cosim/blob/master/doc/vhpidirect/linking.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="linking-object-files">
+<span id="cosim-vhpidirect-linking"></span><h1>Linking object files<a class="headerlink" href="#linking-object-files" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="linking-foreign-object-files-to-ghdl">
+<span id="linking-with-foreign-object-files"></span><h2>Linking foreign object files to GHDL<a class="headerlink" href="#linking-foreign-object-files-to-ghdl" title="Permalink to this headline">¶</a></h2>
+<p>You may add additional files or options during the link of <cite>GHDL</cite> using
+<code class="docutils literal notranslate"><span class="pre">-Wl,</span></code> as described in <a class="reference external" href="https://ghdl.github.io/ghdl/using/CommandReference.html#passing-options-to-other-programs" title="(in GHDL v2.0.0-dev)"><span>Passing options to other programs</span></a>.
+For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ghdl</span> <span class="o">-</span><span class="n">e</span> <span class="o">-</span><span class="n">Wl</span><span class="p">,</span><span class="o">-</span><span class="n">lm</span> <span class="n">math_tb</span>
+</pre></div>
+</div>
+<p>will create the <code class="file docutils literal notranslate"><span class="pre">math_tb</span></code> executable with the <code class="file docutils literal notranslate"><span class="pre">lm</span></code> (mathematical)
+library.</p>
+<p>Note the <code class="file docutils literal notranslate"><span class="pre">c</span></code> library is always linked with an executable.</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>The process for personal code is the same, provided the code is provided as a C source or compiled to an object file.
+Analysis must be made of the HDL files, then elaboration with <code class="docutils literal notranslate"><span class="pre">-e</span> <span class="pre">-Wl,personal.c</span> <span class="pre">[options...]</span> <span class="pre">primary_unit</span> <span class="pre">[secondary_unit]</span></code> as arguments.
+Additional C or object files are flagged as separate <code class="docutils literal notranslate"><span class="pre">-Wl,*</span></code> arguments. The elaboration step will compile the executable with the custom resources.
+Further reading (particularly about the backend particularities) is at <a class="reference external" href="https://ghdl.github.io/ghdl/using/InvokingGHDL.html#elaboration-command" title="(in GHDL v2.0.0-dev)"><span>Elaboration [-e]</span></a> and <a class="reference external" href="https://ghdl.github.io/ghdl/using/InvokingGHDL.html#run-command" title="(in GHDL v2.0.0-dev)"><span>Run [-r]</span></a>.</p>
+</div>
+</div>
+<div class="section" id="linking-ghdl-object-files-to-ada-c">
+<span id="linking-with-ada"></span><h2>Linking GHDL object files to Ada/C<a class="headerlink" href="#linking-ghdl-object-files-to-ada-c" title="Permalink to this headline">¶</a></h2>
+<p>As explained previously in <a class="reference internal" href="wrapping.html#starting-a-simulation-from-a-foreign-program"><span class="std std-ref">Wrapping a simulation</span></a>,
+you can start a simulation from an <cite>Ada</cite> or <cite>C</cite> program. However the build
+process is not trivial: you have to elaborate your program and your
+<cite>VHDL</cite> design.</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>If the foreign language is C, this procedure is equivalent to the one described in
+<a class="reference internal" href="#linking-with-foreign-object-files"><span class="std std-ref">Linking foreign object files to GHDL</span></a>, which is easier. Thus, this procedure is
+explained for didactic purposes. When suitable, we suggest to use <a class="reference external" href="https://ghdl.github.io/ghdl/using/InvokingGHDL.html#cmdoption-ghdl-e" title="(in GHDL v2.0.0-dev)"><code class="xref std std-option docutils literal notranslate"><span class="pre">-e</span></code></a>, instead
+of <a class="reference external" href="https://ghdl.github.io/ghdl/using/CommandReference.html#cmdoption-ghdl-bind" title="(in GHDL v2.0.0-dev)"><code class="xref std std-option docutils literal notranslate"><span class="pre">--bind</span></code></a> and <a class="reference external" href="https://ghdl.github.io/ghdl/using/CommandReference.html#cmdoption-ghdl-list-link" title="(in GHDL v2.0.0-dev)"><code class="xref std std-option docutils literal notranslate"><span class="pre">--list-link</span></code></a>.</p>
+</div>
+<p>First, you have to analyze all your design files. In this example, we
+suppose there is only one design file, <code class="file docutils literal notranslate"><span class="pre">design.vhdl</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ghdl -a design.vhdl
+</pre></div>
+</div>
+<p>Then, bind your design. In this example, we suppose the entity at the
+design apex is <code class="docutils literal notranslate"><span class="pre">design</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ghdl --bind design
+</pre></div>
+</div>
+<p>Finally, compile/bind your program and link it with your <cite>VHDL</cite>
+design:</p>
+<p>in C:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>gcc my_prog.c -Wl,`ghdl --list-link design`
+</pre></div>
+</div>
+<p>in Ada:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ gnatmake my_prog -largs `ghdl --list-link design`
+</pre></div>
+</div>
+<p>See <a class="reference external" href="https://ghdl.github.io/ghdl/using/CommandReference.html#gccllvm-only-programs" title="(in GHDL v2.0.0-dev)"><span>GCC/LLVM only commands</span></a> for further details about <a class="reference external" href="https://ghdl.github.io/ghdl/using/CommandReference.html#cmdoption-ghdl-bind" title="(in GHDL v2.0.0-dev)"><code class="xref std std-option docutils literal notranslate"><span class="pre">--bind</span></code></a> and <a class="reference external" href="https://ghdl.github.io/ghdl/using/CommandReference.html#cmdoption-ghdl-list-link" title="(in GHDL v2.0.0-dev)"><code class="xref std std-option docutils literal notranslate"><span class="pre">--list-link</span></code></a>.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="dynamic.html" class="btn btn-neutral float-right" title="Dynamic loading" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="wrapping.html" class="btn btn-neutral float-left" title="Wrapping a simulation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Tristan Gingold and contributors
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/buildthedocs/sphinx.theme">theme</a>
+    
+    provided by <a href="https://buildthedocs.github.io">Build the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,636 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>FFI/DPI Header &mdash; GHDL-cosim latest documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/icon.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Other co-simulation projects" href="other.html" />
+    <link rel="prev" title="Arrays" href="arrays.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html">
+          
+
+          
+            
+            <img src="../../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                latest
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../ci.html">Continuous Integration</a></li>
+</ul>
+<p class="caption"><span class="caption-text">VHPIDIRECT</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../declarations.html">Type declarations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wrapping.html">Wrapping a simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../linking.html">Linking object files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dynamic.html">Dynamic loading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../grt.html">Using GRT</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html">Quick Start</a></li>
+<li class="toctree-l2"><a class="reference internal" href="grt.html">GRT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="shared.html">Shared libs and dynamic loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="arrays.html">Arrays</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">FFI/DPI Header</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#demo">demo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#crypto">crypto</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#xyce">xyce</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#xyce-c-interface">Xyce: C interface</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#xyce-vhdl-interface">Xyce: VHDL interface</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#examples">Examples</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gui-features">GUI features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#analog-modelling">Analog modelling</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="other.html">Other co-simulation projects</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../notebook/index.html">Notebook</a></li>
+</ul>
+<p class="caption"><span class="caption-text">VPI</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../vpi/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../vpi/examples/index.html">Examples</a></li>
+</ul>
+<p class="caption"><span class="caption-text">VPHI</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../vhpi/index.html">Introduction</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">GHDL-cosim</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">Examples</a> &raquo;</li>
+        
+      <li>FFI/DPI Header</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            
+              <a href="https://github.com/ghdl/ghdl-cosim/blob/master/doc/vhpidirect/examples/vffi_user.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="ffi-dpi-header">
+<span id="cosim-vhpidirect-examples-cinterface"></span><h1>FFI/DPI Header<a class="headerlink" href="#ffi-dpi-header" title="Permalink to this headline">¶</a></h1>
+<p>As explained in <a class="reference internal" href="../declarations.html#cosim-vhpidirect-declarations"><span class="std std-ref">Type declarations</span></a>, dealing with some types directly as exported to C can be cumbersome:</p>
+<ul class="simple">
+<li><p>Some VHDL types are exposed as fat pointers. Hence, dealing with unconstrained arrays and accesses is not straightforward.</p></li>
+<li><p>Indexes of arrays with bounds of direction <code class="docutils literal notranslate"><span class="pre">downto</span></code> are reversed.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">std_logic</span></code> values correspond to an specific enumeration.</p></li>
+<li><p>Etc.</p></li>
+</ul>
+<p><a class="reference external" href="https://github.com/ghdl/ghdl-cosim/blob/master/vhpidirect/vffi_user.h">vffi_user.h</a> and <a class="reference external" href="https://github.com/ghdl/ghdl-cosim/blob/master/vhpidirect/vffi_user.vhd">vffi_user.vhd</a> are utility headers/packages
+for easing the usage of those complex types. The examples in this section showcase the usage of those utilities.
+These examples are based on the foundations shown in previous examples. Hence, reading those is strongly suggested for understanding
+the implementation details.</p>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>As explained in the <a class="reference internal" href="../../index.html#cosim"><span class="std std-ref">home page</span></a>, GHDL’s implementation of VHPIDIRECT is not compliant with the standard,
+and the standarization of a FFI/DPI is being discussed in the VASG (see <a class="reference external" href="https://umarcor.github.io/ghdl-cosim/vhdl202x/index.html">[LCS-202x] VHDL DPI/FFI based on GHDL’s implementation of VHPIDIRECT</a>).
+The <code class="docutils literal notranslate"><span class="pre">vffi_user.h</span></code> file available in this repo corresponds to the current implementation in GHDL. As the standarization process
+goes forward, GHDL is expected to be adapted. Therefore, users should expect probably breaking changes in the header file.</p>
+</div>
+<div class="section" id="demo">
+<span id="cosim-vhpidirect-examples-vffi-user-demo"></span><h2><a class="reference external" href="https://github.com/ghdl/ghdl-cosim/blob/master/vhpidirect/vffi_user/demo">demo</a><a class="headerlink" href="#demo" title="Permalink to this headline">¶</a></h2>
+<p>This is a synthetic example that uses all the supported/defined data types and the helper functions in <code class="docutils literal notranslate"><span class="pre">vffi_user.h</span></code> for converting
+simple values, constrained arrays and multidimensional unconstrained arrays (fat pointers) to sets of C types. Hence, it is a
+regression test for the header file.</p>
+</div>
+<div class="section" id="crypto">
+<span id="cosim-vhpidirect-examples-vffi-user-crypto"></span><h2><a class="reference external" href="https://github.com/ghdl/ghdl-cosim/blob/master/vhpidirect/vffi_user/crypto">crypto</a><a class="headerlink" href="#crypto" title="Permalink to this headline">¶</a></h2>
+<p>In this example, a data value and key generated in VHDL are used to compute the AES cypher using <a class="reference external" href="https://www.openssl.org/">OpenSSL</a>.
+The data, the key and the output are of type <code class="docutils literal notranslate"><span class="pre">std_logic_vector(0</span> <span class="pre">to</span> <span class="pre">127)</span></code> and all of them are allocated in VHDL and passed to C
+by reference, as shown in <code class="docutils literal notranslate"><span class="pre">vhdlallocarr</span></code> from <a class="reference internal" href="arrays.html#cosim-vhpidirect-examples-arrays-intvector-vhdlsized"><span class="std std-ref">Sized in VHDL</span></a>.</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>This example is a reduced version of the testing infrastructure of <a class="reference external" href="https://github.com/tmeissner/cryptocores">tmeissner/cryptocores</a>.
+In that repository both encryption and decryption features of an AES IP core written in VHDL are tested using VHPIDIRECT and OpenSSL.
+See <a class="reference external" href="https://github.com/tmeissner/cryptocores/tree/master/aes/sim/vhdl">tmeissner/cryptocores: aes/sim/vhdl</a>.</p>
+</div>
+<p>As explained in <a class="reference internal" href="../declarations.html#restrictions-on-foreign-declarations"><span class="std std-ref">Restrictions on type declarations</span></a> and shown in <a class="reference internal" href="arrays.html#cosim-vhpidirect-examples-arrays-logicvectors"><span class="std std-ref">Vector of std_logic</span></a>, VHDL
+variables of types <code class="docutils literal notranslate"><span class="pre">std_logic``or</span> <span class="pre">``std_logic_vector</span></code> are not very usable in C being arrays of <code class="docutils literal notranslate"><span class="pre">char</span></code>. That’s specially so because
+the default encoding of <code class="docutils literal notranslate"><span class="pre">HDL_0</span></code> and <code class="docutils literal notranslate"><span class="pre">HDL_1</span></code> is <code class="docutils literal notranslate"><span class="pre">2</span></code> and <code class="docutils literal notranslate"><span class="pre">3</span></code>, respectively. Hence, it is almost a requirement to convert them
+into a format that is suitable for the target C function.</p>
+<p>In C, the function provided by OpenSSL expects data as arrays of bits. Hence, variables need to be converted for the memory layout
+of the data to match. This can be done in C only, and/or in VHDL too. Apart from the encryption function (<a class="reference external" href="https://github.com/ghdl/ghdl-cosim/blob/master/vhpidirect/vffi_user/crypto/encrypt.c">encrypt.c</a>),
+an intermediate function (<code class="docutils literal notranslate"><span class="pre">cryptData</span></code>) is used (<a class="reference external" href="https://github.com/ghdl/ghdl-cosim/blob/master/vhpidirect/vffi_user/crypto/c/caux.c">caux.c</a>). The intermediate
+function uses enums and two helper functions (<code class="docutils literal notranslate"><span class="pre">vfficharArr2bitArr</span></code> and <code class="docutils literal notranslate"><span class="pre">vffibitArr2charArr</span></code>) defined in <a class="reference external" href="https://github.com/ghdl/ghdl-cosim/blob/master/vhpidirect/vffi_user.h">vffi_user.h</a>.
+Furthermore, a <code class="docutils literal notranslate"><span class="pre">reverseBitsInBytes</span></code> function written in VHDL is used for reordering (see <a class="reference external" href="https://github.com/ghdl/ghdl-cosim/blob/master/vhpidirect/vffi_user-body.vhd">vffi_user-body.vhd</a>).</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>This example is based on VHDL and C. However, as show in <a class="reference internal" href="shared.html#cosim-vhpidirect-examples-shared-pycb"><span class="std std-ref">pycb</span></a>, using Python modules/functions
+from VHDL is also possible. Projects such as <a class="reference external" href="https://github.com/pyca/cryptography">pyca/cryptography</a> provide equivalent features
+to OpenSSL. Are you up to writting a variant of this example using Python? <a class="reference external" href="https://github.com/ghdl/ghdl-cosim/compare">Propose a PR</a>!</p>
+</div>
+</div>
+<div class="section" id="xyce">
+<span id="cosim-vhpidirect-examples-vffi-user-xyce"></span><h2><a class="reference external" href="https://github.com/ghdl/ghdl-cosim/blob/master/vhpidirect/vffi_user/xyce">xyce</a><a class="headerlink" href="#xyce" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p>“<em>Xyce is an open source, SPICE-compatible, high-performance analog circuit simulator, capable of solving extremely
+large circuit problems by supporting large-scale parallel computing platforms.
+It also supports serial execution on all common desktop platforms, and small-scale parallel runs on Unix-like
+systems</em>”.</p>
+<p class="attribution">—<a class="reference external" href="https://xyce.sandia.gov">xyce.sandia.gov</a></p>
+</div></blockquote>
+<p>Xyce provides two mechanisms for external tools/simulation codes to use it:</p>
+<dl class="simple">
+<dt><strong>General External Interface (GenExt)</strong></dt><dd><p>Comprenhensive interface aimed at developers who wish to couple other external codes written in C++. See AppNote
+<a class="reference external" href="https://xyce.sandia.gov/documentation/AppNote-GenExt.pdf">Coupled Simulation with the Xyce General External Interface</a>.</p>
+</dd>
+<dt><strong>Mixed Signal Interface (MixedSignal)</strong></dt><dd><p>Interface to use Xyce as a shared library/object, either from C/C++ codes or through Python’s <code class="docutils literal notranslate"><span class="pre">ctypes</span></code>. Class
+<a class="reference external" href="https://github.com/Xyce/Xyce/tree/master/utils/XyceCInterface">XyceCInterface</a> provides methods to work with a
+pointer to the topmost object in a Xyce simulation; and corresponding Python bindings are provided. See AppNote
+<a class="reference external" href="https://xyce.sandia.gov/downloads/_assets/documents/AppNote-MixedSignal_6.11.pdf">Mixed Signal Simulation with Xyce 6.11</a>
+(other versions: <a class="reference external" href="https://www.osti.gov/biblio/1483152-application-note-mixed-signal-simulation-xyce">October 2018</a>, <a class="reference external" href="https://xyce.sandia.gov/downloads/_assets/documents/AppNote-MixedSignal.pdf">June 2020</a>).</p>
+</dd>
+</dl>
+<p>Regarding integration with GHDL, both interfaces might be suitable for different targets:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">GenExt</span></code> might allow GHDL to provide VHDL-AMS support to Xyce, as the interface allows Xyce to execute callbacks defined in
+a foreign tool. However, VHDL-AMS support in GHDL is incomplete. Currently, the parsing stage is implemented only. See
+<a class="reference external" href="https://github.com/ghdl/ghdl/issues/1052">ghdl#1052</a>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MixedSignal</span></code> provides a higher abstraction level mechanism, which allows for co-execution of otherwise atomic modules.</p></li>
+</ul>
+<p>In this examples, a simplified C API based on <code class="docutils literal notranslate"><span class="pre">MixedSignal</span></code> is used. Moreover, VHDL bindings based on <a class="reference external" href="https://github.com/ghdl/ghdl-cosim/blob/master/vhpidirect/vffi_user.h">vffi_user.h</a>
+are used for driving the co-simulation from VHDL. The main differences between this simplified API and <code class="docutils literal notranslate"><span class="pre">XyceCInterface</span></code> are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">XyceCInterface</span></code> is designed to use a variable of type <code class="docutils literal notranslate"><span class="pre">void**</span></code> as the handler of a simulation object.
+Unfortunately, such a type is not cleanly mapped to VHDL. Instead, identifiers of type <cite>string</cite> are used in VHDL,
+and this bridge provides a storage mechanism to keep track of the correspondence.</p></li>
+<li><p>VHDL’s type system, which is based on Ada’s, avoids the requirement of using additional function/procedure parameters
+for passing array constraints.</p></li>
+</ul>
+<p>This simplified API is targeted at developers who use VHDL as the main language to orchestrate the co-execution. Hence,
+existence of C sources is expected to be transparent. <a class="reference internal" href="#xyce-pkg"><span class="std std-ref">xyce package</span></a> provides the public VHDL API for end-users. Note that
+it is possible to run multiple analog simulations by handling multiple instances of <code class="docutils literal notranslate"><span class="pre">xyce_t</span></code> from different VHDL
+modules. Find usage details in <a class="reference internal" href="#xyce-egs"><span class="std std-ref">Examples</span></a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Currently, the C implementation is based on <a class="reference external" href="https://github.com/ghdl/ghdl-cosim/blob/master/vhpidirect/vffi_user.h">vffi_user.h</a>; hence, it is
+specific to GHDL. Nevertheless, it should be possible to adapt it for simulators that support FLI or XSI. Contributions
+are welcome!</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Although the C implementation is not expected to be used directly, it can be useful to access it when the
+simulation executable is to be dynamically loaded. In these contexts, it might be handy to initialize and close the Xyce
+simulations from, say, Python, while VHDL is used to run steps and handle I/O. Even though specific examples are not
+available yet, this is a supported use case.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The current implementation of the storage mechanism is likely to be replaced as a result of the discussions
+in <a class="reference external" href="https://github.com/VUnit/vunit/issues/603">VUnit/vunit#603</a>. Such a replacement should be transparent to
+end-users. However, since this is a very experimental project yet, note that disruptive changes might be required.</p>
+</div>
+<div class="section" id="xyce-c-interface">
+<span id="xyce-c"></span><h3>Xyce: C interface<a class="headerlink" href="#xyce-c-interface" title="Permalink to this headline">¶</a></h3>
+<p>This is a simplified API based on <a class="reference external" href="https://github.com/Xyce/Xyce/tree/master/utils/XyceCInterface">XyceCInterface</a>. It
+seems that binding <code class="docutils literal notranslate"><span class="pre">void**</span> <span class="pre">ptr</span></code> from C to VHDL is not supported. So, unconstrained strings are used instead. Unconstrained
+strings can be accesed as <code class="docutils literal notranslate"><span class="pre">char**</span> <span class="pre">id</span></code> from C. A storage mechanism is used to manage actual pointers associated to each id
+(string).</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">uint32_t</span> <span class="nf">xhdl_init</span><span class="p">(</span>
+  <span class="n">vffiNaturalDimArr_t</span><span class="o">*</span> <span class="n">ptr</span><span class="p">,</span>
+  <span class="n">vffiNaturalDimArr_t</span><span class="o">*</span> <span class="n">cir</span>
+<span class="p">);</span>
+
+<span class="kt">uint32_t</span> <span class="nf">xhdl_run</span><span class="p">(</span>
+  <span class="n">vffiNaturalDimArr_t</span><span class="o">*</span> <span class="n">ptr</span><span class="p">,</span>
+  <span class="kt">double</span> <span class="n">requestedUntilTime</span>
+<span class="p">);</span>
+
+<span class="kt">uint32_t</span> <span class="nf">xhdl_run_1D</span><span class="p">(</span>
+  <span class="n">vffiNaturalDimArr_t</span><span class="o">*</span> <span class="n">ptr</span><span class="p">,</span>
+  <span class="kt">double</span> <span class="n">requestedUntilTime</span><span class="p">,</span>
+  <span class="n">vffiNaturalDimArr_t</span><span class="o">*</span> <span class="n">tArray</span><span class="p">,</span>
+  <span class="n">vffiNaturalDimArr_t</span><span class="o">*</span> <span class="n">vArray</span>
+<span class="p">);</span>
+
+<span class="kt">uint32_t</span> <span class="nf">xhdl_run_2D</span><span class="p">(</span>
+  <span class="n">vffiNaturalDimArr_t</span><span class="o">*</span> <span class="n">ptr</span><span class="p">,</span>
+  <span class="kt">double</span> <span class="n">requestedUntilTime</span><span class="p">,</span>
+  <span class="n">vffiNaturalDimArr_t</span><span class="o">*</span> <span class="n">array2D</span>
+<span class="p">);</span>
+
+<span class="kt">double</span> <span class="nf">xhdl_read</span><span class="p">(</span>
+  <span class="n">vffiNaturalDimArr_t</span><span class="o">*</span> <span class="n">ptr</span><span class="p">,</span>
+  <span class="n">vffiNaturalDimArr_t</span><span class="o">*</span> <span class="n">name</span>
+<span class="p">);</span>
+
+<span class="kt">void</span> <span class="nf">xhdl_close</span><span class="p">(</span>
+  <span class="n">vffiNaturalDimArr_t</span><span class="o">*</span> <span class="n">ptr</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Given the similarity between <code class="docutils literal notranslate"><span class="pre">void**</span></code> and <code class="docutils literal notranslate"><span class="pre">char**</span></code> (pointers), it might be possible to define a custom subtype of any
+type and use an access type to it as a placeholder for managing C void pointers in VHDL. To be investigated…</p>
+</div>
+</div>
+<div class="section" id="xyce-vhdl-interface">
+<span id="xyce-vhdl"></span><h3>Xyce: VHDL interface<a class="headerlink" href="#xyce-vhdl-interface" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="xyce-package">
+<span id="xyce-pkg"></span><h4><em>xyce</em> package<a class="headerlink" href="#xyce-package" title="Permalink to this headline">¶</a></h4>
+<p>Provides the user interface to co-execute Xyce simulations from VHDL. It is a protected type, which resembles OOP.</p>
+<div class="highlight-vhdl notranslate"><div class="highlight"><pre><span></span><span class="k">use</span> <span class="nn">work.xyce_xhdl_pkg.</span><span class="k">all</span><span class="p">;</span>
+
+<span class="k">package</span> <span class="n">xyce_pkg</span> <span class="k">is</span>
+
+  <span class="k">alias</span> <span class="n">arr2D_t</span> <span class="k">is</span> <span class="nn">work</span><span class="p">.</span><span class="n">xyce_xhdl_pkg</span><span class="p">.</span><span class="n">arr2D_t</span><span class="p">;</span>
+
+  <span class="k">type</span> <span class="n">xyce_t</span> <span class="k">is</span> <span class="n">protected</span>
+    <span class="k">procedure</span> <span class="n">init</span> <span class="p">(</span>
+      <span class="n">id</span>      <span class="o">:</span> <span class="kt">string</span><span class="p">;</span>
+      <span class="n">circuit</span> <span class="o">:</span> <span class="kt">string</span>
+    <span class="p">);</span>
+
+    <span class="k">procedure</span> <span class="n">run</span> <span class="p">(</span>
+      <span class="n">reqT</span> <span class="o">:</span> <span class="n">real</span>
+    <span class="p">);</span>
+
+    <span class="k">procedure</span> <span class="n">run</span> <span class="p">(</span>
+      <span class="n">reqT</span>    <span class="o">:</span> <span class="n">real</span><span class="p">;</span>
+      <span class="n">arrTime</span> <span class="o">:</span> <span class="n">real_vector</span><span class="p">;</span>
+      <span class="n">arrVolt</span> <span class="o">:</span> <span class="n">real_vector</span>
+    <span class="p">);</span>
+
+    <span class="k">procedure</span> <span class="n">run</span> <span class="p">(</span>
+      <span class="n">reqT</span>  <span class="o">:</span> <span class="n">real</span><span class="p">;</span>
+      <span class="n">arr2D</span> <span class="o">:</span> <span class="n">arr2D_t</span>
+    <span class="p">);</span>
+
+    <span class="k">impure</span> <span class="k">function</span> <span class="n">reqT</span> <span class="k">return</span> <span class="n">real</span><span class="p">;</span>
+
+    <span class="k">impure</span> <span class="k">function</span> <span class="n">read</span> <span class="p">(</span>
+      <span class="n">name</span> <span class="o">:</span> <span class="kt">string</span>
+    <span class="p">)</span> <span class="k">return</span> <span class="n">real</span><span class="p">;</span>
+
+    <span class="k">procedure</span> <span class="n">close</span><span class="p">;</span>
+  <span class="k">end</span> <span class="nc">protected</span><span class="p">;</span>
+
+<span class="k">end</span> <span class="nc">xyce_pkg</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="xyce-xhdl-package">
+<span id="xyce-xhdl-pkg"></span><h4><em>xyce_xhdl</em> package<a class="headerlink" href="#xyce-xhdl-package" title="Permalink to this headline">¶</a></h4>
+<p>Provides bindings between VHDL and a foreign language through VHPIDIRECT. This source needs to be included in the design, but users are not expected to use it explicitly.</p>
+<div class="highlight-vhdl notranslate"><div class="highlight"><pre><span></span><span class="k">package</span> <span class="n">xyce_xhdl_pkg</span> <span class="k">is</span>
+
+  <span class="k">function</span> <span class="n">xyce_init</span><span class="p">(</span>
+    <span class="n">id</span>      <span class="o">:</span> <span class="kt">string</span><span class="p">;</span>
+    <span class="n">circuit</span> <span class="o">:</span> <span class="kt">string</span>
+  <span class="p">)</span> <span class="k">return</span> <span class="kt">integer</span><span class="p">;</span>
+  <span class="k">attribute</span> <span class="n">foreign</span> <span class="k">of</span> <span class="n">xyce_init</span> <span class="o">:</span> <span class="k">function</span> <span class="k">is</span> <span class="s">&quot;VHPIDIRECT xhdl_init&quot;</span><span class="p">;</span>
+
+  <span class="k">function</span> <span class="n">xyce_run</span><span class="p">(</span>
+    <span class="n">id</span>      <span class="o">:</span> <span class="kt">string</span><span class="p">;</span>
+    <span class="n">reqTime</span> <span class="o">:</span> <span class="n">real</span>
+  <span class="p">)</span> <span class="k">return</span> <span class="kt">integer</span><span class="p">;</span>
+  <span class="k">attribute</span> <span class="n">foreign</span> <span class="k">of</span> <span class="n">xyce_run</span> <span class="o">:</span> <span class="k">function</span> <span class="k">is</span> <span class="s">&quot;VHPIDIRECT xhdl_run&quot;</span><span class="p">;</span>
+
+  <span class="k">function</span> <span class="n">xyce_run</span><span class="p">(</span>
+    <span class="n">id</span>      <span class="o">:</span> <span class="kt">string</span><span class="p">;</span>
+    <span class="n">reqTime</span> <span class="o">:</span> <span class="n">real</span><span class="p">;</span>
+    <span class="n">arrTime</span> <span class="o">:</span> <span class="n">real_vector</span><span class="p">;</span>
+    <span class="n">arrVolt</span> <span class="o">:</span> <span class="n">real_vector</span>
+  <span class="p">)</span> <span class="k">return</span> <span class="kt">integer</span><span class="p">;</span>
+  <span class="k">attribute</span> <span class="n">foreign</span> <span class="k">of</span> <span class="n">xyce_run</span><span class="p">[</span>
+    <span class="kt">string</span><span class="p">,</span>
+    <span class="n">real</span><span class="p">,</span>
+    <span class="n">real_vector</span><span class="p">,</span>
+    <span class="n">real_vector</span>
+    <span class="k">return</span> <span class="kt">integer</span>
+  <span class="p">]</span> <span class="o">:</span> <span class="k">function</span> <span class="k">is</span> <span class="s">&quot;VHPIDIRECT xhdl_run_1D&quot;</span><span class="p">;</span>
+
+  <span class="k">type</span> <span class="n">arr2D_t</span> <span class="k">is</span> <span class="k">array</span> <span class="p">(</span><span class="kt">natural</span> <span class="k">range</span> <span class="o">&lt;&gt;</span><span class="p">,</span> <span class="kt">natural</span> <span class="k">range</span> <span class="o">&lt;&gt;</span><span class="p">)</span> <span class="k">of</span> <span class="n">real</span><span class="p">;</span>
+  <span class="k">function</span> <span class="n">xyce_run</span><span class="p">(</span>
+    <span class="n">id</span>      <span class="o">:</span> <span class="kt">string</span><span class="p">;</span>
+    <span class="n">reqTime</span> <span class="o">:</span> <span class="n">real</span><span class="p">;</span>
+    <span class="n">arr2D</span>   <span class="o">:</span> <span class="n">arr2D_t</span>
+  <span class="p">)</span> <span class="k">return</span> <span class="kt">integer</span><span class="p">;</span>
+  <span class="k">attribute</span> <span class="n">foreign</span> <span class="k">of</span> <span class="n">xyce_run</span><span class="p">[</span>
+    <span class="kt">string</span><span class="p">,</span>
+    <span class="n">real</span><span class="p">,</span>
+    <span class="n">arr2D_t</span>
+    <span class="k">return</span> <span class="kt">integer</span>
+  <span class="p">]</span> <span class="o">:</span> <span class="k">function</span> <span class="k">is</span> <span class="s">&quot;VHPIDIRECT xhdl_run_2D&quot;</span><span class="p">;</span>
+
+  <span class="k">function</span> <span class="n">xyce_read</span><span class="p">(</span>
+    <span class="n">id</span>   <span class="o">:</span> <span class="kt">string</span><span class="p">;</span>
+    <span class="n">name</span> <span class="o">:</span> <span class="kt">string</span>
+  <span class="p">)</span> <span class="k">return</span> <span class="n">real</span><span class="p">;</span>
+  <span class="k">attribute</span> <span class="n">foreign</span> <span class="k">of</span> <span class="n">xyce_read</span> <span class="o">:</span> <span class="k">function</span> <span class="k">is</span> <span class="s">&quot;VHPIDIRECT xhdl_read&quot;</span><span class="p">;</span>
+
+  <span class="k">procedure</span> <span class="n">xyce_close</span><span class="p">(</span>
+    <span class="n">id</span> <span class="o">:</span> <span class="kt">string</span>
+  <span class="p">);</span>
+  <span class="k">attribute</span> <span class="n">foreign</span> <span class="k">of</span> <span class="n">xyce_close</span> <span class="o">:</span> <span class="k">procedure</span> <span class="k">is</span> <span class="s">&quot;VHPIDIRECT xhdl_close&quot;</span><span class="p">;</span>
+
+<span class="k">end</span> <span class="nc">xyce_xhdl_pkg</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="examples">
+<span id="xyce-egs"></span><h3>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h3>
+<p>Xyce developers provide two versions of the same three examples (<a class="reference external" href="https://github.com/Xyce/Xyce/tree/master/utils/XyceCInterface">utils/XyceCInterface</a>):</p>
+<dl>
+<dt><strong>Python_examples</strong></dt><dd><p>Use <code class="docutils literal notranslate"><span class="pre">xyce_interface.py</span></code> to manage a Xyce simulation from Python. No HDL is used.</p>
+</dd>
+<dt><strong>VPI_examples</strong></dt><dd><p>Use Verilog to trigger the Xyce simulations. However, all the logic is implemented in C.
+As explained in Section 7 of <a class="reference external" href="https://xyce.sandia.gov/downloads/_assets/documents/AppNote-MixedSignal_6.11.pdf">Mixed Signal Simulation with Xyce 6.11</a>:</p>
+<blockquote>
+<div><p>“<em>The primary issue with the VPI capability is the lack of standards compliance. The example (…) uses the C++
+features of the `XyceCInterface` directly. Wrapper functions, that only use ANSI C and the native PLI
+data-types in their function calls, still need to beimplemented.</em>”</p>
+</div></blockquote>
+</dd>
+</dl>
+<p>The examples in this repo are an adaptation of the VPI_examples from Xyce’s repo. Here, VHDL is used through VHPIDIRECT
+bindings, instead of Verilog. The management of the execution flow is handled from VHDL, so that developers don’t need to
+code in C/C++. Regarding data types, native VHDL types are used. Precisely, unconstrained strings and unconstrained
+<code class="docutils literal notranslate"><span class="pre">real_vector</span></code>.</p>
+<div class="section" id="runacircuit">
+<h4><a class="reference external" href="https://github.com/ghdl/ghdl-cosim/blob/master/vhpidirect/vffi_user/xyce/runACircuit">runACircuit</a><a class="headerlink" href="#runacircuit" title="Permalink to this headline">¶</a></h4>
+<p><code class="docutils literal notranslate"><span class="pre">runACircuit</span></code> is the most simple use case, where a single VHDL test bench and a single C file are used. It shows how to
+call Xyce from VHDL, but no data is passed and neither <a class="reference internal" href="#xyce-c"><span class="std std-ref">Xyce: C interface</span></a> nor <a class="reference internal" href="#xyce-vhdl"><span class="std std-ref">Xyce: VHDL interface</span></a> are used.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Currently, <code class="docutils literal notranslate"><span class="pre">XyceCInterface</span></code> requires circuit models to be passed as a path to a file. Providing a pointer to a
+string or using <code class="docutils literal notranslate"><span class="pre">stdin</span></code> is not supported yet. However, the feature has been requested to developers of Xyce and
+it might be available in future versions.</p>
+</div>
+</div>
+<div class="section" id="runacircuitinsteps">
+<h4><a class="reference external" href="https://github.com/ghdl/ghdl-cosim/blob/master/vhpidirect/vffi_user/xyce/runACircuitInSteps">runACircuitInSteps</a><a class="headerlink" href="#runacircuitinsteps" title="Permalink to this headline">¶</a></h4>
+<p><code class="docutils literal notranslate"><span class="pre">runACircuitInSteps</span></code> is based on <a class="reference internal" href="#xyce-c"><span class="std std-ref">Xyce: C interface</span></a> and <a class="reference internal" href="#xyce-vhdl"><span class="std std-ref">Xyce: VHDL interface</span></a>. Precisely, <code class="docutils literal notranslate"><span class="pre">xyce_t</span></code> and
+from <a class="reference internal" href="#xyce-pkg"><span class="std std-ref">xyce package</span></a> is used. This allows controlling the execution flow from VHDL, unlike <code class="docutils literal notranslate"><span class="pre">runACircuit</span></code>
+or the versions in Xyce’s repo; where all the relevant logic is implemented in C and HDL is only used as a trigger.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>See Section 7.1 of <a class="reference external" href="https://xyce.sandia.gov/downloads/_assets/documents/AppNote-MixedSignal_6.11.pdf">Mixed Signal Simulation with Xyce 6.11</a>
+for information regarding <em>known issues with coordinated timestepping</em>.</p>
+</div>
+</div>
+<div class="section" id="runwithdacs">
+<h4><a class="reference external" href="https://github.com/ghdl/ghdl-cosim/blob/master/vhpidirect/vffi_user/xyce/runWithDACs">runWithDACs</a><a class="headerlink" href="#runwithdacs" title="Permalink to this headline">¶</a></h4>
+<p><code class="docutils literal notranslate"><span class="pre">runWithDACs</span></code> is also based on <a class="reference internal" href="#xyce-c"><span class="std std-ref">Xyce: C interface</span></a> and <a class="reference internal" href="#xyce-vhdl"><span class="std std-ref">Xyce: VHDL interface</span></a>. On top of controlling the execution flow, in this example
+DAC/ADC models provided by Xyce are used for passing data between the digital domain and the analog domain. So, the previous
+two examples (<code class="docutils literal notranslate"><span class="pre">runACircuit</span></code> and <code class="docutils literal notranslate"><span class="pre">runACircuitInSteps</span></code>) are not proper digital/analog co-simulations, because there
+is no communication between digital and analog domains. Those examples are provided for illustrative purposes only, as an
+introduction to this one. Here, vectors containing voltage and time need to be passed from VHDL to C. Then, an a value from
+the analog circuit is read and passed to VHDL. Two equivalent implementations/tests are shown:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/ghdl/ghdl-cosim/blob/master/vhpidirect/vffi_user/xyce/runWithDACs/tb_xyce_eg_with_dacs_1D.vhd">tb_xyce_eg_with_dacs_1D</a>: two <cite>real_vector</cite> variables are used for passing an array of time values and an array of voltage values as separate arguments. Checking that the length of both arrays match is done explicitly.</p></li>
+<li><p><a class="reference external" href="https://github.com/ghdl/ghdl-cosim/blob/master/vhpidirect/vffi_user/xyce/runWithDACs/tb_xyce_eg_with_dacs_2D.vhd">tb_xyce_eg_with_dacs_2D</a>: a single multidimensional array of <cite>real</cite> is used for passing time and voltage values in a single argument. As a result, all the vectors are guaranteed to have the same length.</p></li>
+</ul>
+<p>The behaviour of both tests is exactly the same. However, the 2D variant makes it easier to extend the example for handling multiple DACs. Overall, both cases are provided for illustrative purposes, as both 1D and 2D unconstrained arrays are fat pointers and helper functions from <a class="reference external" href="https://github.com/ghdl/ghdl-cosim/blob/master/vhpidirect/vffi_user.h">vffi_user.h</a> are used.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The YADC and YDAC device models in Xyce, are not realistic device models. Important issues like rise/fall times and
+drive/sink currents are not modelled. Hence, they are adequate for artificial transferring signal values between digital
+and analog domains, but those models need to be improved. See Section 5 of <a class="reference external" href="https://xyce.sandia.gov/downloads/_assets/documents/AppNote-MixedSignal_6.11.pdf">Mixed Signal Simulation with Xyce 6.11</a>.</p>
+</div>
+</div>
+<div class="section" id="usage">
+<h4>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h4>
+<p>Two <a class="reference external" href="https://github.com/VUnit/vunit">VUnit</a> scripts are provided: <a class="reference external" href="https://github.com/ghdl/ghdl-cosim/blob/master/vhpidirect/vffi_user/xyce/run_minimal.py">run_minimal.py</a>
+builds and executes <code class="docutils literal notranslate"><span class="pre">runACircuit</span></code>, and <a class="reference external" href="https://github.com/ghdl/ghdl-cosim/blob/master/vhpidirect/vffi_user/xyce/run.py">run.py</a> takes care of the others.</p>
+<p>Since Xyce’s Mixed Signal Interface is an experimental feature yet, specific versions of the tools are required, and
+configuration options need to be correctly chosen for producing shared libraries. In order to make getting a working
+environment easier, a <a class="reference external" href="https://github.com/ghdl/ghdl-cosim/blob/master/docker/xyce.dockerfile">Dockerfile</a> is provided. Moreover, an image is built
+periodically and published as <a class="reference external" href="https://hub.docker.com/r/umarcor/cosim/tags">umarcor/cosim:xyce</a>.
+The image is based on <a class="reference external" href="https://github.com/ghdl/docker">ghdl/vunit:llvm-master</a> and includes GHDL (<code class="docutils literal notranslate"><span class="pre">master</span></code>),
+Python 3, VUnit (<code class="docutils literal notranslate"><span class="pre">master</span></code>) and Xyce.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In these examples, VUnit is used for automatic dependency scanning, incremental builds and unit testing only.
+Other features, such as communication libraries and verification components, are not used.</p>
+<p>Moreover, should <a class="reference external" href="https://github.com/ghdl/ghdl-cosim/blob/master/vhpidirect/vffi_user.h">vffi_user.h</a> be standardized (see <a class="reference external" href="https://umarcor.github.io/ghdl-cosim/vhdl202x/index.html">VHDL DPI/FFI based on GHDL</a>), VUnit would allow testing multiple simulators easily.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>As explained in AppNote <a class="reference external" href="https://www.osti.gov/biblio/1488489-digital-analog-cosimulation-using-cocotb-xyce">Digital/Analog Cosimulation using CocoTB and Xyce</a>,
+cocotb can be used to co-simulate GHDL and Xyce through VPI, as an alternative to using VHPIDIRECT. Such an approach
+might be preferred when Python is to be used as the orchestrator. Moreover, the report introduces an interesting use
+case where digital and analog versions of the same module are used. Unfortunately, sources of that example are not
+publicly available.</p>
+</div>
+</div>
+</div>
+<div class="section" id="gui-features">
+<h3>GUI features<a class="headerlink" href="#gui-features" title="Permalink to this headline">¶</a></h3>
+<p>Neither GHDL nor Xyce provide built-in features for graphical schematic capture or plotting/viewing of simulation
+signals. Fortunately, both of them support generating traces that can be visualised with specific free and open source
+tools. If GHDL is used for generating waveforms, which might include digitalised analog signals, <a class="reference external" href="http://gtkwave.sourceforge.net/">GTKWave</a>
+can be used. Note that GTKWave provides an <em>analog</em> visualization type. Regarding Xyce, see AppNote <a class="reference external" href="https://xyce.sandia.gov/downloads/_assets/documents/AppNote-GedaAndXyce.pdf">Using Open Source Schematic
+Capture Tools With Xyce</a> for information about
+schematic capture and plotting tools. See also <a class="reference external" href="https://github.com/umarcor/pulseview/tree/ghdl/ghdl">Reading waveforms from HDL simulators with PulseView</a>
+and <a class="reference external" href="https://github.com/dbhi/fpconv">Data type exploration and visualization in arithmetic algorithms/circuits</a>.</p>
+</div>
+<div class="section" id="analog-modelling">
+<h3>Analog modelling<a class="headerlink" href="#analog-modelling" title="Permalink to this headline">¶</a></h3>
+<p>Xyce supports Verilog-A through Automatic Device Model Synthesizer (ADMS), an open-source translator. Xyce/ADMS is a
+set of XML templates for use with ADMS, which allows to emit C++ for a device model. See <a class="reference external" href="https://xyce.sandia.gov/documentation/XyceADMSGuide.html">Xyce/ADMS Users Guide</a>.</p>
+<p>Unfortunately, for VHDL-AMS there is neither built-in support nor a similar translation tool (yet). See related
+discussion in <a class="reference external" href="https://github.com/ghdl/ghdl/issues/1052">ghdl/ghdl#1052</a>.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="other.html" class="btn btn-neutral float-right" title="Other co-simulation projects" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="arrays.html" class="btn btn-neutral float-left" title="Arrays" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Tristan Gingold and contributors
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/buildthedocs/sphinx.theme">theme</a>
+    
+    provided by <a href="https://buildthedocs.github.io">Build the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

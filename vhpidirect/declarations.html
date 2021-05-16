@@ -1,0 +1,342 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Type declarations &mdash; GHDL-cosim latest documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+
+  
+  
+    <link rel="shortcut icon" href="../_static/icon.ico"/>
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Wrapping a simulation" href="wrapping.html" />
+    <link rel="prev" title="Introduction" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                latest
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../ci.html">Continuous Integration</a></li>
+</ul>
+<p class="caption"><span class="caption-text">VHPIDIRECT</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">Introduction</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Type declarations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#restrictions-on-type-declarations">Restrictions on type declarations</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="wrapping.html">Wrapping a simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linking.html">Linking object files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dynamic.html">Dynamic loading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="grt.html">Using GRT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/index.html">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="notebook/index.html">Notebook</a></li>
+</ul>
+<p class="caption"><span class="caption-text">VPI</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../vpi/index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../vpi/examples/index.html">Examples</a></li>
+</ul>
+<p class="caption"><span class="caption-text">VPHI</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../vhpi/index.html">Introduction</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">GHDL-cosim</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Type declarations</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            
+              <a href="https://github.com/ghdl/ghdl-cosim/blob/master/doc/vhpidirect/declarations.rst" class="fa fa-github"> Edit on GitHub</a>
+            
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="type-declarations">
+<span id="cosim-vhpidirect-declarations"></span><h1>Type declarations<a class="headerlink" href="#type-declarations" title="Permalink to this headline">¶</a></h1>
+<p>Only subprograms (<strong>functions</strong> or <strong>procedures</strong>) can be imported using the foreign
+attribute. In the following minimal <a class="reference internal" href="examples/quickstart.html#cosim-vhpidirect-examples-quickstart-math"><span class="std std-ref">example</span></a>,
+the <cite>sin</cite> function is imported:</p>
+<div class="highlight-VHDL notranslate"><div class="highlight"><pre><span></span><span class="k">package</span> <span class="n">math</span> <span class="k">is</span>
+  <span class="k">function</span> <span class="n">sin</span> <span class="p">(</span><span class="n">v</span> <span class="o">:</span> <span class="n">real</span><span class="p">)</span> <span class="k">return</span> <span class="n">real</span><span class="p">;</span>
+  <span class="k">attribute</span> <span class="n">foreign</span> <span class="k">of</span> <span class="n">sin</span> <span class="o">:</span> <span class="k">function</span> <span class="k">is</span> <span class="s">&quot;VHPIDIRECT sin&quot;</span><span class="p">;</span>
+<span class="k">end</span> <span class="nc">math</span><span class="p">;</span>
+
+<span class="k">package</span> <span class="k">body</span> <span class="n">math</span> <span class="k">is</span>
+  <span class="k">function</span> <span class="n">sin</span> <span class="p">(</span><span class="n">v</span> <span class="o">:</span> <span class="n">real</span><span class="p">)</span> <span class="k">return</span> <span class="n">real</span> <span class="k">is</span>
+  <span class="k">begin</span>
+    <span class="k">assert</span> <span class="n">false</span> <span class="k">severity</span> <span class="n">failure</span><span class="p">;</span>
+  <span class="k">end</span> <span class="nc">sin</span><span class="p">;</span>
+<span class="k">end</span> <span class="nc">math</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Requirements:</p>
+<ul class="simple">
+<li><p>A subprogram is made foreign if the <code class="docutils literal notranslate"><span class="pre">foreign</span></code> attribute decorates
+it.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">attribute</span></code> specification must be in the same declarative part as the
+subprogram and must be after it. This is a general rule for specifications.</p></li>
+<li><p>The value of the specification must be a locally static string.</p></li>
+<li><p>The value of the attribute must start with <code class="docutils literal notranslate"><span class="pre">VHPIDIRECT</span></code> (an upper-case keyword
+followed by one or more blanks). The linkage name of the subprogram follows. The
+path to a shared library can be optionally specified between the keyword and the
+name of the subprogram (see <a class="reference internal" href="examples/shared.html#cosim-vhpidirect-examples-shared-shlib"><span class="std std-ref">shlib</span></a>).</p></li>
+<li><p>Even when a subprogram is foreign, its body must be present in VHDL. However, since
+it won’t be called, you can make it empty or simply put an assertion. If the body
+is ever executed, that will mean that the foreign resource was not properly linked.</p></li>
+<li><p>Except for resources in the standard C library (which is linked by default), the
+object file with the source code for foreign subprogram(s) must then be linked to
+GHDL, expanded upon in <a class="reference internal" href="linking.html#cosim-vhpidirect-linking"><span class="std std-ref">Linking object files</span></a>.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Attribute <code class="docutils literal notranslate"><span class="pre">foreign</span></code> is declared in the 1993 revision of the <code class="docutils literal notranslate"><span class="pre">std.standard</span></code> package.
+Therefore, it cannot be used in VHDL 1987.</p>
+</div>
+<div class="section" id="restrictions-on-type-declarations">
+<span id="restrictions-on-foreign-declarations"></span><h2>Restrictions on type declarations<a class="headerlink" href="#restrictions-on-type-declarations" title="Permalink to this headline">¶</a></h2>
+<p>Any subprogram can be imported. GHDL puts no restrictions on foreign
+subprograms. However, the representation of a type or of an interface in a
+foreign language may be obscure. Most non-composite types are easily imported:</p>
+<dl class="simple">
+<dt><em>integer types</em></dt><dd><p>32 bit word. Generally, <cite>int</cite> for <cite>C</cite> or <cite>Integer</cite> for <cite>Ada</cite>.</p>
+</dd>
+<dt><em>physical types</em></dt><dd><p>64 bit word. Generally, <cite>long long</cite> for <cite>C</cite> or <cite>Long_Long_Integer</cite> for <cite>Ada</cite>.</p>
+</dd>
+<dt><em>floating point types</em></dt><dd><p>64 bit floating point word. Generally, <cite>double</cite> for <cite>C</cite> or <cite>Long_Float</cite> for <cite>Ada</cite>.</p>
+</dd>
+<dt><em>enumeration types</em></dt><dd><p>8 bit word, or, if the number of literals is greater than 256, by a 32 bit word.
+There is no corresponding C type, since arguments are not promoted.</p>
+</dd>
+</dl>
+<p>Non-composite types are passed by value. For the <cite>in</cite> mode (default), this corresponds
+to the <cite>C</cite> or <cite>Ada</cite> mechanism. <cite>out</cite> and <cite>inout</cite> interfaces are gathered in a record and
+this record is passed by reference as the first argument to the subprogram. As a
+consequence, it is not suggested to use <cite>out</cite> and/or <cite>inout</cite> modes in foreign
+subprograms, since they are not portable.</p>
+<p>Composite types:</p>
+<ul class="simple">
+<li><p>Records are represented like a <cite>C</cite> structure and are passed by reference to subprograms.</p></li>
+<li><p>Arrays with static bounds are represented like a <cite>C</cite> array, whose length is the number
+of elements, and are passed by reference to subprograms.</p></li>
+<li><p>Unconstrained arrays are represented by a fat pointer. It is not suggested to use
+unconstrained arrays in foreign subprograms.</p></li>
+<li><p>Accesses to an unconstrained array are fat pointers. Other accesses correspond to an
+address/pointer and are passed to a subprogram like other non-composite types.</p></li>
+<li><p>Files are represented by a 32 bit word, which corresponds to an index in a table.</p></li>
+</ul>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>The internal representation of arrays is little-endian left-to-right, regardless of the
+bounds. As a result, when used from C, indexes always correspond to direction <code class="docutils literal notranslate"><span class="pre">to</span></code>; thus,
+indexes for arrays with direction <code class="docutils literal notranslate"><span class="pre">downto</span></code> are reversed between VHDL and C:</p>
+<div class="highlight-vhdl notranslate"><div class="highlight"><pre><span></span><span class="k">constant</span> <span class="n">stdv</span><span class="o">:</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">3</span> <span class="k">downto</span> <span class="mi">0</span><span class="p">)</span> <span class="o">:=</span> <span class="s">&quot;UX10&quot;</span><span class="p">;</span> <span class="c1">-- a(0) in VHDL corresponds to a[3] in C, both print &#39;0&#39;</span>
+<span class="k">constant</span> <span class="n">stdv</span><span class="o">:</span> <span class="kt">std_logic_vector</span><span class="p">(</span><span class="mi">0</span> <span class="k">to</span> <span class="mi">3</span><span class="p">)</span>     <span class="o">:=</span> <span class="s">&quot;UX10&quot;</span><span class="p">;</span> <span class="c1">-- a(0) in VHDL corresponds to a[0] in C, both print &#39;U&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>Since both constrained arrays and accesses to constrained arrays are passed by reference,
+distinct VHDL types are mapped to the same types in C. For example, an array of integers and
+an access to array of integers are both passed as <code class="docutils literal notranslate"><span class="pre">int*</span></code>.</p>
+<p>As a result, it is typically possible to reuse the same C implementation for handling VHDL
+arrays/records or their accesses/pointers. See, for example, <a class="reference internal" href="examples/arrays.html#cosim-vhpidirect-examples-arrays-intvector-vhdlsized"><span class="std std-ref">Sized in VHDL</span></a>
+and/or <a class="reference internal" href="examples/quickstart.html#cosim-vhpidirect-examples-quickstart-shrecord"><span class="std std-ref">shrecord</span></a>.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="wrapping.html" class="btn btn-neutral float-right" title="Wrapping a simulation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="Introduction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Tristan Gingold and contributors
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/buildthedocs/sphinx.theme">theme</a>
+    
+    provided by <a href="https://buildthedocs.github.io">Build the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
