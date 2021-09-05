@@ -27,6 +27,8 @@ Co-simulation with GHDL
 
 .. raw:: html
 
+    <br>
+
     <p style="text-align: center;">
       <a title="GitHub Repository" href="https://github.com/ghdl/ghdl-cosim"><img src="https://img.shields.io/badge/-ghdl/ghdl--cosim-323131.svg?longCache=true&style=flat-square&logo=github"></a><!--
       -->
