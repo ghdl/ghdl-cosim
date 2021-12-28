@@ -22,9 +22,4 @@ if [ "$OS" = "Windows_NT" ]; then
 fi
 
 echo "> Execute tb"
-if [ `ghdl version | grep mcode | wc -l` = "1" ]; then
-  # if ghdl compiled with mcode, tb executable will not exist
-  ghdl -r tb --vpi=./vpi.vpi
-else
-  ./tb --vpi=./vpi.vpi
-fi
+ghdl -r tb --vpi=./vpi.vpi
