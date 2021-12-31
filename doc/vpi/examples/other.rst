@@ -26,12 +26,15 @@ GTKWave, as in a traditional workflow. Available peripherals are 7 segment displ
    :align: center
    :target: https://gitlab.ensta-bretagne.fr/bollenth/ghdl-vpi-virtual-board
 
-GHDL-Cocotb Interactive Simulation
-==================================
+GHDL-Cocotb GUI Simulation
+==========================
 
-`GHDL-Cocotb interactive simulation <https://blog.chuckstechtalk.com/software/2021/12/27/interactive-vhdl-testbench.html>`__ is a VPI application that
-demonstrates how to create a Python-based interactive simulation. Like GHDL VPI virtual board, it provides a testbench and a matching GUI for testing
-a design, instead of examining waveforms. Unlike GHDL VPI virtual board, using Python makes interactive GUI creation an easier task.
+`GHDL-Cocotb GUI Simulation <https://blog.chuckstechtalk.com/software/2021/12/27/interactive-vhdl-testbench.html>`__ is a VPI application that
+demonstrates how to create a Python-based interactive GUI simulation using ghdl, cocotb, and pygame. It provides a
+testbench and a matching GUI with I/O peripherals for testing a design, instead of examining waveforms. While 
+similar to the `GHDL VPI virtual board <https://gitlab.ensta-bretagne.fr/bollenth/ghdl-vpi-virtual-board>`__ example, using
+`cocotb <https://github.com/cocotb/cocotb>`__ and `pygame <https://www.pygame.org>__` makes interactive GUI creation more dynamic
+than using a compiled language (such as C++).
 
 .. image:: https://github.com/chuckb/ghdl-interactive-sim/raw/8a466215dd18c6c809dd96f8d03fa53cad8417c2/test/images/screen_shot.png
    :align: center
