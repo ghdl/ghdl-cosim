@@ -32,9 +32,9 @@ Co-simulation with GHDL
     <p style="text-align: center;">
       <a title="GitHub Repository" href="https://github.com/ghdl/ghdl-cosim"><img src="https://img.shields.io/badge/-ghdl/ghdl--cosim-323131.svg?longCache=true&style=flat-square&logo=github"></a><!--
       -->
-      <a title="GHDL documentation" href="http://ghdl.github.io/ghdl"><img src="https://img.shields.io/website.svg?label=doc:%20ghdl&longCache=true&style=flat-square&url=http%3A%2F%2Fghdl.github.io%2Fghdl%2Findex.html"></a><!--
+      <a title="GHDL documentation" href="http://ghdl.github.io/ghdl"><img src="https://img.shields.io/website.svg?label=ghdl.github.io/ghdl&longCache=true&style=flat-square&url=http%3A%2F%2Fghdl.github.io%2Fghdl%2Findex.html&logo=GitHub&logoColor=fff"></a><!--
       -->
-      <a title="Join the chat at https://gitter.im/ghdl1/Lobby" href="https://gitter.im/ghdl1/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge"><img src="https://img.shields.io/badge/chat-on%20gitter-4db797.svg?longCache=true&style=flat-square&logo=gitter&logoColor=e8ecef"></a><!--
+      <a title="Join the chat at https://gitter.im/ghdl1/Lobby" href="https://gitter.im/ghdl1/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge"><img src="https://img.shields.io/badge/Chat-on%20gitter-4db797.svg?longCache=true&style=flat-square&logo=gitter&logoColor=e8ecef"></a><!--
       -->
     </p>
 
