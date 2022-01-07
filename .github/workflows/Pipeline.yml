@@ -154,12 +154,12 @@ jobs:
       with:
         msystem: MINGW64
         update: true
-        install: >
-          mingw-w64-x86_64-python-pip
-          mingw-w64-x86_64-python-numpy
-          mingw-w64-x86_64-python-matplotlib
-          mingw-w64-x86_64-openssl
-          mingw-w64-x86_64-dlfcn
+        pacboy: >
+          python-pip:p
+          python-numpy:p
+          python-matplotlib:p
+          openssl:p
+          dlfcn:p
 
     - name: '⚙️ Setup GHDL (LLVM)'
       uses: ghdl/setup-ghdl-ci@master
@@ -200,13 +200,13 @@ jobs:
       with:
         msystem: MINGW64
         update: true
-        install: >
-          mingw-w64-x86_64-ghdl-llvm
-          mingw-w64-x86_64-python-pip
-          mingw-w64-x86_64-python-numpy
-          mingw-w64-x86_64-python-matplotlib
-          mingw-w64-x86_64-openssl
-          mingw-w64-x86_64-dlfcn
+        pacboy: >
+          ghdl-llvm:p
+          python-pip:p
+          python-numpy:p
+          python-matplotlib:p
+          openssl:p
+          dlfcn:p
 
     - name: '🐍 Install dependencies'
       run: python -m pip install --progress-bar off pytest vunit_hdl
