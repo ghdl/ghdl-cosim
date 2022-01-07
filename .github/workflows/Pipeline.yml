@@ -1,4 +1,4 @@
-name: 'test'
+name: Pipeline
 
 on:
   push:
@@ -11,6 +11,27 @@ env:
   CI: true
 
 jobs:
+
+
+  doc:
+    name: '📓 Docs'
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: '🧰 Checkout'
+      uses: actions/checkout@v2
+
+    - name: '📓 BuildTheDocs (BTD)'
+      uses: buildthedocs/btd@v0
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        skip-deploy: github.event_name == 'pull_request'
+
+    - name: '📤 Upload artifact: HTML'
+      uses: actions/upload-artifact@master
+      with:
+        name: doc
+        path: doc/_build/html
 
 
   xyce-docker:
