@@ -3,6 +3,9 @@ name: 'doc'
 on:
   push:
   pull_request:
+  schedule:
+    - cron: '0 15 * * *'
+  workflow_dispatch:
 
 jobs:
 
