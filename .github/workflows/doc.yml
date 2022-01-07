@@ -9,7 +9,6 @@ jobs:
 
   btd:
     name: '📓 Docs'
-    if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     steps:
 
@@ -20,6 +19,7 @@ jobs:
       uses: buildthedocs/btd@v0
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
+        skip-deploy: github.event_name == 'pull_request'
 
     - name: '📤 Upload artifact: HTML'
       uses: actions/upload-artifact@master
