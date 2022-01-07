@@ -22,4 +22,4 @@ if [ "$OS" = "Windows_NT" ]; then
 fi
 
 echo "> Execute tb"
-./tb --vpi=./vpi.vpi
+ghdl -r tb --vpi=./vpi.vpi
