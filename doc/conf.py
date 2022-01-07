@@ -3,50 +3,31 @@
 import sys, re
 from os.path import abspath
 from pathlib import Path
-from json import dump, loads
+from json import loads as json_loads
 
-# If extensions (or modules to document with autodoc) are in another directory,
-# add these directories to sys.path here. If the directory is relative to the
-# documentation root, use os.path.abspath to make it absolute, like shown here.
+
+ROOT = Path(__file__).resolve().parent
+
 sys.path.insert(0, abspath('.'))
 
 # -- General configuration ------------------------------------------------
 
-# If your documentation needs a minimal Sphinx version, state it here.
-needs_sphinx = '1.5'
-
 extensions = [
-    # Standard Sphinx extensions
-    'recommonmark',
     'sphinx.ext.extlinks',
     'sphinx.ext.intersphinx',
-    'sphinx.ext.todo',
-    'sphinx.ext.graphviz',
-    'sphinx.ext.mathjax',
-    'sphinx.ext.ifconfig',
-    'sphinx.ext.viewcode',
 ]
 
 templates_path = ['_templates']
 
-# The suffix(es) of source filenames.
 source_suffix = {
     '.rst': 'restructuredtext',
-    # '.txt': 'markdown',
-    '.md': 'markdown',
 }
 
-# The master toctree document.
 master_doc = 'index'
 
-# General information about the project.
 project = u'GHDL-cosim'
 copyright = u'2020, Tristan Gingold and contributors'
 author = u'Tristan Gingold and contributors'
-
-# The version info for the project you're documenting, acts as replacement for
-# |version| and |release|, also used in various other places throughout the
-# built documents.
 
 version = "latest"
 release = version  # The full version, including alpha/beta/rc tags.
@@ -57,13 +38,7 @@ release = version  # The full version, including alpha/beta/rc tags.
 # Usually you set "language" from the command line for these cases.
 language = None
 
-# List of patterns, relative to source directory, that match files and
-# directories to ignore when looking for source files.
 exclude_patterns = []
-
-# If true, `todo` and `todoList` produce output, else they produce nothing.
-todo_include_todos = True
-todo_link_only = True
 
 # reST settings
 prologPath = "prolog.inc"
@@ -77,19 +52,21 @@ except Exception as ex:
 
 # -- Options for HTML output ----------------------------------------------
 
-html_theme_options = {
-    'logo_only': True,
-    'home_breadcrumbs': False,
-    'vcs_pageview_mode': 'blob',
-}
-
 html_context = {}
-ctx = Path(__file__).resolve().parent / 'context.json'
+ctx = ROOT / 'context.json'
 if ctx.is_file():
-    html_context.update(loads(ctx.open('r').read()))
+    html_context.update(json_loads(ctx.open('r').read()))
 
-html_theme_path = ["."]
-html_theme = "_theme"
+if (ROOT / "_theme").is_dir():
+    html_theme_path = ["."]
+    html_theme = "_theme"
+    html_theme_options = {
+        'logo_only': True,
+        'home_breadcrumbs': False,
+        'vcs_pageview_mode': 'blob',
+    }
+else:
+    html_theme = "alabaster"
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
@@ -99,7 +76,6 @@ html_static_path = ['_static']
 html_logo = str(Path(html_static_path[0]) / "logo.png")
 html_favicon = str(Path(html_static_path[0]) / "icon.ico")
 
-# Output file base name for HTML help builder.
 htmlhelp_basename = 'GHDLcosimdoc'
 
 # -- Options for LaTeX output ---------------------------------------------
@@ -145,7 +121,7 @@ extlinks = {
    'ghdlsharp':  ('https://github.com/ghdl/ghdl/issues/%s', 'ghdl#'),
    'ghdlissue':  ('https://github.com/ghdl/ghdl/issues/%s', 'issue #'),
    'ghdlpull':   ('https://github.com/ghdl/ghdl/pull/%s', 'pull request #'),
-   'ghdlsrc':    ('https://github.com/ghdl/ghdl/blob/master/src/%s', None),
+   'ghdlsrc':    ('https://github.com/ghdl/ghdl/blob/master/src/%s', ''),
    'cosimsharp': ('https://github.com/ghdl/ghdl-cosim/issues/%s', 'ghdl-cosim#'),
-   'cosimtree':  ('https://github.com/ghdl/ghdl-cosim/blob/master/%s', None),
+   'cosimtree':  ('https://github.com/ghdl/ghdl-cosim/blob/master/%s', ''),
 }
