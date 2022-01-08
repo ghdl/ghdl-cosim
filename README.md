@@ -14,7 +14,7 @@
   -->
   <a title="'Pipeline' workflow status" href="https://github.com/ghdl/ghdl-cosim/actions?query=workflow%3APipeline"><img alt="'Pipeline' workflow status" src="https://img.shields.io/github/workflow/status/ghdl/ghdl-cosim/Pipeline/master?longCache=true&style=flat-square&label=Pipeline&logo=Github%20Actions&logoColor=fff"></a><!--
   -->
-  <a title="Source Code License" href="https://github.com/ghdl/ghdl-cosim"><img src="https://img.shields.io/badge/Code-Aoache--2.0-green?longCache=true&style=flat-square&logo=Apache"></a><!--
+  <a title="Source Code License" href="https://github.com/ghdl/ghdl-cosim"><img src="https://img.shields.io/badge/Code-Apache--2.0-green?longCache=true&style=flat-square&logo=Apache"></a><!--
   -->
   <a title="Documentation License" href="https://ghdl.github.io/ghdl-cosim"><img src="https://img.shields.io/badge/Doc-CC--BY%204.0-bf7600?longCache=true&style=flat-square&logo=CreativeCommons"></a><!--
   -->

@@ -32,7 +32,7 @@ Co-simulation with GHDL
     <p style="text-align: center;">
       <a title="GitHub Repository" href="https://github.com/ghdl/ghdl-cosim"><img src="https://img.shields.io/badge/-ghdl/ghdl--cosim-323131.svg?longCache=true&style=flat-square&logo=github"></a><!--
       -->
-      <a title="Source Code License" href="License.html"><img src="https://img.shields.io/badge/Code-Aoache--2.0-green?longCache=true&style=flat-square&logo=Apache"></a><!--
+      <a title="Source Code License" href="License.html"><img src="https://img.shields.io/badge/Code-Apache--2.0-green?longCache=true&style=flat-square&logo=Apache"></a><!--
       -->
       <a title="Documentation License" href="Doc-License.html"><img src="https://img.shields.io/badge/Doc-CC--BY%204.0-bf7600?longCache=true&style=flat-square&logo=CreativeCommons"></a><!--
       -->
