@@ -26,7 +26,7 @@ source_suffix = {
 master_doc = 'index'
 
 project = u'GHDL-cosim'
-copyright = u'2020, Tristan Gingold and contributors'
+copyright = u'2020-2022, Tristan Gingold and contributors'
 author = u'Tristan Gingold and contributors'
 
 version = "latest"
