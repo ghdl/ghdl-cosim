@@ -103,6 +103,7 @@ COPY --from=build /tmp/xyce/ /
 RUN apt-get update -qq && \
 DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends \
   ca-certificates \
+  libamd2 \
   libgfortran5 \
   libfftw3-3 \
   libblas3 \
