@@ -12,7 +12,7 @@
 <p align="center">
   <a title="Join the chat at https://gitter.im/ghdl1/Lobby" href="https://gitter.im/ghdl1/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge"><img src="https://img.shields.io/badge/Chat-on%20gitter-4db797.svg?longCache=true&style=flat-square&logo=gitter&logoColor=e8ecef"></a><!--
   -->
-  <a title="'Pipeline' workflow status" href="https://github.com/ghdl/ghdl-cosim/actions?query=workflow%3APipeline"><img alt="'Pipeline' workflow status" src="https://img.shields.io/github/workflow/status/ghdl/ghdl-cosim/Pipeline/master?longCache=true&style=flat-square&label=Pipeline&logo=Github%20Actions&logoColor=fff"></a><!--
+  <a title="'Pipeline' workflow status" href="https://github.com/ghdl/ghdl-cosim/actions/workflows/Pipeline.yml"><img alt="'Pipeline' workflow status" src="https://img.shields.io/github/actions/workflow/status/ghdl/ghdl-cosim/Pipeline.yml?branch=master&longCache=true&style=flat-square&label=Pipeline&logo=Github%20Actions&logoColor=fff"></a><!--
   -->
   <a title="Source Code License" href="https://github.com/ghdl/ghdl-cosim"><img src="https://img.shields.io/badge/Code-Apache--2.0-green?longCache=true&style=flat-square&logo=Apache"></a><!--
   -->
