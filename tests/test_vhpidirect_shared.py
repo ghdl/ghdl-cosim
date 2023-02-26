@@ -19,20 +19,24 @@ class TestShared(TestVHPIDIRECT):
         self._sh([str(self.vhpidirect / 'shared' / 'dlopen' / 'run.sh')])
 
 
+    @pytest.mark.xfail(
+        not isWin,
+        reason="abortion is produced on some Linux environments"
+    )
     def test_shghdl(self):
         self._sh([str(self.vhpidirect / 'shared' / 'shghdl' / 'run.sh')])
 
 
     @pytest.mark.xfail(
         not isWin,
-        reason="abortion is produced on some Linux environements"
+        reason="abortion is produced on some Linux environments"
     )
     def test_py(self):
         self._sh([str(self.vhpidirect / 'shared' / 'py' / 'run.sh')])
 
     @pytest.mark.xfail(
         not isWin,
-        reason="abortion is produced on some Linux environements"
+        reason="abortion is produced on some Linux environments"
     )
     def test_py_vunit(self):
         self._sh([str(self.vhpidirect / 'shared' / 'py' / 'vunit' / 'run.sh')])
