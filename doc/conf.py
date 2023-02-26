@@ -17,8 +17,6 @@ extensions = [
     'sphinx.ext.intersphinx',
 ]
 
-templates_path = ['_templates']
-
 source_suffix = {
     '.rst': 'restructuredtext',
 }
@@ -26,7 +24,7 @@ source_suffix = {
 master_doc = 'index'
 
 project = u'GHDL-cosim'
-copyright = u'2020-2022, Tristan Gingold and contributors'
+copyright = u'2020-2023, Tristan Gingold and contributors'
 author = u'Tristan Gingold and contributors'
 
 version = "latest"
@@ -57,26 +55,12 @@ ctx = ROOT / 'context.json'
 if ctx.is_file():
     html_context.update(json_loads(ctx.open('r').read()))
 
-if (ROOT / "_theme").is_dir():
-    html_theme_path = ["."]
-    html_theme = "_theme"
-    html_theme_options = {
-        'logo_only': True,
-        'home_breadcrumbs': False,
-        'vcs_pageview_mode': 'blob',
-    }
-else:
-    html_theme = "alabaster"
+html_theme = "furo"
 
-# Add any paths that contain custom static files (such as style sheets) here,
-# relative to this directory. They are copied after the builtin static files,
-# so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
 
 html_logo = str(Path(html_static_path[0]) / "logo.png")
 html_favicon = str(Path(html_static_path[0]) / "icon.ico")
-
-htmlhelp_basename = 'GHDLcosimdoc'
 
 # -- Options for LaTeX output ---------------------------------------------
 
@@ -118,10 +102,10 @@ intersphinx_mapping = {
 # -- Sphinx.Ext.ExtLinks --------------------------------------------------
 extlinks = {
    'wikipedia':  ('https://en.wikipedia.org/wiki/%s', None),
-   'ghdlsharp':  ('https://github.com/ghdl/ghdl/issues/%s', 'ghdl#'),
-   'ghdlissue':  ('https://github.com/ghdl/ghdl/issues/%s', 'issue #'),
-   'ghdlpull':   ('https://github.com/ghdl/ghdl/pull/%s', 'pull request #'),
-   'ghdlsrc':    ('https://github.com/ghdl/ghdl/blob/master/src/%s', ''),
-   'cosimsharp': ('https://github.com/ghdl/ghdl-cosim/issues/%s', 'ghdl-cosim#'),
-   'cosimtree':  ('https://github.com/ghdl/ghdl-cosim/blob/master/%s', ''),
+   'ghdlsharp':  ('https://github.com/ghdl/ghdl/issues/%s', 'ghdl#%s'),
+   'ghdlissue':  ('https://github.com/ghdl/ghdl/issues/%s', 'issue #%s'),
+   'ghdlpull':   ('https://github.com/ghdl/ghdl/pull/%s', 'pull request #%s'),
+   'ghdlsrc':    ('https://github.com/ghdl/ghdl/blob/master/src/%s', '%s'),
+   'cosimsharp': ('https://github.com/ghdl/ghdl-cosim/issues/%s', 'ghdl-cosim#%s'),
+   'cosimtree':  ('https://github.com/ghdl/ghdl-cosim/blob/master/%s', '%s'),
 }
