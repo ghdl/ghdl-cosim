@@ -19,7 +19,7 @@ jobs:
     steps:
 
     - name: '🧰 Checkout'
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: '📓 BuildTheDocs (BTD)'
       uses: buildthedocs/btd@v0
@@ -42,7 +42,7 @@ jobs:
     steps:
 
     - name: '🧰 Checkout'
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: '⚙️ Setup .github/bin'
       run: echo "$(pwd)/.github/bin" >> $GITHUB_PATH
@@ -74,7 +74,7 @@ jobs:
     steps:
 
     - name: '🧰 Checkout'
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: '⚙️ Setup .github/bin'
       run: echo "$(pwd)/.github/bin" >> $GITHUB_PATH
@@ -104,7 +104,7 @@ jobs:
     steps:
 
     - name: '🧰 Checkout'
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: '⚙️ Setup GHDL (LLVM)'
       uses: ghdl/setup-ghdl-ci@master
@@ -147,7 +147,7 @@ jobs:
     steps:
 
     - name: '🧰 Checkout'
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: '🟪 Setup MSYS2'
       uses: msys2/setup-msys2@v2
@@ -193,7 +193,7 @@ jobs:
     steps:
 
     - name: '🧰 Checkout'
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: '🟪 Setup MSYS2'
       uses: msys2/setup-msys2@v2
@@ -222,7 +222,7 @@ jobs:
     steps:
 
     - name: '🧰 Checkout'
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: '⚙️ Setup GHDL (LLVM)'
       uses: ghdl/setup-ghdl-ci@master
@@ -242,7 +242,7 @@ jobs:
     steps:
 
     - name: '🧰 Checkout'
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: '🟪 Setup MSYS2'
       uses: msys2/setup-msys2@v2
