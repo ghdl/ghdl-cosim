@@ -26,4 +26,6 @@ Subdirs in [vhpidirect](./vhpidirect) and [vpi](./vpi) contain groups of example
 `run.sh` script in each subdir in order to build and execute the group of examples. In some cases, there are further subdirs with
 additional examples. Explanations are available in the [docs](https://ghdl.github.io/ghdl-cosim).
 
+The project [GHDL Verilator Interface](https://github.com/miree/gvi) makes use of VHPIDIRECT to integrate Verilog modules into VHDL simulations through automatically generated interface code.
+
 *This repository was created recently and multiple existing examples are not published yet. Find on-going work in issue [#1](https://github.com/ghdl/ghdl-cosim/issues/1) and in [open Pull Requests](https://github.com/ghdl/ghdl-cosim/pulls)*.
