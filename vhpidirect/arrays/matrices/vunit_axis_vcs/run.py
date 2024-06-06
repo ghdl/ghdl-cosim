@@ -2,6 +2,7 @@ from pathlib import Path
 from vunit import VUnit
 
 VU = VUnit.from_argv(vhdl_standard="2008")
+VU.add_vhdl_builtins()
 VU.add_verification_components()
 
 ROOT = Path(__file__).resolve().parent

@@ -27,6 +27,7 @@ def post_func(results):
 ROOT = Path(__file__).resolve().parent
 
 vu = VUnit.from_argv(vhdl_standard=getenv('VUNIT_VHDL_STANDARD', '2008'))
+vu.add_vhdl_builtins()
 
 lib = vu.add_library('lib').add_source_files(str(ROOT / 'tb.vhd'))
 

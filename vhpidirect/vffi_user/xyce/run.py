@@ -6,6 +6,7 @@ from vunit import VUnit
 RUN = Path(__file__).parent.resolve()
 
 VU = VUnit.from_argv(vhdl_standard="2008")
+VU.add_vhdl_builtins()
 
 for PRJ in ["runACircuitInSteps", "runWithDACs"]:
     LIB = VU.add_library(PRJ)
