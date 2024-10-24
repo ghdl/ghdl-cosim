@@ -1,0 +1,617 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" /><link rel="next" title="FFI/DPI Header" href="vffi_user.html" /><link rel="prev" title="Shared libs and dynamic loading" href="shared.html" />
+
+    <link rel="shortcut icon" href="../../_static/icon.ico"/><!-- Generated with Sphinx 7.2.6 and Furo 2024.08.06 -->
+        <title>Arrays - GHDL-cosim latest documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=354aac6f" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=302659d7" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../index.html"><div class="brand">GHDL-cosim latest documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="../../_static/logo.png" alt="Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text">GHDL-cosim latest documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../ci.html">Continuous Integration</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">VHPIDIRECT</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../declarations.html">Type declarations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wrapping.html">Wrapping a simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../linking.html">Linking object files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dynamic.html">Dynamic loading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../grt.html">Using GRT</a></li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Examples</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Examples</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="quickstart.html">Quick Start</a></li>
+<li class="toctree-l2"><a class="reference internal" href="grt.html">GRT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="shared.html">Shared libs and dynamic loading</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Arrays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vffi_user.html">FFI/DPI Header</a></li>
+<li class="toctree-l2"><a class="reference internal" href="other.html">Other co-simulation projects</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../notebook/index.html">Notebook</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Notebook</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../notebook/howtouseghdlfromc.html">How to use GHDL from an external C program?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebook/memorylayout.html">Memory Layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebook/mistakes.html">Common mistakes</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">VPI</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../vpi/index.html">Introduction</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../vpi/examples/index.html">Examples</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Examples</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../vpi/examples/quickstart.html">Quick Start</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../vpi/examples/other.html">Other co-simulation projects</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">VPHI</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../vhpi/index.html">Introduction</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../License.html">Apache License 2.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc-License.html">Creative Commons Attribution 4.0 International</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="../../_sources/vhpidirect/examples/arrays.rst.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div>
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="arrays">
+<span id="cosim-vhpidirect-examples-arrays"></span><h1>Arrays<a class="headerlink" href="#arrays" title="Link to this heading">¶</a></h1>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>A VHDL access that is used for a constrained/bounded array is tied to a type that specifies its length. In
+<a class="reference internal" href="#cosim-vhpidirect-examples-arrays-intvector"><span class="std std-ref">Constrained/bounded integer arrays</span></a> and <a class="reference internal" href="#cosim-vhpidirect-examples-arrays-matrices"><span class="std std-ref">Matrices</span></a> below, one and
+two dimensional lengths are specified, respectively.
+This means that a separate type needs to be declared for an array with different dimensions and/or different sizes in
+any dimension. In order to create a single type for many differently shaped arrays, it would need to be unconstrained.
+See <a class="reference external" href="https://github.com/ghdl/ghdl-cosim/issues/3">ghdl-cosim#3</a> for work in progress regarding unconstrained types.</p>
+</div>
+<section id="constrained-bounded-integer-arrays">
+<span id="cosim-vhpidirect-examples-arrays-intvector"></span><h2>Constrained/bounded integer arrays<a class="headerlink" href="#constrained-bounded-integer-arrays" title="Link to this heading">¶</a></h2>
+<p>As explained in <a class="reference internal" href="../declarations.html#restrictions-on-foreign-declarations"><span class="std std-ref">Restrictions on type declarations</span></a>, unconstrained arrays are represented by a fat pointer in C,
+and it is not suggested to use fat pointers unless it is unavoidable. Hence, it is desirable for data buffers which are
+to be represented as arrays to be constrained. However, constraining arrays in VHDL and C separately is error prone.</p>
+<p>This example includes multiple solutions to set the bounding size once only (either in C or in VHDL), and have the
+parameter passed to the other language so that matching types are defined. Moreover, independently of where the size is
+defined, it is possible to allocate and free the buffers in any of the languages. The following examples show how to
+define them in C or VHDL and have them (de)allocated in either of them.</p>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>Pointers/accesses MUST be freed/deallocated in the same language that was used to allocate them. Hence, it is not
+possible to allocate in VHDL and free in C, nor <em>vice versa</em>.</p>
+</div>
+<section id="sized-in-c">
+<span id="cosim-vhpidirect-examples-arrays-intvector-csized"></span><h3><a class="reference external" href="https://github.com/ghdl/ghdl-cosim/blob/master/vhpidirect/arrays/intvector/csized">Sized in C</a><a class="headerlink" href="#sized-in-c" title="Link to this heading">¶</a></h3>
+<p>Integer arrays with the content fully defined in C can be passed to VHDL by first passing their size, so that an
+appropriate array type can be created in VHDL. After that, another VHPIDIRECT subprogram can be defined either to pass
+the array to be filled (allocated in VHDL), or to return the array access (pointer) allocated in C.</p>
+<p>This example shows how to hardcode both the length and the content of an array in C, with matching types are created in
+VHDL:</p>
+<ul>
+<li><p><a class="reference external" href="https://github.com/ghdl/ghdl-cosim/blob/master/vhpidirect/arrays/intvector/csized/proc">proc</a>: an array is allocated in VHDL and a procedure is used.
+After filling the array in C, it is read and modified from VHDL.</p></li>
+<li><p><a class="reference external" href="https://github.com/ghdl/ghdl-cosim/blob/master/vhpidirect/arrays/intvector/csized/fcn">fcn</a>: an array is allocated in C and the pointer is passed to
+VHDL, where the content is read and modified.</p>
+<p>If the integer array must be created or filled at runtime by some more advanced process, it is possible to execute the GHDL
+simulation within a custom <code class="docutils literal notranslate"><span class="pre">main()</span></code> entrypoint (see <a class="reference internal" href="quickstart.html#cosim-vhpidirect-examples-quickstart-wrapping-basic"><span class="std std-ref">basic</span></a>). By using
+<code class="docutils literal notranslate"><span class="pre">main.c</span></code> instead of <code class="docutils literal notranslate"><span class="pre">caux.c</span></code>, the content of the array is written programatically in C, before calling <code class="docutils literal notranslate"><span class="pre">ghdl_main</span></code>.
+Note that the content of the array is read from C both before and after executing the simulation.</p>
+</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The length (or any other argument) can also be set through top level generics and/or as a custom CLI argument. See
+<a class="reference internal" href="quickstart.html#cosim-vhpidirect-examples-quickstart-cli"><span class="std std-ref">Command-Line Arguments</span></a>.</p>
+</div>
+</section>
+<section id="sized-in-vhdl">
+<span id="cosim-vhpidirect-examples-arrays-intvector-vhdlsized"></span><h3><a class="reference external" href="https://github.com/ghdl/ghdl-cosim/blob/master/vhpidirect/arrays/intvector/vhdlsized">Sized in VHDL</a><a class="headerlink" href="#sized-in-vhdl" title="Link to this heading">¶</a></h3>
+<p>Complementing the examples above, when the size of a bounded/constrained array is defined in VHDL, it is possible to have
+the (de)allocation performed in either VHDL or C. However, while accesses to constrained VHDL types do contain metada about
+the bounds, pointers in C do not. Hence, in these examples, the length is explicitly passed along with the pointer/access.
+Note that other possible implementations would save the length in a variable in C, so that it does not need to be passed
+each time. This is done in <code class="docutils literal notranslate"><span class="pre">fcn</span></code> <a class="reference internal" href="#cosim-vhpidirect-examples-arrays-intvector-csized"><span class="std std-ref">above</span></a>.</p>
+<p>In this example three equivalent architectures are provided.</p>
+<ul class="simple">
+<li><p><strong>calloc</strong>: allocation and deallocation is done in C, invoked from VHDL through <code class="docutils literal notranslate"><span class="pre">[c_]allocIntArr</span></code> and <code class="docutils literal notranslate"><span class="pre">[c_]freePointer</span></code>,
+respectively.</p></li>
+<li><p><strong>vhdlallocarr</strong>: allocation of an array is done in VHDL.</p></li>
+<li><p><strong>vhdlallocacc</strong>: allocation of an access is done in VHDL.</p></li>
+</ul>
+<p>Apart from that, all three implementations are functionally equivalent:</p>
+<ul class="simple">
+<li><p>A constrained array is allocated.</p></li>
+<li><p>The content is initialized from C.</p></li>
+<li><p>The content is read and modified from VHDL.</p></li>
+<li><p>A function in C is used to assert the modifications and to print the results.</p></li>
+<li><p>The array is deallocated.</p></li>
+</ul>
+<p>Note that VHPIDIRECT resources are defined in a package (as shown in <a class="reference internal" href="quickstart.html#cosim-vhpidirect-examples-quickstart-package"><span class="std std-ref">package</span></a>).
+The same package and the corresponding C source file (<code class="docutils literal notranslate"><span class="pre">caux.c</span></code>) are used in all three examples; however:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">[c_]allocIntArr</span></code> and <code class="docutils literal notranslate"><span class="pre">[c_]freePointer</span></code> are used by <code class="docutils literal notranslate"><span class="pre">calloc</span></code> only.</p></li>
+<li><p>The C implementation of the functions used in <code class="docutils literal notranslate"><span class="pre">vhdlallocarr</span></code> and <code class="docutils literal notranslate"><span class="pre">vhdlallocacc</span></code> is the same, even though the definitions
+in VHDL are different. This is because both constrained arrays and accesses to constrained arrays are mapped to the same types
+in C. See <a class="reference internal" href="../declarations.html#restrictions-on-foreign-declarations"><span class="std std-ref">Restrictions on type declarations</span></a>.</p></li>
+</ul>
+</section>
+</section>
+<section id="vector-of-std-logic">
+<span id="cosim-vhpidirect-examples-arrays-logicvectors"></span><h2><a class="reference external" href="https://github.com/ghdl/ghdl-cosim/blob/master/vhpidirect/arrays/logicvector">Vector of std_logic</a><a class="headerlink" href="#vector-of-std-logic" title="Link to this heading">¶</a></h2>
+<p>Commonly signals in VHDL are of a logic type or a vector thereof (<code class="docutils literal notranslate"><span class="pre">std_logic</span></code> and <code class="docutils literal notranslate"><span class="pre">std_logic_vector</span></code>), coming from IEEE’s
+<code class="docutils literal notranslate"><span class="pre">std_logic_1164</span></code> package. These types can hold values other than high and low (<code class="docutils literal notranslate"><span class="pre">1</span></code> and <code class="docutils literal notranslate"><span class="pre">0</span></code>) and are enumerated as:
+<code class="docutils literal notranslate"><span class="pre">0</span> <span class="pre">=</span> <span class="pre">'U'</span></code>, <code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">=</span> <span class="pre">'X'</span></code>, <code class="docutils literal notranslate"><span class="pre">2</span> <span class="pre">=</span> <span class="pre">'0'</span></code>, <code class="docutils literal notranslate"><span class="pre">3</span> <span class="pre">=</span> <span class="pre">'1'</span></code>, <code class="docutils literal notranslate"><span class="pre">4</span> <span class="pre">=</span> <span class="pre">'Z'</span></code>, <code class="docutils literal notranslate"><span class="pre">5</span> <span class="pre">=</span> <span class="pre">'W'</span></code>, <code class="docutils literal notranslate"><span class="pre">6</span> <span class="pre">=</span> <span class="pre">'L'</span></code>, <code class="docutils literal notranslate"><span class="pre">7</span> <span class="pre">=</span> <span class="pre">'H'</span></code> and <code class="docutils literal notranslate"><span class="pre">8</span> <span class="pre">=</span> <span class="pre">'-'</span></code>.
+As mentioned in <a class="reference internal" href="../declarations.html#restrictions-on-foreign-declarations"><span class="std std-ref">Restrictions on type declarations</span></a>:</p>
+<ul class="simple">
+<li><p>Because the number of enumeration values is less than 256, logic values are transported in 8 bit words (a <code class="docutils literal notranslate"><span class="pre">char</span></code> type in C).</p>
+<ul>
+<li><p>In this example two declarations make handling logic values in C a bit easier:</p>
+<ul>
+<li><p>Providing logic values in C as their enumeration numbers is simplified with the use of a matching enumeration,
+<code class="docutils literal notranslate"><span class="pre">HDL_LOGIC_STATES</span></code>.</p></li>
+<li><p>Printing out a logic value’s associated character is also simplified with the <code class="docutils literal notranslate"><span class="pre">const</span> <span class="pre">char</span> <span class="pre">HDL_LOGIC_CHAR[]</span></code>
+declaration.</p></li>
+</ul>
+</li>
+<li><p>Logic vectors, of a bounded size, can be easily used in C as a <code class="docutils literal notranslate"><span class="pre">char[]</span></code> and passed to VHDL. These can be read as either
+an <code class="docutils literal notranslate"><span class="pre">access</span></code> of a subtype of <code class="docutils literal notranslate"><span class="pre">std_logic_vector</span></code>, or as the subtype itself.</p></li>
+</ul>
+</li>
+</ul>
+<p>This example builds on the integer vector example (<a class="reference internal" href="#cosim-vhpidirect-examples-arrays-intvector"><span class="std std-ref">Constrained/bounded integer arrays</span></a>), by instead passing an
+array of logic values. Foreign subprograms are declared that enable receiving the size of two different logic vectors from C.
+There is only one subprogram to get the size of both C arrays, and it takes in an argument to determine which array’s size gets
+returned.</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">getLogicVecSize</span></code> in VHDL is declared as receiving a <code class="docutils literal notranslate"><span class="pre">boolean</span></code> argument. In C the function is declared to receive a
+<code class="docutils literal notranslate"><span class="pre">char</span></code> argument. The VHDL booleans <code class="docutils literal notranslate"><span class="pre">false</span></code> and <code class="docutils literal notranslate"><span class="pre">true</span></code> are enumerations, and have integer values, <code class="docutils literal notranslate"><span class="pre">0</span></code> and <code class="docutils literal notranslate"><span class="pre">1</span></code>
+respectively. As with the logic values, the boolean enumerations use fewer than 8 bits, so the single byte in C’s <code class="docutils literal notranslate"><span class="pre">char</span></code>
+variable receives the VHDL enumeration correctly.</p>
+</div>
+<p>For illustrative purposes, the two vectors are allocated and populated with logic values in different ways:</p>
+<ul class="simple">
+<li><p>logicVecA is allocated in C, it is returned as an access type through a function, and indices are manually filled with
+enumeration values from <code class="docutils literal notranslate"><span class="pre">HDL_LOGIC_STATES</span></code>: <code class="docutils literal notranslate"><span class="pre">vec[0]</span> <span class="pre">=</span> <span class="pre">HDL_U;</span></code>.</p></li>
+<li><p>logicVecB is allocated in VHDL, it is passed as an <code class="docutils literal notranslate"><span class="pre">std_logic_vector</span></code> subtype (by reference) through a procedure, and
+indices are filled with integer values: <code class="docutils literal notranslate"><span class="pre">for(int</span> <span class="pre">i</span> <span class="pre">=</span> <span class="pre">0;</span> <span class="pre">i</span> <span class="pre">&lt;</span> <span class="pre">SIZE_LOGIC_VEC_B;</span> <span class="pre">i++){</span> <span class="pre">vec[i]</span> <span class="pre">=</span> <span class="pre">8-i;</span> <span class="pre">}</span></code>.</p></li>
+</ul>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>The integer values that are given to <code class="docutils literal notranslate"><span class="pre">char</span></code> variables in C which are intended to be read as VHDL logic values, must be
+limited to [0, 8]. This ensures that they represent one of the 9 enumerated logic values.</p>
+</div>
+</section>
+<section id="matrices">
+<span id="cosim-vhpidirect-examples-arrays-matrices"></span><h2><a class="reference external" href="https://github.com/ghdl/ghdl-cosim/blob/master/vhpidirect/arrays/matrices">Matrices</a><a class="headerlink" href="#matrices" title="Link to this heading">¶</a></h2>
+<section id="constrained-multidimensional-arrays-of-doubles-reals">
+<h3>Constrained multidimensional arrays of doubles/reals<a class="headerlink" href="#constrained-multidimensional-arrays-of-doubles-reals" title="Link to this heading">¶</a></h3>
+<p>In many signal and image processing applications, large amounts of data need to be transferred between software and
+hardware. In software, it is common to use floating-point data types, since most general-purpose processors include
+hard floating-point units. Conversely, fixed-point formats are used in hardware, in order to optimise area and power.
+Converting data formats and using intermediate files to transfer test data to/from a simulation model can be tedious
+and error-prone.</p>
+<p>This example builds on <a class="reference internal" href="#cosim-vhpidirect-examples-arrays-intvector"><span class="std std-ref">intvector</span></a>. Precisely, it’s an extension of
+case <a class="reference internal" href="#cosim-vhpidirect-examples-arrays-intvector-csized"><span class="std std-ref">Sized in C</span></a>. A general procedure to share constrained multidimensional
+arrays of any size is shown. Dimensions of a 2D matrix of doubles are defined in C and a helper function is used for
+VHDL to read those values into the declaration of an <em>array of reals</em> type. Then, the pointer to the matrix (in C) is
+retrieved as an access (in VHDL), through another helper function.</p>
+<p>For completeness, IEEE’s <code class="docutils literal notranslate"><span class="pre">fixed_generic_pkg</span></code> package is used to multiply each value with a constant using fixed-point
+formats. This is to illustrate that VHDL 2008 can be used as <em>fixed-point toolbox</em> in numerical processing environments.</p>
+</section>
+<section id="array-and-axi4-stream-verification-components">
+<span id="cosim-vhpidirect-examples-arrays-matrices-axis"></span><h3><a class="reference external" href="https://github.com/ghdl/ghdl-cosim/blob/master/vhpidirect/arrays/matrices/vunit_axis_vcs">Array and AXI4 Stream Verification Components</a><a class="headerlink" href="#array-and-axi4-stream-verification-components" title="Link to this heading">¶</a></h3>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>This example is based on <a class="reference external" href="http://vunit.github.io/">VUnit</a>, an open source unit testing framework for VHDL/SystemVerilog.
+Instead of a shell script, the main entrypoint to this example is a <code class="docutils literal notranslate"><span class="pre">run.py</span></code> Python script. Users who are not familiar
+with VUnit are encouraged to first read <a class="reference external" href="https://vunit.github.io/user_guide.html#user-guide" title="(in VUnit)"><span>User Guide</span></a> and get familiar with VUnit example <a class="reference external" href="http://vunit.github.io/examples.html#id9">array_axis_vcs</a>.</p>
+</div>
+<figure class="align-center" id="id5">
+<a class="reference internal image-reference" href="../../_images/matrices_array_axis_vcs.png"><img alt="VUnit example `array_axis_vcs &lt;http://vunit.github.io/examples.html#id9&gt;`_" src="../../_images/matrices_array_axis_vcs.png" style="width: 500px;" /></a>
+<figcaption>
+<p><span class="caption-text">Block diagram of VUnit example <code class="docutils literal notranslate"><span class="pre">array_axis_vcs</span></code>.</span><a class="headerlink" href="#id5" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
+<p><a class="reference external" href="http://vunit.github.io/">VUnit</a> provides an <a class="reference external" href="https://vunit.github.io/data_types/integer_array.html#integer-array-pkg" title="(in VUnit)"><span class="xref std std-ref">integer_array</span></a> package with <code class="docutils literal notranslate"><span class="pre">load_csv</span></code>
+and <code class="docutils literal notranslate"><span class="pre">save_csv</span></code> functions. Those are used in <a class="reference external" href="http://vunit.github.io/examples.html#id9">Array and AXI4 Stream Verification Components</a>,
+along with AXI4 Stream components from the <span class="xref std std-ref">vunit:vc_library</span>, to load data from CSV files to a UUT. While CSVs as
+intermediate files are useful for integration with Matlab, Octave, NumPy, etc., not having an equivalent <cite>real_array</cite>
+package posses an additional complexity in applications such as DSP or machine learning. This is because values to be
+handled in fixed-point need to be first converted from doubles to integers.</p>
+<figure class="align-center" id="id6">
+<a class="reference internal image-reference" href="../../_images/matrices_vunit_axis_vcs.png"><img alt="Modified version of the example, renamed to :cosimtree:`vunit_axis_vcs &lt;vhpidirect/arrays/matrices/vunit_axis_vcs&gt;`" src="../../_images/matrices_vunit_axis_vcs.png" style="width: 500px;" /></a>
+<figcaption>
+<p><span class="caption-text">Block diagram of the modified version of the VUnit example, renamed to <a class="reference external" href="https://github.com/ghdl/ghdl-cosim/blob/master/vhpidirect/arrays/matrices/vunit_axis_vcs">vunit_axis_vcs</a>.</span><a class="headerlink" href="#id6" title="Link to this image">¶</a></p>
+</figcaption>
+</figure>
+<p>Subdir <a class="reference external" href="https://github.com/ghdl/ghdl-cosim/blob/master/vhpidirect/arrays/matrices/vunit_axis_vcs">vunit_axis_vcs</a> of this example contains a modified
+version of a VUnit example (<a class="reference external" href="http://vunit.github.io/examples.html#id9">array_axis_vcs</a>), where <code class="docutils literal notranslate"><span class="pre">integer_array</span></code>
+and CSV files are replaced with VHPIDIRECT functions, so that data is read from C directly. In fact, no additional
+co-simulation sources are included in the subdir because the <code class="docutils literal notranslate"><span class="pre">main.c</span></code> and <code class="docutils literal notranslate"><span class="pre">pkg.vhd</span></code> from the parent dir are used.
+These will share the matrix as in the parent example, which is then passed to/from the verification components to test
+the AXI Stream master/slave setup. The top-level processes <code class="docutils literal notranslate"><span class="pre">stimuli</span></code> and <code class="docutils literal notranslate"><span class="pre">receive</span></code> are the master sending and the
+slave receiving, respectively, data from/to the matrix variable. For completeness only, <code class="docutils literal notranslate"><span class="pre">stimuli</span></code> verifies the contents
+of the matrix before sending it, row by row.</p>
+<p>This example illustrates how to separate sources for synthesis from testbench/simulation resources, enhanced with GHDL’s
+co-simulation features and with VUnit’s verification components. At the same time, this is a showcase of how to combine
+a VUnit <code class="docutils literal notranslate"><span class="pre">run.py</span></code> script (for building and test management) along with custom VHPIDIRECT resources.</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>Combining VUnit’s verification components with VHPIDIRECT allows to build simulation models for VHDL designs
+with complex top-level interfaces, while providing a C API to interact with them. Find work in progress in this regard
+at <a class="reference external" href="https://vunit.github.io/cosim/">VUnit/cosim</a>.</p>
+</div>
+</section>
+<section id="vga-rgb-image-buffer">
+<span id="cosim-vhpidirect-examples-arrays-matrices-vga"></span><h3><a class="reference external" href="https://github.com/ghdl/ghdl-cosim/blob/master/vhpidirect/arrays/matrices/framebuffer">VGA (RGB image buffer)</a><a class="headerlink" href="#vga-rgb-image-buffer" title="Link to this heading">¶</a></h3>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>These examples require <a class="reference external" href="https://www.imagemagick.org/">ImageMagick</a> and/or <a class="reference external" href="https://www.x.org/releases/current/doc/libX11/libX11/libX11.html">Xlib</a>.</p>
+</div>
+<p>In image generation and processing applications, it can be tedious to debug the designs by looking at waveforms or
+logs. Saving data from RAMs and/or typical graphics standards to images or video allows to spot visual artifacts easily.</p>
+<p>This example is based on <a class="reference internal" href="#cosim-vhpidirect-examples-arrays-intvector-vhdlsized"><span class="std std-ref">Sized in VHDL</span></a> from <a class="reference internal" href="#cosim-vhpidirect-examples-arrays-intvector"><span class="std std-ref">intvector</span></a>.
+A 2D array of integers is allocated in a (generic) VHDL package and it is used as a frame buffer. Each integer represents a
+pixel: the 24 least significant bits are used for R, G and B (8 bits each); while the 8 most significant are not used.
+See <a class="reference external" href="https://en.wikipedia.org/wiki/Color_depth#True_color_(24-bit)">Wikipedia: Color_depth#True_color_(24-bit)</a>.</p>
+<p>In the same package, foreign function <code class="docutils literal notranslate"><span class="pre">save_screenshot</span></code> is defined. It accepts a pointer to an array of integers, along
+with integers defining the width and the height, and an integer used as an identifier of the frame number. Hence, unlike
+previous examples with matrices, in this example calls to the VHPIDIRECT function are atomic and do not depend on passing
+any parameter beforehand.</p>
+<p>In practice, this example provides the foundation to build <em>virtual screens</em> for simulation purposes. Two different
+implementations are shown:</p>
+<ul class="simple">
+<li><p>With <a class="reference external" href="https://github.com/ghdl/ghdl-cosim/blob/master/vhpidirect/arrays/matrices/framebuffer/caux.c">caux.c</a>, the content of the frame buffer is saved to a binary
+file in RGB24 format. Then, <code class="docutils literal notranslate"><span class="pre">convert</span></code> from <a class="reference external" href="https://www.imagemagick.org/">ImageMagick</a> is used to convert it to PNG.
+When the simulation ends, <code class="docutils literal notranslate"><span class="pre">convert</span></code> is used again, to merge all the PNGs into an animated GIF.</p></li>
+<li><p>With <a class="reference external" href="https://github.com/ghdl/ghdl-cosim/blob/master/vhpidirect/arrays/matrices/framebuffer/caux_x11.c">caux_x11.c</a>, X11 libraries are used to generate a
+window on the desktop. Then, when <code class="docutils literal notranslate"><span class="pre">save_screenshot</span></code> is called, the canvas is updated with the content of the frame buffer.</p></li>
+</ul>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>The resolution of the screen (frame buffer) is defined in <a class="reference external" href="https://github.com/ghdl/ghdl-cosim/blob/master/vhpidirect/arrays/matrices/framebuffer/pkg.vhd">pkg.vhd</a>,
+which is a generic package. Corresponding generics are defined in the top-level entity (testbench). Hence, it is possible to
+modify the size of the screen through CLI args.
+At the same time, the size of the canvas (X11 window) is defined in the testbench and passed to C as arguments of <code class="docutils literal notranslate"><span class="pre">sim_init</span></code>
+(see <a class="reference external" href="https://github.com/ghdl/ghdl-cosim/blob/master/vhpidirect/arrays/matrices/framebuffer/caux.c">caux.c</a>). By default, the size of the window matches the
+size of the screen (frame buffer). However, this is not a requirement.</p>
+</div>
+<p>Moreover, two different architectures are provided for the testbench (<a class="reference external" href="https://github.com/ghdl/ghdl-cosim/blob/master/vhpidirect/arrays/matrices/framebuffer/tb.vhd">tb.vhd</a>):</p>
+<ul class="simple">
+<li><p>In architecture <code class="docutils literal notranslate"><span class="pre">test</span></code>, 16 frames/images are generated. The content of the buffer is set through literal assignments
+such as <code class="docutils literal notranslate"><span class="pre">screen(j,i)</span> <span class="pre">:=</span> <span class="pre">16#FFFF00#;</span></code>. The generated pattern is a yellow background and an animated cyan box (it is moved to the
+right and to the bottom as frames advance).</p></li>
+<li><p>In architecture <code class="docutils literal notranslate"><span class="pre">bars</span></code>, a single frame/image is generated. The content of the buffer is set through an <code class="docutils literal notranslate"><span class="pre">std_logic_vector(2</span> <span class="pre">downto</span> <span class="pre">0)</span></code>
+(RGB) signal. A helper function (<code class="docutils literal notranslate"><span class="pre">RGB_to_integer</span></code>, provided in the package) is used to convert the 3 bit signal into
+RGB24. The generated static pattern is eight equally spaced vertical bars, each correponding to a value of the 3 bit
+signal; from left to right: black, red, green, yellow, blue, magenta, cyan and white.</p></li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>In <a class="reference external" href="https://github.com/dbhi/vboard/tree/main/vga">dbhi/vboard: VGA test pattern</a> a <em>virtual VGA screen</em> is implemented based
+on this shared frame buffer example. A test core is provided, which captures the VSYNC, HSYNC and RGB signals of a UUT, and writes
+RGB24 integers to the buffer. Then, apart from Imagemagick, <a class="reference external" href="https://docs.python.org/3/library/tkinter.html">Tkinter</a>
+is supported. Tkinter is the Tcl/Tk interface built in Python. Hence, <a class="reference external" href="https://github.com/dbhi/vboard/tree/main/vga#tkinter-desktop-window">dbhi/vboard: vga/test/tkinter</a>
+shows how to combine this framebuffer example with <a class="reference internal" href="shared.html#cosim-vhpidirect-examples-shared-pycb"><span class="std std-ref">pycb</span></a>. The result is similar to
+using <code class="docutils literal notranslate"><span class="pre">X11/Xlib.h</span></code>, but <a class="reference external" href="https://numpy.org/">NumPy</a> and <a class="reference external" href="https://python-pillow.org/">Pillow</a> are used, instead of coding in C.</p>
+</div>
+</section>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="vffi_user.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">FFI/DPI Header</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="shared.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Shared libs and dynamic loading</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2020-2023, Tristan Gingold and contributors
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Arrays</a><ul>
+<li><a class="reference internal" href="#constrained-bounded-integer-arrays">Constrained/bounded integer arrays</a><ul>
+<li><a class="reference internal" href="#sized-in-c">Sized in C</a></li>
+<li><a class="reference internal" href="#sized-in-vhdl">Sized in VHDL</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#vector-of-std-logic">Vector of std_logic</a></li>
+<li><a class="reference internal" href="#matrices">Matrices</a><ul>
+<li><a class="reference internal" href="#constrained-multidimensional-arrays-of-doubles-reals">Constrained multidimensional arrays of doubles/reals</a></li>
+<li><a class="reference internal" href="#array-and-axi4-stream-verification-components">Array and AXI4 Stream Verification Components</a></li>
+<li><a class="reference internal" href="#vga-rgb-image-buffer">VGA (RGB image buffer)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../../_static/documentation_options.js?v=c6e86fd7"></script>
+    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/scripts/furo.js?v=5fa4622c"></script>
+    </body>
+</html>

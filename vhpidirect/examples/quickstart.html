@@ -1,0 +1,593 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" /><link rel="next" title="GRT" href="grt.html" /><link rel="prev" title="Examples" href="index.html" />
+
+    <link rel="shortcut icon" href="../../_static/icon.ico"/><!-- Generated with Sphinx 7.2.6 and Furo 2024.08.06 -->
+        <title>Quick Start - GHDL-cosim latest documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=354aac6f" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=302659d7" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../index.html"><div class="brand">GHDL-cosim latest documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="../../_static/logo.png" alt="Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text">GHDL-cosim latest documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../ci.html">Continuous Integration</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">VHPIDIRECT</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../declarations.html">Type declarations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../wrapping.html">Wrapping a simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../linking.html">Linking object files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dynamic.html">Dynamic loading</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../grt.html">Using GRT</a></li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="index.html">Examples</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Examples</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Quick Start</a></li>
+<li class="toctree-l2"><a class="reference internal" href="grt.html">GRT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="shared.html">Shared libs and dynamic loading</a></li>
+<li class="toctree-l2"><a class="reference internal" href="arrays.html">Arrays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="vffi_user.html">FFI/DPI Header</a></li>
+<li class="toctree-l2"><a class="reference internal" href="other.html">Other co-simulation projects</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../notebook/index.html">Notebook</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Notebook</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../notebook/howtouseghdlfromc.html">How to use GHDL from an external C program?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebook/memorylayout.html">Memory Layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../notebook/mistakes.html">Common mistakes</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">VPI</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../vpi/index.html">Introduction</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../vpi/examples/index.html">Examples</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of Examples</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../vpi/examples/quickstart.html">Quick Start</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../vpi/examples/other.html">Other co-simulation projects</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">VPHI</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../vhpi/index.html">Introduction</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../License.html">Apache License 2.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Doc-License.html">Creative Commons Attribution 4.0 International</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="../../_sources/vhpidirect/examples/quickstart.rst.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div>
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="quick-start">
+<span id="cosim-vhpidirect-examples-quickstart"></span><h1>Quick Start<a class="headerlink" href="#quick-start" title="Link to this heading">¶</a></h1>
+<section id="rand-from-stdlib">
+<span id="cosim-vhpidirect-examples-quickstart-random"></span><h2><a class="reference external" href="https://github.com/ghdl/ghdl-cosim/blob/master/vhpidirect/quickstart/random">‘rand’ from stdlib</a><a class="headerlink" href="#rand-from-stdlib" title="Link to this heading">¶</a></h2>
+<p>By default, GHDL includes the standard C library in the generated simulation models. Hence, resources from <code class="docutils literal notranslate"><span class="pre">stdlib</span></code>
+can be used without any modification to the build procedure.</p>
+<p>This example shows how to import and use <code class="docutils literal notranslate"><span class="pre">rand</span></code> to generate and print 10 integer numbers. The VHDL code is equivalent
+to the following C snippet. However, note that this C source is NOT required, because <code class="docutils literal notranslate"><span class="pre">stdlib</span></code> is already built in.</p>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdlib.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="w"> </span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="w">    </span><span class="n">printf</span><span class="w"> </span><span class="p">(</span><span class="s">&quot;%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">rand</span><span class="w"> </span><span class="p">());</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="sin-from-libmath">
+<span id="cosim-vhpidirect-examples-quickstart-math"></span><h2><a class="reference external" href="https://github.com/ghdl/ghdl-cosim/blob/master/vhpidirect/quickstart/math">‘sin’ from libmath</a><a class="headerlink" href="#sin-from-libmath" title="Link to this heading">¶</a></h2>
+<p>By the same token, it is possible to include functions from system library by just providing the corresponding linker
+flag.</p>
+<p>In this example, function <code class="docutils literal notranslate"><span class="pre">sin</span></code> from the <code class="docutils literal notranslate"><span class="pre">math</span></code> library is used to compute 10 values. As in the previous example,
+no additional C sources are required, because the <code class="docutils literal notranslate"><span class="pre">math</span></code> library is already compiled and installed in the system.</p>
+</section>
+<section id="custom-c">
+<span id="cosim-vhpidirect-examples-quickstart-customc"></span><h2><a class="reference external" href="https://github.com/ghdl/ghdl-cosim/blob/master/vhpidirect/quickstart/customc">custom C</a><a class="headerlink" href="#custom-c" title="Link to this heading">¶</a></h2>
+<p>When the required functionality is not available in pre-built libraries, custom C sources and/or objects can be added
+to the elaboration and/or linking.</p>
+<p>This example shows how to bind custom C functions in VHDL as either procedures or functions. Four cases are included:
+<code class="docutils literal notranslate"><span class="pre">custom_procedure</span></code>, <code class="docutils literal notranslate"><span class="pre">custom_procedure_withargs</span></code>, <code class="docutils literal notranslate"><span class="pre">custom_function</span></code> and <code class="docutils literal notranslate"><span class="pre">custom_function_withargs</span></code>. In all
+cases, the parameters are defined as integers, in order to keep it simple. See <a class="reference internal" href="../declarations.html#cosim-vhpidirect-declarations"><span class="std std-ref">Type declarations</span></a>
+for further details.</p>
+<p>Since either C sources or pre-compiled <code class="docutils literal notranslate"><span class="pre">.o</span></code> objects can be added, in C/C++ projects of moderate complexity, it might
+be desirable to merge all the C sources in a single object before elaborating the design.</p>
+</section>
+<section id="wrapping-ghdl-main">
+<span id="cosim-vhpidirect-examples-wrapping"></span><h2>Wrapping ghdl_main<a class="headerlink" href="#wrapping-ghdl-main" title="Link to this heading">¶</a></h2>
+<section id="basic">
+<span id="cosim-vhpidirect-examples-quickstart-wrapping-basic"></span><h3><a class="reference external" href="https://github.com/ghdl/ghdl-cosim/blob/master/vhpidirect/quickstart/wrapping/basic">basic</a><a class="headerlink" href="#basic" title="Link to this heading">¶</a></h3>
+<p>Instead of using GHDL’s own entrypoint to the execution, it is possible to wrap it by providing a custom program
+entrypoint (<code class="docutils literal notranslate"><span class="pre">main</span></code> function), wherein the execution of the simulation is triggered by calling <code class="docutils literal notranslate"><span class="pre">ghdl_main</span></code>.</p>
+<p>This example shows the most basic of such usage. <code class="docutils literal notranslate"><span class="pre">ghdl_main</span></code> is declared as <code class="docutils literal notranslate"><span class="pre">extern</span></code> in C, and arguments <code class="docutils literal notranslate"><span class="pre">argc</span></code>
+and <code class="docutils literal notranslate"><span class="pre">argv</span></code> are passed without modification. However, this sets the ground for custom prepocessing and postprocessing
+in a foreign language.</p>
+<p>Other options are to just pass empty arguments (<code class="docutils literal notranslate"><span class="pre">ghdl_main(0,</span> <span class="pre">NULL)</span></code>) or to customize them:</p>
+<div class="highlight-C notranslate"><div class="highlight"><pre><span></span><span class="kt">char</span><span class="o">*</span><span class="w"> </span><span class="n">args</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;--wave=wave.ghw&quot;</span><span class="p">};</span>
+<span class="n">ghdl_main</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">args</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>See <a class="reference internal" href="../wrapping.html#cosim-vhpidirect-wrapping"><span class="std std-ref">Wrapping a simulation</span></a> for further details about the constraints of <code class="docutils literal notranslate"><span class="pre">argv</span></code>. Furthermore, section
+<a class="reference internal" href="#cosim-vhpidirect-examples-quickstart-cli"><span class="std std-ref">Command-Line Arguments</span></a> below shows argument parsing/manipulation strategies.</p>
+</section>
+<section id="time">
+<h3><a class="reference external" href="https://github.com/ghdl/ghdl-cosim/blob/master/vhpidirect/quickstart/wrapping/time">time</a><a class="headerlink" href="#time" title="Link to this heading">¶</a></h3>
+<p>Although most of the provided examples are written in C, VHPIDIRECT can be used with any language that supports a
+C-like compile and link model.</p>
+<p>This example shows how to time the execution of a simulation from either C or Ada. In both cases, function <code class="docutils literal notranslate"><span class="pre">clock</span></code> is
+used to get the time before and after calling <code class="docutils literal notranslate"><span class="pre">ghdl_main</span></code>. Regarding the build procedure, it is to be noted that C
+sources are elaborated with <a class="reference external" href="https://ghdl.github.io/ghdl/using/InvokingGHDL.html#cmdoption-ghdl-e" title="(in GHDL v4.0)"><code class="xref std std-option docutils literal notranslate"><span class="pre">-e</span></code></a>, because GHDL allows passing parameters (in this case, additional C sources)
+to the compiler and/or linker. However, since it is not possible to do so with Ada, <code class="docutils literal notranslate"><span class="pre">gnatmake</span></code>, <a class="reference external" href="https://ghdl.github.io/ghdl/using/CommandReference.html#cmdoption-ghdl-bind" title="(in GHDL v4.0)"><code class="xref std std-option docutils literal notranslate"><span class="pre">--bind</span></code></a> and
+<a class="reference external" href="https://ghdl.github.io/ghdl/using/CommandReference.html#cmdoption-ghdl-list-link" title="(in GHDL v4.0)"><code class="xref std std-option docutils literal notranslate"><span class="pre">--list-link</span></code></a> are used instead. See <a class="reference internal" href="../linking.html#cosim-vhpidirect-linking"><span class="std std-ref">Linking object files</span></a> for further info about custom linking setups.</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>Compared to the previous example, the declaration of <code class="docutils literal notranslate"><span class="pre">ghdl_main</span></code> includes three arguments in this example:
+<code class="docutils literal notranslate"><span class="pre">int</span> <span class="pre">argc,</span> <span class="pre">void**</span> <span class="pre">argv,</span> <span class="pre">void**</span> <span class="pre">envp</span></code>. This is done for illustration purposes only, as it has no real effect on the
+exercise.</p>
+</div>
+</section>
+<section id="exitcb">
+<span id="cosim-vhpidirect-examples-quickstart-wrapping-exitcb"></span><h3><a class="reference external" href="https://github.com/ghdl/ghdl-cosim/blob/master/vhpidirect/quickstart/wrapping/exitcb">exitcb</a><a class="headerlink" href="#exitcb" title="Link to this heading">¶</a></h3>
+<p>When wrapped in a foreign language, calls to <code class="docutils literal notranslate"><span class="pre">ghdl_main</span></code> should return an exit code and allow the regular execution of the
+wrapper, so that users can handle simulation results in there. However, bugs might result in failures that exit immediately
+through an abortion signal. This example shows how to register an exit handler and a signal handler, to allow executing
+custom code regardless of crashes in the simulation.</p>
+<p>In VHDL 1993, simulation termination statements and exit codes that simulators should produce were undefined. Therefore, it was
+common practice to termine the simulations through reports of severity <code class="docutils literal notranslate"><span class="pre">failure</span></code>. When wrapping GHDL, such strategies
+might result in undesired exit procedures. Using VHDL 2008 is suggested.</p>
+</section>
+</section>
+<section id="linking">
+<span id="cosim-vhpidirect-examples-quickstart-linking"></span><h2>Linking<a class="headerlink" href="#linking" title="Link to this heading">¶</a></h2>
+<section id="bind">
+<h3><a class="reference external" href="https://github.com/ghdl/ghdl-cosim/blob/master/vhpidirect/quickstart/linking/bind">bind</a><a class="headerlink" href="#bind" title="Link to this heading">¶</a></h3>
+<p>Although GHDL’s elaborate command can compile and link C sources, it is sometimes preferred or required to call a
+compiler explicitly with custom arguments. This is useful, e.g., when a simulation is to be embedded in the build of an
+existing C/C++ application.</p>
+<p>This example is equivalent to <a class="reference internal" href="#cosim-vhpidirect-examples-quickstart-wrapping-basic"><span class="std std-ref">basic</span></a>, but it shows how to use
+<a class="reference external" href="https://ghdl.github.io/ghdl/using/CommandReference.html#cmdoption-ghdl-bind" title="(in GHDL v4.0)"><code class="xref std std-option docutils literal notranslate"><span class="pre">--bind</span></code></a> and <a class="reference external" href="https://ghdl.github.io/ghdl/using/CommandReference.html#cmdoption-ghdl-list-link" title="(in GHDL v4.0)"><code class="xref std std-option docutils literal notranslate"><span class="pre">--list-link</span></code></a> instead of <a class="reference external" href="https://ghdl.github.io/ghdl/using/InvokingGHDL.html#cmdoption-ghdl-e" title="(in GHDL v4.0)"><code class="xref std std-option docutils literal notranslate"><span class="pre">-e</span></code></a>. See <a class="reference internal" href="../linking.html#cosim-vhpidirect-linking"><span class="std std-ref">Linking object files</span></a> for further
+details.</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>Objects generated by <a class="reference external" href="https://ghdl.github.io/ghdl/using/CommandReference.html#cmdoption-ghdl-bind" title="(in GHDL v4.0)"><code class="xref std std-option docutils literal notranslate"><span class="pre">--bind</span></code></a> are created in the working directory. See <a class="reference external" href="https://ghdl.github.io/ghdl/using/CommandReference.html#gccllvm-only-programs" title="(in GHDL v4.0)"><span>GCC/LLVM only commands</span></a> and
+<a class="reference external" href="https://github.com/ghdl/ghdl/issues/781">ghdl#781</a>.</p>
+</div>
+</section>
+</section>
+<section id="package">
+<span id="cosim-vhpidirect-examples-quickstart-package"></span><h2><a class="reference external" href="https://github.com/ghdl/ghdl-cosim/blob/master/vhpidirect/quickstart/package">package</a><a class="headerlink" href="#package" title="Link to this heading">¶</a></h2>
+<p>If the auxillary VHPIDIRECT subprograms need to be accessed in more than one entity, it is possible to package the
+subprograms. This also makes it very easy to reuse the VHPIDIRECT declarations in different projects.</p>
+<p>In this example two different entities use a C defined <code class="docutils literal notranslate"><span class="pre">c_printInt(val:</span> <span class="pre">integer)</span></code> subprogram to print two different
+numbers. Subprogram declaration requirements are detailed under the <a class="reference internal" href="../declarations.html#cosim-vhpidirect-declarations"><span class="std std-ref">Type declarations</span></a> section.</p>
+</section>
+<section id="sharedvar">
+<span id="cosim-vhpidirect-examples-quickstart-sharedvar"></span><h2><a class="reference external" href="https://github.com/ghdl/ghdl-cosim/blob/master/vhpidirect/quickstart/sharedvar">sharedvar</a><a class="headerlink" href="#sharedvar" title="Link to this heading">¶</a></h2>
+<p>While sharing variables through packages in VHDL 1993 is flexible, in VHDL 2008 protected types need to be used.
+However, GHDL allows to relax some rules of the LRM through <a class="reference external" href="https://ghdl.github.io/ghdl/using/InvokingGHDL.html#cmdoption-ghdl-frelaxed" title="(in GHDL v4.0)"><code class="xref std std-option docutils literal notranslate"><span class="pre">-frelaxed</span></code></a>.</p>
+<p>This example showcases multiple ways of sharing variables through packages, depending on the target version of the
+standard. Three different binaries are built from the same entity, using:</p>
+<ul class="simple">
+<li><p>A VHDL 1993 package with <code class="docutils literal notranslate"><span class="pre">--std=93</span></code>.</p></li>
+<li><p>A VHDL 1993 package with <code class="docutils literal notranslate"><span class="pre">--std=08</span> <span class="pre">-frelaxed</span></code>.</p></li>
+<li><p>A VHDL 2008 package with <code class="docutils literal notranslate"><span class="pre">--std=08</span></code>.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Procedure <code class="docutils literal notranslate"><span class="pre">setVar</span></code> is not strictly required. It is used to allow the same descriptions of the entity/architectures
+to work with both VHDL 1993 and VHDL 2008. See the bodies of the procedure in <a class="reference external" href="https://github.com/ghdl/ghdl-cosim/blob/master/vhpidirect/quickstart/sharedvar/pkg_93.vhd">pkg_93.vhd</a> and <a class="reference external" href="https://github.com/ghdl/ghdl-cosim/blob/master/vhpidirect/quickstart/sharedvar/pkg_08.vhd">pkg_08.vhd</a>.</p>
+</div>
+<section id="shint">
+<span id="cosim-vhpidirect-examples-quickstart-shint"></span><h3><a class="reference external" href="https://github.com/ghdl/ghdl-cosim/blob/master/vhpidirect/quickstart/sharedvar/shint">shint</a><a class="headerlink" href="#shint" title="Link to this heading">¶</a></h3>
+<p>As an alternative to using a shared variable in VHDL, subdir <a class="reference external" href="https://github.com/ghdl/ghdl-cosim/blob/master/vhpidirect/quickstart/sharedvar/shint">shint</a>
+contains an approach based on a helper record type which is used as a handle. Mimicking the concept of <em>methods</em> from
+Object Oriented (OO) programming, helper C functions are used to read/write the actual variables, instead of sharing
+data through an access/pointer. This approach is more verbose than others, but it works with either VHDL 1993 or VHDL
+2008 without modification and without requiring <a class="reference external" href="https://ghdl.github.io/ghdl/using/InvokingGHDL.html#cmdoption-ghdl-frelaxed" title="(in GHDL v4.0)"><code class="xref std std-option docutils literal notranslate"><span class="pre">-frelaxed</span></code></a>. Moreover, it enhances encapsulation, as it provides
+a user-defined API between VHDL and C, which can improve maintainability when sources are reused. As a matter of fact,
+this approach is found in verification projects such as <a class="reference external" href="http://vunit.github.io/">VUnit</a> and <a class="reference external" href="https://osvvm.org/">OSVVM</a>.</p>
+</section>
+<section id="shrecord">
+<span id="cosim-vhpidirect-examples-quickstart-shrecord"></span><h3><a class="reference external" href="https://github.com/ghdl/ghdl-cosim/blob/master/vhpidirect/quickstart/sharedvar/shrecord">shrecord</a><a class="headerlink" href="#shrecord" title="Link to this heading">¶</a></h3>
+<p>Records are contiguous collections of types in VHDL, analogous to <code class="docutils literal notranslate"><span class="pre">struct</span></code> in C. This subexample quickly showcases:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>sharing a C declared struct between VHDL entities</p></li>
+<li><p>sharing a VHDL declared record with C functions</p></li>
+</ul>
+</div></blockquote>
+<p>This example only uses two subprograms, and does not have a globally shared variable like the other <em>sharedvar</em> examples.
+This is in order to keep the package compatible with both VHDL 93 and 08, and keep the focus on sharing a record variable.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The records/structs have a field of type <cite>std_logic_vector</cite>/<cite>char[]</cite>, which is a variable that is more complicated than
+the integer’s in previous examples. The <a class="reference internal" href="arrays.html#cosim-vhpidirect-examples-arrays-logicvectors"><span class="std std-ref">Vector of std_logic</span></a> example fully explains this
+variable.</p>
+</div>
+<p>As mentioned in <a class="reference internal" href="../declarations.html#restrictions-on-foreign-declarations"><span class="std std-ref">Restrictions on type declarations</span></a>, both records and accesses to records are passed by reference.
+This means that the functions in C receive and return <code class="docutils literal notranslate"><span class="pre">struct</span> <span class="pre">*</span></code>, regardless of the VHDL type being an access.</p>
+</section>
+</section>
+<section id="command-line-arguments">
+<span id="cosim-vhpidirect-examples-quickstart-cli"></span><h2><a class="reference external" href="https://github.com/ghdl/ghdl-cosim/blob/master/vhpidirect/quickstart/cli">Command-Line Arguments</a><a class="headerlink" href="#command-line-arguments" title="Link to this heading">¶</a></h2>
+<section id="top-level-generics">
+<h3>Top-level generics<a class="headerlink" href="#top-level-generics" title="Link to this heading">¶</a></h3>
+<p>As explained in <a class="reference external" href="https://ghdl.github.io/ghdl/using/Simulation.html#simulation-options" title="(in GHDL v4.0)"><span>Simulation options</span></a>, there is no standard method in VHDL to obtain command-line arguments. However,
+GHDL allows to override top-level generics, with certain restrictions. See <a class="reference external" href="https://ghdl.github.io/ghdl/using/Simulation.html#cmdoption-ghdl-gGENERIC" title="(in GHDL v4.0)"><code class="xref std std-option docutils literal notranslate"><span class="pre">-gGENERIC</span></code></a> and <a class="reference external" href="https://github.com/ghdl/ghdl/issues/1388">ghdl#1388</a> for
+further details.</p>
+<p>In this example, two top-level generics of types <code class="docutils literal notranslate"><span class="pre">string</span></code> and <code class="docutils literal notranslate"><span class="pre">integer</span></code> are used. First, default values are
+used. Then, both are overriden through CLI arguments. Note that top-level generics cannot be undefined; hence, the user must
+provide either default values or CLI arguments.</p>
+</section>
+<section id="parsing-customizing-argv">
+<h3>Parsing/customizing <code class="docutils literal notranslate"><span class="pre">argv</span></code><a class="headerlink" href="#parsing-customizing-argv" title="Link to this heading">¶</a></h3>
+<p>By the same token, when wrapping a simulation, <code class="docutils literal notranslate"><span class="pre">ghdl_main</span></code> receives <code class="docutils literal notranslate"><span class="pre">argc</span></code>, <code class="docutils literal notranslate"><span class="pre">argv</span></code> and <code class="docutils literal notranslate"><span class="pre">env</span></code> as any regular
+<code class="docutils literal notranslate"><span class="pre">main</span></code> function in C. Hence, when GHDL is wrapped as explained in <a class="reference internal" href="../wrapping.html#starting-a-simulation-from-a-foreign-program"><span class="std std-ref">Wrapping a simulation</span></a>,
+it is possible to either pass raw arguments or to process them before calling <code class="docutils literal notranslate"><span class="pre">ghdl_main</span></code>. As a result, overrides for
+top-level generics can be defined in C sources. Otherwise, GHDL will complain by producing an error.</p>
+<p>These examples showcase multiple approaches to manipulate top-level generics when GHDL is wrapped:</p>
+<ul>
+<li><p><a class="reference external" href="https://github.com/ghdl/ghdl-cosim/blob/master/vhpidirect/quickstart/cli/rawargs.c">rawargs</a>: pass arguments without modification. This, which is equivalent
+to <a class="reference internal" href="#cosim-vhpidirect-examples-quickstart-wrapping-basic"><span class="std std-ref">basic</span></a> above, is the minimal requirement for default CLI features
+to be available when wrapping GHDL.</p></li>
+<li><p><a class="reference external" href="https://github.com/ghdl/ghdl-cosim/blob/master/vhpidirect/quickstart/cli/procargs.c">procargs</a>: pass arguments and set/add some. First, no argument is
+provided and <code class="docutils literal notranslate"><span class="pre">genStr</span></code> is assigned a value in C. Then, <code class="docutils literal notranslate"><span class="pre">genInt</span></code> is provided and <code class="docutils literal notranslate"><span class="pre">genStr</span></code> is added in C.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This is a naive approach without any specific library. <a class="reference external" href="https://www.gnu.org/software/libc/manual/html_node/Getopt.html">getopt</a>
+and/or <a class="reference external" href="https://www.gnu.org/software/libc/manual/html_node/Argp.html">Argp</a> are popular ways to parse arguments
+in C. A complete example that uses <em>getopt</em> or <em>Argp</em> would be very welcome, since it would allow non trivial arguments
+(<code class="docutils literal notranslate"><span class="pre">[c</span> <span class="pre">options]</span> <span class="pre">--</span> <span class="pre">[ghdl</span> <span class="pre">options]</span></code> or <code class="docutils literal notranslate"><span class="pre">[ghdl</span> <span class="pre">options]</span> <span class="pre">--</span> <span class="pre">[c</span> <span class="pre">options]</span></code>). Feel free to <a class="reference external" href="https://github.com/ghdl/ghdl-cosim/compare">open a PR</a>!</p>
+</div>
+</li>
+<li><p><a class="reference external" href="https://github.com/ghdl/ghdl-cosim/blob/master/vhpidirect/quickstart/cli/fcnargs/">fcnargs</a>: pass arguments without modification, but use a function call
+to set the default of top-level generics. That is, when no arguments are provided, the value defined in C is used. However,
+when <code class="docutils literal notranslate"><span class="pre">-ggenInt=</span></code> is provided, it overrides the value of the top-level generic.</p></li>
+</ul>
+</section>
+<section id="setting-parameters-in-c-through-vhdl-generics">
+<h3><a class="reference external" href="https://github.com/ghdl/ghdl-cosim/blob/master/vhpidirect/quickstart/cli/fcngen">Setting parameters in C through VHDL generics</a><a class="headerlink" href="#setting-parameters-in-c-through-vhdl-generics" title="Link to this heading">¶</a></h3>
+<p>This example is the opposite of <code class="docutils literal notranslate"><span class="pre">fcnargs</span></code>. A VHDL generic is passed to C when calling an external subprogram. Although
+this might feel as a rare use case, it is common when adapting designs that are not aware of VHPIDIRECT features, to
+enhance them with external snippets/libraries in a testbench.</p>
+</section>
+<section id="json-for-vhdl">
+<h3>JSON-for-VHDL<a class="headerlink" href="#json-for-vhdl" title="Link to this heading">¶</a></h3>
+<p><a class="reference external" href="https://github.com/Paebbels/JSON-for-VHDL">JSON-for-VHDL</a> is a synthesizable VHDL library that allows to provide
+configuration parameters through either a JSON file or an stringified (and optionally base16 encoded) top-level generic.
+Together with <a class="reference external" href="https://stedolan.github.io/jq/">jq</a> or the libraries available for almost any language, it is a very
+powerful resource to pass large amounts of params with minimal maintenance effort.</p>
+<p>Examples are available at <a class="reference external" href="https://github.com/Paebbels/JSON-for-VHDL/tree/master/tests">Paebbels/JSON-for-VHDL:tests</a>.</p>
+</section>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="grt.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">GRT</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="index.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Examples</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2020-2023, Tristan Gingold and contributors
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Quick Start</a><ul>
+<li><a class="reference internal" href="#rand-from-stdlib">‘rand’ from stdlib</a></li>
+<li><a class="reference internal" href="#sin-from-libmath">‘sin’ from libmath</a></li>
+<li><a class="reference internal" href="#custom-c">custom C</a></li>
+<li><a class="reference internal" href="#wrapping-ghdl-main">Wrapping ghdl_main</a><ul>
+<li><a class="reference internal" href="#basic">basic</a></li>
+<li><a class="reference internal" href="#time">time</a></li>
+<li><a class="reference internal" href="#exitcb">exitcb</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#linking">Linking</a><ul>
+<li><a class="reference internal" href="#bind">bind</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#package">package</a></li>
+<li><a class="reference internal" href="#sharedvar">sharedvar</a><ul>
+<li><a class="reference internal" href="#shint">shint</a></li>
+<li><a class="reference internal" href="#shrecord">shrecord</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#command-line-arguments">Command-Line Arguments</a><ul>
+<li><a class="reference internal" href="#top-level-generics">Top-level generics</a></li>
+<li><a class="reference internal" href="#parsing-customizing-argv">Parsing/customizing <code class="docutils literal notranslate"><span class="pre">argv</span></code></a></li>
+<li><a class="reference internal" href="#setting-parameters-in-c-through-vhdl-generics">Setting parameters in C through VHDL generics</a></li>
+<li><a class="reference internal" href="#json-for-vhdl">JSON-for-VHDL</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../../_static/documentation_options.js?v=c6e86fd7"></script>
+    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/scripts/furo.js?v=5fa4622c"></script>
+    </body>
+</html>
