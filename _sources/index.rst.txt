@@ -1,0 +1,123 @@
+.. program:: ghdl
+
+.. _COSIM:
+
+Co-simulation with GHDL
+#######################
+
+.. index:: interfacing
+
+.. index:: other languages
+
+.. index:: foreign
+
+.. index:: VPI
+
+.. index:: VHPI
+
+.. index:: VHPIDIRECT
+
+.. index:: SystemC
+
+
+.. image:: _static/logo.png
+   :width: 500 px
+   :align: center
+   :target: https://github.com/ghdl/ghdl-cosim
+
+.. raw:: html
+
+    <br>
+
+    <p style="text-align: center;">
+      <a title="GitHub Repository" href="https://github.com/ghdl/ghdl-cosim"><img src="https://img.shields.io/badge/-ghdl/ghdl--cosim-323131.svg?longCache=true&style=flat-square&logo=github"></a><!--
+      -->
+      <a title="Source Code License" href="License.html"><img src="https://img.shields.io/badge/Code-Apache--2.0-green?longCache=true&style=flat-square&logo=Apache"></a><!--
+      -->
+      <a title="Documentation License" href="Doc-License.html"><img src="https://img.shields.io/badge/Doc-CC--BY%204.0-bf7600?longCache=true&style=flat-square&logo=CreativeCommons"></a><!--
+      -->
+      <a title="GHDL documentation" href="http://ghdl.github.io/ghdl"><img src="https://img.shields.io/website.svg?label=ghdl.github.io/ghdl&longCache=true&style=flat-square&url=http%3A%2F%2Fghdl.github.io%2Fghdl%2Findex.html&logo=GitHub&logoColor=fff"></a><!--
+      -->
+      <a title="Join the chat at https://gitter.im/ghdl1/Lobby" href="https://gitter.im/ghdl1/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge"><img src="https://img.shields.io/badge/Chat-on%20gitter-4db797.svg?longCache=true&style=flat-square&logo=gitter&logoColor=e8ecef"></a><!--
+      -->
+    </p>
+
+    <hr>
+
+This repository contains **documentation** and **working examples** about how to co-simulate VHDL and other languages through
+GHDL's foreign interfaces. Since specific features of the language and the tool are used, it is suggested for users
+who are new to either `GHDL` or `VHDL` to first read the :ref:`USING:QuickStart` in the main documentation
+(`ghdl.github.io/ghdl <https://ghdl.github.io/ghdl>`_).
+
+Three main approaches are used to co-simulate (co-execute) VHDL sources along with software applications written in a
+language other than VHDL (typically C/C++/SystemC):
+
+* `Verilog Procedural Interface <https://en.wikipedia.org/wiki/Verilog_Procedural_Interface>`_ (VPI), also known as
+  Program Language Interface (PLI) 2.0.
+
+* `VHDL Programming Interface <https://ieeexplore.ieee.org/document/4299594>`_ (VHPI), or specific implementations,
+  such as Foreign Language Interface (FLI).
+
+* Generation of C/C++ models/sources through a transpiler.
+
+VPI and VHPI are complex APIs which allow to inspect the hierarchy, set callbacks and/or assign signals. Because
+provided features are similar but VPI was published years before VHPI, GHDL supports VPI only. Furthermore, as an
+easier to use alternative, GHDL features a custom coexecution interface named VHPIDIRECT, similar to SystemVerilog's
+DPI (`Direct Programming Interface <https://en.wikipedia.org/wiki/SystemVerilog_DPI>`_).
+As of today, generation of C++/SystemC models à la `Verilator <https://www.veripool.org/wiki/verilator>`_ is not
+supported. However, a *vhdlator*/*ghdlator* might be available in the future.
+
+.. ATTENTION:: In fact, VHPIDIRECT is defined as part of VHPI in VHDL 2008 LRM. However, GHDL's implementation is not
+  compliant with the standard. This is probably because VHPIDIRECT was implemented in GHDL based on some draft,
+  before VHDL 2008 was official. Nevertheless, the VASG is currently discussing the addition of a Foreign Function
+  Interface (FFI) or Direct Programming Interface (DPI) to the next revision of the standard. See `[LCS-202x] VHDL DPI/FFI based on GHDL’s implementation of VHPIDIRECT <https://umarcor.github.io/ghdl-cosim/vhdl202x/index.html>`_
+  (`PDF <https://github.com/umarcor/ghdl-cosim/blob/gh-pages/vhdl202x/vhdl202x-lcs-dpi.pdf>`_).
+
+:ref:`VHPIDIRECT <COSIM:VHPIDIRECT:Intro>` is easier to use than :ref:`VPI <COSIM:VPI:Intro>`/:ref:`VHPI <COSIM:VHPI:Intro>`
+because, as the name suggests, it is a direct interface. However, on the one hand VHPIDIRECT requires modification of
+VHDL sources, which might not be possible or desirable in certain contexts. On the other hand, VPI/VHPI allow use cases
+which are not yet possible with VHPIDIRECT, such as controlling execution time steps. It is suggested to read the quick
+start examples of both interfacing mechanisms, in order to get a feel for the differences.
+
+
+.. toctree::
+   :hidden:
+
+   ci
+
+
+.. toctree::
+   :caption: VHPIDIRECT
+   :hidden:
+
+   vhpidirect/index
+   vhpidirect/declarations
+   vhpidirect/wrapping
+   vhpidirect/linking
+   vhpidirect/dynamic
+   vhpidirect/grt
+   vhpidirect/examples/index
+   vhpidirect/notebook/index
+
+
+.. toctree::
+   :caption: VPI
+   :hidden:
+
+   vpi/index
+   vpi/examples/index
+
+
+.. toctree::
+   :caption: VPHI
+   :hidden:
+
+   vhpi/index
+
+
+.. toctree::
+   :caption: Appendix
+   :hidden:
+
+   License
+   Doc-License
